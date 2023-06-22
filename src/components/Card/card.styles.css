@@ -1,0 +1,6 @@
+.card-body {
+  display: flex;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+}
