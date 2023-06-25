@@ -3,11 +3,11 @@ import "./search.styles.css";
 import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-const Search = ({ onChange }) => {
+const Search = ({ onChange, searchValue, refresh }) => {
   const [searchFocus, setSearchFocus] = useState(false);
-  const keyElement = document.getElementById("search-id");
+
   function handleClick() {
-    keyElement.value = "";
+    refresh();
   }
   function handleKeyDown(e) {
     if (e.key === "Escape") {
@@ -15,11 +15,10 @@ const Search = ({ onChange }) => {
     }
   }
   function escapePressed() {
-    if (keyElement) {
-      keyElement.value = "";
-      keyElement.blur();
-    }
     setSearchFocus(false);
+    if (refresh) {
+      refresh();
+    }
   }
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -39,6 +38,7 @@ const Search = ({ onChange }) => {
           type="text"
           id="search-id"
           placeholder={!searchFocus ? "Search" : ""}
+          value={searchValue}
           onFocus={() => {
             setSearchFocus(true);
           }}

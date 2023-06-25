@@ -4,8 +4,12 @@ import Search from "./components/Search";
 import Header from "./components/Header/header";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  function refresh() {
+    setSearchValue("");
+  }
   function onInputChange(e) {
-    //console.log(e.target.value);
+    setSearchValue(e.target.value);
   }
   return (
     <div
@@ -15,7 +19,12 @@ function App() {
           : "theme-light custom-fonts App"
       }
     >
-      <Search onChange={onInputChange} key={"1"} />
+      <Search
+        onChange={onInputChange}
+        key={"1"}
+        searchValue={searchValue}
+        refresh={refresh}
+      />
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
