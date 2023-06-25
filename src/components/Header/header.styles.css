@@ -1,5 +1,110 @@
-.container {
+.header-container {
   background-color: var(--root);
-  width: 50px;
-  height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
+  border: 1px solid #000;
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+
+.name-logo-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 10px 10px 10px;
+  flex: 1;
+}
+.theme-inner-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.switch-button {
+  color: var(--secondary);
+}
+.menu-item {
+  display: flex;
+  border-radius: 5px 0px 0px 5px;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+.menu-item:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+}
+.logo-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  align-items: center;
+  padding: 3px 3px 3px 3px;
+  border-radius: 0px 5px 5px 0px;
+}
+.logo-item > label {
+  font-size: var(--heading);
+  font-weight: bold;
+}
+.search-container {
+  display: flex;
+  flex-direction: row;
+  flex: 2;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.theme-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+}
+.add-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 5px;
+}
+.add-button:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+.theme-label {
+  font-size: var(--text);
+  font-weight: bold;
+}
+@media screen and (max-width: 320px) {
+  .logo-item {
+    display: none;
+  }
+  .logo-item > label {
+    display: none;
+  }
+  .theme-label {
+    display: none;
+  }
+  .menu-item {
+    border-radius: 5px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .logo-item > label {
+    display: none;
+  }
+  .logo-item {
+    display: none;
+  }
+  .theme-label {
+    display: none;
+  }
+  .menu-item {
+    border-radius: 5px;
+  }
 }

@@ -9,28 +9,28 @@
 }
 .theme-light {
   --primary: #fff;
-  --secondary: #000;
+  --secondary: grey;
 }
 .theme-dark {
   --primary: #000;
-  --secondary: #b123b1;
+  --secondary: #fff;
 }
 
-@media (min-width: 320px) {
+@media screen and (min-width: 320px) {
   .App {
     --text: 12px;
     --heading: 16px;
     --menu: 10px;
   }
 }
-@media (min-width: 480px) {
+@media screen and (min-width: 480px) {
   .App {
     --text: 13px;
     --heading: 17px;
     --menu: 11px;
   }
 }
-@media (min-width: 600px) {
+@media screen and (min-width: 600px) {
   .App {
     --text: 14px;
     --heading: 18px;
@@ -38,7 +38,7 @@
   }
   /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 }
-@media (min-width: 801px) {
+@media screen and (min-width: 801px) {
   .App {
     --text: 15px;
     --heading: 19px;
@@ -46,7 +46,7 @@
   }
   /* tablet, landscape iPad, lo-res laptops ands desktops */
 }
-@media (min-width: 1025px) {
+@media screen and (min-width: 1025px) {
   .App {
     --text: 16px;
     --heading: 20px;
@@ -54,7 +54,7 @@
   }
   /* big landscape tablets, laptops, and desktops */
 }
-@media (min-width: 1281px) {
+@media screen and (min-width: 1281px) {
   /* hi-res laptops and desktops */
   .App {
     --text: 17px;
@@ -63,9 +63,8 @@
   }
 }
 
-.row {
+.column {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: var(--seconday);
+  flex-direction: column;
+  align-items: center;
 }

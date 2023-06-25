@@ -1,9 +1,12 @@
 import "./App.css";
 import { useState } from "react";
-//import Header from "./components/Header/header";
-import Card from "./components/Card";
+import Search from "./components/Search";
+import Header from "./components/Header/header";
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  function onInputChange(e) {
+    //console.log(e.target.value);
+  }
   return (
     <div
       className={
@@ -12,14 +15,8 @@ function App() {
           : "theme-light custom-fonts App"
       }
     >
-      <Card />
-      <button
-        onClick={() => {
-          setDarkMode(!darkMode);
-        }}
-      >
-        change theme
-      </button>
+      <Search onChange={onInputChange} key={"1"} />
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
 }
