@@ -1,16 +1,11 @@
 import "./App.css";
 import { useState } from "react";
-import Search from "./components/Search";
-import Header from "./components/Header/header";
+//import Search from "./components/Search";
+//import Header from "./components/Header/header";
+import AppHeader from "./containers/AppHeader";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  function refresh() {
-    setSearchValue("");
-  }
-  function onInputChange(e) {
-    setSearchValue(e.target.value);
-  }
+
   return (
     <div
       className={
@@ -19,13 +14,7 @@ function App() {
           : "theme-light custom-fonts App"
       }
     >
-      <Search
-        onChange={onInputChange}
-        key={"1"}
-        searchValue={searchValue}
-        refresh={refresh}
-      />
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+      <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
 }
