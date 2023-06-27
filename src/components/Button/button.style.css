@@ -1,0 +1,14 @@
+.button-container {
+  display: flex;
+  color: var(--primary);
+  background-color: var(--secondary);
+  padding: 10px;
+  font-size: var(--menu);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button-container:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}

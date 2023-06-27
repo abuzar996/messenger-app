@@ -51,6 +51,7 @@
   background-color: var(--secondary);
   padding: 5px;
   flex-direction: row;
+  align-items: center;
   margin-right: 10px;
   border-radius: 5px;
 }
@@ -59,7 +60,5 @@
   color: var(--secondary);
 }
 .message-button-container {
-  background-color: blue;
   justify-content: flex-end;
-  width: 50px;
 }
