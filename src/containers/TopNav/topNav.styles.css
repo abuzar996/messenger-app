@@ -1,0 +1,43 @@
+.top-nav-container {
+  margin-top: 1px;
+}
+.top-nav-inner-container {
+  padding: 5px 10px 5px 10px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.title-container {
+  display: flex;
+}
+.icon-container {
+  display: flex;
+}
+.title-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  align-items: center;
+  padding: 3px 3px 3px 3px;
+  border-radius: 5px;
+}
+.icon-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  align-items: center;
+  padding: 3px 3px 3px 3px;
+  border-radius: 5px;
+}
+.icon-item:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+.title-item > label {
+  font-size: var(--heading);
+  font-weight: bold;
+}

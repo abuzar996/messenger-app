@@ -5,13 +5,16 @@
   color: var(--secondary);
   border: 1px solid var(--secondary);
 }
+.card-body:hover {
+  opacity: 0.6;
+}
 .image {
   width: 80px;
   height: 80px;
 }
 .img-container {
   display: flex;
-
+  padding-left: 10px;
   flex-direction: row;
 }
 .data-container {
@@ -30,6 +33,7 @@
 .option {
   width: var(--heading);
   height: var(--heading);
+  color: var(--primary);
 }
 .data-body {
   display: flex;

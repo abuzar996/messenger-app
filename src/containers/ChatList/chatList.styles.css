@@ -1,0 +1,14 @@
+.chat-list-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.chat-list-inner-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 0px 0px;
+  overflow-y: scroll;
+  height: calc(100vh - 140px);
+  border: 1px solid var(--secondary);
+}
+/* width */

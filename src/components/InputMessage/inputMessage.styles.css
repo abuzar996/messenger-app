@@ -1,0 +1,65 @@
+.input-message-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--secondary);
+}
+.input-message-container > div {
+  padding: 10px;
+  flex: 1;
+  background-color: var(--primary);
+}
+.input-message-container > div > textarea {
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 5px;
+  display: flex;
+  width: calc(100% - 10px);
+  max-height: 50px;
+  min-height: 50px;
+  flex: 1;
+  font-size: var(--text);
+  padding: 5px;
+  max-lines: 4;
+  border: none;
+  resize: none;
+}
+.input-message-container > div > textarea:focus {
+  outline: none;
+}
+.input-message-container > div > textarea::placeholder {
+  font-size: var(--text);
+  color: var(--primary);
+}
+#option-message-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 2;
+  padding: 0px 10px 10px 10px;
+  color: var(--secondary);
+  width: calc(100% - 20px);
+}
+.message-icons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.message-icons-container > div {
+  display: flex;
+  color: var(--primary);
+  background-color: var(--secondary);
+  padding: 5px;
+  flex-direction: row;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.message-icons-container > div:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+.message-button-container {
+  background-color: blue;
+  justify-content: flex-end;
+  width: 50px;
+}

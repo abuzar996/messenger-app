@@ -17,6 +17,9 @@
   background-color: transparent;
   border: none;
 }
+.search-inner-container > div > input::placeholder {
+  color: var(--primary);
+}
 .input-field {
   width: 90%;
 }

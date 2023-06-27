@@ -3,7 +3,7 @@ import "./search.styles.css";
 import { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-const Search = ({ onChange, searchValue, refresh }) => {
+const Search = ({ onChange, searchValue, refresh, searchData }) => {
   const [searchFocus, setSearchFocus] = useState(false);
 
   function handleClick() {
@@ -37,7 +37,7 @@ const Search = ({ onChange, searchValue, refresh }) => {
           className="input-text"
           type="text"
           id="search-id"
-          placeholder={!searchFocus ? "Search" : ""}
+          placeholder={!searchFocus ? (searchData ? searchData : "Search") : ""}
           value={searchValue}
           onFocus={() => {
             setSearchFocus(true);
