@@ -16,27 +16,25 @@ const ListHeader = () => {
     setSearchValue("");
   }
   return (
-    <div className="chat-header">
-      <Header>
-        <div className="search-container">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "calc(100% - 20px)",
-              padding: "2px 10px 2px 10px",
-            }}
-          >
-            <Search
-              onChange={onInputChange}
-              searchValue={searchValue}
-              refresh={refresh}
-              searchData={"Search Messages"}
-            />
-          </div>
+    <Header>
+      <div className="list-search-container">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "calc(100% - 20px)",
+            padding: "2px 10px 2px 10px",
+          }}
+        >
+          <Search
+            onChange={onInputChange}
+            searchValue={searchValue}
+            refresh={refresh}
+            searchData={"Search Messages"}
+          />
         </div>
-      </Header>
-    </div>
+      </div>
+    </Header>
   );
 };
 

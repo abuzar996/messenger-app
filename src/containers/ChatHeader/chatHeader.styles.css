@@ -1,0 +1,61 @@
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex: 1;
+  padding-right: 10px;
+}
+.chat-name-container {
+  display: flex;
+  padding: 10px 10px 10px 10px;
+}
+.chat-name {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  align-items: center;
+  padding: 4px;
+  border-radius: 5px;
+}
+.chat-name > label {
+  font-size: var(--menu);
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.back-item {
+  display: flex;
+  border-radius: 5px;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+.back-item:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+}
+.chat-search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+}
+.chat-icons-container {
+  display: flex;
+  align-items: center;
+}
+.chat-icons-container > div {
+  border-radius: 5px;
+  color: var(--primary);
+  background-color: var(--secondary);
+  padding: 3px 3px 5px 3px;
+  display: flex;
+  align-items: center;
+}
+.chat-icons-container > div:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}
