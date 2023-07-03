@@ -4,6 +4,7 @@
   background-color: var(--primary);
   color: var(--secondary);
   border: 1px solid var(--secondary);
+  border-top: none;
 }
 .card-body:hover {
   opacity: 0.6;

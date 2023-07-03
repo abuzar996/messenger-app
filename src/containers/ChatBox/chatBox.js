@@ -33,8 +33,8 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const refferences = useRef(null);
   function onSendClick() {
-    if (newMessage) {
-      let temp = newMessage.trim();
+    if (newMessage.length) {
+      let temp = newMessage?.trim();
       if (temp.length) {
         setChatData((prevState) => {
           return [...prevState, { user1: [newMessage] }];

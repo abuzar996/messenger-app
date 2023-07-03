@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import AppHeader from "./containers/AppHeader";
 import ChatBox from "./containers/ChatBox";
+import HomeLayout from "./containers/Home/homeLayout";
 import ChatList from "./containers/ChatList";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <ChatList />
         </div>
         <div style={{ width: "60%" }}>
-          <ChatBox />
+          <HomeLayout />
         </div>
       </div>
     </div>

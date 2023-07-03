@@ -1,0 +1,30 @@
+.home-body-container {
+  margin-top: 1px;
+  margin-left: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  border: 1px solid var(--secondary);
+  height: calc(100vh - 99.5px);
+  flex-direction: column;
+  border-bottom-right-radius: 15px;
+}
+.home-body-container > img {
+  height: 50% !important;
+  width: 50% !important;
+  border: 50%;
+}
+.home-body-container > label {
+  font-size: var(--menu);
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--secondary);
+  margin-top: 10px;
+}
+.home-body-container > label:hover {
+  font-size: var(--heading);
+  font-weight: bold;
+  text-decoration: none;
+  color: blueviolet;
+}

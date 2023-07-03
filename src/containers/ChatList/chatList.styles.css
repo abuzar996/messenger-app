@@ -8,7 +8,9 @@
   flex-direction: column;
   padding: 0px 0px 0px 0px;
   overflow-y: scroll;
-  height: calc(100vh - 129px);
+  height: calc(100vh - 132px);
+  margin-top: 1px;
   border: 1px solid var(--secondary);
+  border-bottom-left-radius: 15px;
 }
 /* width */

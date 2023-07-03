@@ -30,6 +30,7 @@
   color: var(--primary);
   border-radius: 40px;
   padding: 10px;
+  font-size: var(--text);
 }
 .display-message {
   justify-content: flex-end;
@@ -42,18 +43,20 @@
   justify-content: flex-end;
   border-radius: 40px;
   padding: 10px;
+  font-size: var(--text);
 }
 .icon-visibility {
-  display: none;
+  display: none !important;
 }
+
 .inner-container-user:hover > .icon-visibility {
-  display: flex;
+  display: flex !important;
   color: var(--secondary);
   align-self: center;
 }
 .inner-container:hover > .icon-visibility {
-  display: flex;
+  display: flex !important;
   color: var(--secondary);
-
+  justify-content: flex-end;
   align-self: center;
 }

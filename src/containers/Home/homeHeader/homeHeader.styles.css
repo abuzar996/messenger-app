@@ -1,0 +1,23 @@
+.home-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--secondary);
+  background-color: var(--primary);
+  color: var(--secondary);
+  margin-top: 1px;
+  margin-left: 1px;
+  flex: 1;
+}
+.home-header-container > div {
+  padding: 5.3px;
+  display: flex;
+  justify-content: center;
+}
+.home-header-container > div > label {
+  color: var(--secondary);
+  font-size: var(--heading);
+  font-weight: bold;
+  padding: 3px 3px 3px 3px;
+}
