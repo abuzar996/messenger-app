@@ -7,6 +7,38 @@
 }
 .chat-space {
   display: flex;
-  height: 620.3px;
+  height: calc(100vh - 232px);
   background-color: var(--primary);
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.inner-container {
+  padding: 10px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
+.inner-container-user {
+  padding: 10px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+.label1 {
+  background-color: var(--secondary);
+  color: var(--primary);
+  border-radius: 40px;
+  padding: 10px;
+}
+.display-message {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.label2 {
+  background-color: blueviolet;
+  color: black;
+  text-align: left;
+  justify-content: flex-end;
+  border-radius: 40px;
+  padding: 10px;
 }

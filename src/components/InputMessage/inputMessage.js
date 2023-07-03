@@ -4,14 +4,15 @@ import "./inputMessage.styles.css";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ImageIcon from "@mui/icons-material/Image";
-const InputMessage = () => {
-  function onButtonClick() {
-    console.log("onButtonClick");
-  }
+const InputMessage = ({ onClick, onChange }) => {
   return (
     <div className="input-message-container">
       <div>
-        <textarea placeholder="write a message" type="text" />
+        <textarea
+          placeholder="write a message"
+          type="text"
+          onChange={onChange.bind(this)}
+        />
       </div>
       <div id="option-message-container">
         <div className="message-icons-container">
@@ -26,7 +27,7 @@ const InputMessage = () => {
           </div>
         </div>
         <div className="message-button-container">
-          <Button onClick={onButtonClick}>Send</Button>
+          <Button onClick={onClick.bind(this)}>Send</Button>
         </div>
       </div>
     </div>
