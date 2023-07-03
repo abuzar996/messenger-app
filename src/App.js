@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import AppHeader from "./containers/AppHeader";
-import ChatBox from "./containers/ChatBox";
+//import ChatBox from "./containers/ChatBox";
 import HomeLayout from "./containers/Home/homeLayout";
 import ChatList from "./containers/ChatList";
 
