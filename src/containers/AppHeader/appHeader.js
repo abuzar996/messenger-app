@@ -37,6 +37,7 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
           searchValue={searchValue}
           refresh={refresh}
           key={"1"}
+          searchData={"Search Users or friends..."}
         />
       </div>
       <div className="theme-container">
