@@ -1,15 +1,9 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-//import Search from "./components/Search";
-//import Header from "./components/Header/header";
-//import Card from "./components/Card";
+import { useState } from "react";
 import AppHeader from "./containers/AppHeader";
-import ChatHeader from "./containers/ChatHeader";
-//import ListHeader from "./containers/ListHeader";
 import ChatBox from "./containers/ChatBox";
-//import TopNav from "./containers/TopNav";
 import ChatList from "./containers/ChatList";
-import InputMessage from "./components/InputMessage";
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   return (

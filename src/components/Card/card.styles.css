@@ -33,7 +33,7 @@
 .option {
   width: var(--heading);
   height: var(--heading);
-  color: var(--primary);
+  color: var(--secondary);
 }
 .data-body {
   display: flex;

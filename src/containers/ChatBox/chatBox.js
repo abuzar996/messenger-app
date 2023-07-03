@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./chatBox.styles.css";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
@@ -30,39 +31,55 @@ const chats = [
 const ChatBox = () => {
   const [chatData, setChatData] = useState(chats);
   const [newMessage, setNewMessage] = useState([]);
+  const refferences = useRef(null);
   function onSendClick() {
     if (newMessage) {
-      setChatData((prevState) => {
-        console.log(prevState);
-        return [...prevState, { user1: [newMessage] }];
-      });
-      // console.log(chatData);
+      let temp = newMessage.trim();
+      if (temp.length) {
+        setChatData((prevState) => {
+          return [...prevState, { user1: [newMessage] }];
+        });
+      }
+      setNewMessage("");
     }
   }
   function onInputChange(e) {
     setNewMessage(e.target.value);
   }
+  useEffect(() => {
+    refferences.current.scrollTo({
+      top: refferences.current.scrollHeight,
+      behavior: "smooth",
+    });
+  });
+
   return (
     <div className="chat-box-container">
       <ChatHeader />
-      <div className="chat-space">
+      <div className="chat-space" ref={refferences}>
         {chatData
           ? chatData.map((chat) =>
               chat.user1
                 ? chat.user1.map((message, i) => (
-                    <div key={i} className="inner-container">
-                      <label className="label1">{message}</label>
+                    <div key={i} className="inner-container-user">
+                      <label className="label2">{message}</label>
+                      <MoreHorizIcon className="icon-visibility" />
                     </div>
                   ))
                 : chat.user2.map((message, i) => (
-                    <div key={i} className="inner-container-user">
-                      <label className="label2">{message}</label>
+                    <div key={i} className="inner-container">
+                      <label className="label1">{message}</label>
+                      <MoreHorizIcon className="icon-visibility" />
                     </div>
                   ))
             )
           : null}
       </div>
-      <InputMessage onClick={onSendClick} onChange={onInputChange} />
+      <InputMessage
+        value={newMessage}
+        onClick={onSendClick}
+        onChange={onInputChange}
+      />
     </div>
   );
 };
