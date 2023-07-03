@@ -1,6 +1,5 @@
 import React from "react";
 import user from "../../images/user.png";
-import options from "../../images/dots.svg";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./card.styles.css";
 import "../../App.css";
@@ -14,7 +13,6 @@ const Card = () => {
         <div className="data-container align-center padding-left padding-top">
           <label className="user-name">Abuzar Rahim</label>
           <MoreHorizIcon className="option padding-right" />
-          {/* //<img src={options} alt="user" /> */}
         </div>
 
         <div className="data-container padding-left">
