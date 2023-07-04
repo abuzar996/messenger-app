@@ -7,7 +7,7 @@ import HomeLayout from "./containers/Home/homeLayout";
 import ChatList from "./containers/ChatList";
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   return (
     <div
