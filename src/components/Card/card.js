@@ -1,8 +1,10 @@
 import React from "react";
-import user from "../../images/user.png";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./card.styles.css";
 import "../../App.css";
+
+import user from "../../images/user.png";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
 const Card = () => {
   return (
     <div className="card-body">

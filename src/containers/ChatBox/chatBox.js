@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./chatBox.styles.css";
+
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
+
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
 const chats = [
   {
     user1: ["hello", "how are you"],
@@ -28,6 +31,7 @@ const chats = [
     user1: ["Great!", "Thankyou!"],
   },
 ];
+
 const ChatBox = () => {
   const [chatData, setChatData] = useState(chats);
   const [newMessage, setNewMessage] = useState([]);

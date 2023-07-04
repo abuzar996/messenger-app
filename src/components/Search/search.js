@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./search.styles.css";
-import { useState, useEffect } from "react";
+
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
+
 const Search = ({ onChange, searchValue, refresh, searchData }) => {
   const [searchFocus, setSearchFocus] = useState(false);
 

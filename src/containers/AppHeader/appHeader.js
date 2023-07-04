@@ -1,14 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import "./appHeader.styles.css";
 
 import Search from "../../components/Search";
 import Header from "../../components/Header/header";
-import "./appHeader.styles.css";
 import UserOptionModal from "../../modals/UserOptionModal/userOptionModal";
+
 import { Switch } from "@mui/material";
+
+import profile from "../../images/profile.jpg";
+
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import profile from "../../images/profile.jpg";
+
 const AppHeader = ({ darkMode, setDarkMode }) => {
   const [searchValue, setSearchValue] = useState("");
   const [optionModalOpen, setOptionModalOpen] = useState(false);

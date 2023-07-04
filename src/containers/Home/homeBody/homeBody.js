@@ -1,6 +1,8 @@
 import React from "react";
 import "./homeBody.styles.css";
+
 import logo from "../../../images/logo.svg";
+
 const HomeBody = () => {
   return (
     <div className="home-body-container">

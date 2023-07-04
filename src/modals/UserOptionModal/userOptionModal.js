@@ -54,5 +54,4 @@ const UserOptionModal = ({ modalOpen }) => {
     </div>
   );
 };
-
 export default UserOptionModal;

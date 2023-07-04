@@ -1,10 +1,14 @@
 import React from "react";
 import "./userProfileModal.styles.css";
+
+import Overlay from "../../components/Overlay";
+
+import profile from "../../images/profile.jpg";
+
 import PhoneIcon from "@mui/icons-material/Phone";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
-import profile from "../../images/profile.jpg";
-import Overlay from "../../components/Overlay";
+
 const UserProfileModal = ({ setModalOpen }) => {
   return (
     <Overlay modalOpen={setModalOpen}>

@@ -1,9 +1,10 @@
 import React from "react";
+import "./chatList.styles.css";
 
 import TopNav from "../TopNav";
 import ListHeader from "../ListHeader";
 import Card from "../../components/Card";
-import "./chatList.styles.css";
+
 const ChatList = () => {
   return (
     <div className="chat-list-container">
@@ -11,7 +12,6 @@ const ChatList = () => {
       <ListHeader />
       <div className="chat-list-inner-container">
         <Card />
-
         <Card />
         <Card />
         <Card />
@@ -19,7 +19,6 @@ const ChatList = () => {
         <Card />
         <Card />
         <Card />
-
         <Card />
         <Card />
         <Card />

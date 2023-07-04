@@ -1,7 +1,7 @@
 import React from "react";
+import "./topNav.styles.css";
 
 import Header from "../../components/Header/header";
-import "./topNav.styles.css";
 
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 

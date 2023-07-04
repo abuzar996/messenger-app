@@ -10,5 +10,4 @@ const HomeHeader = () => {
     </div>
   );
 };
-
 export default HomeHeader;

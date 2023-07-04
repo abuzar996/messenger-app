@@ -1,10 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import "./listHeader.styles.css";
 
 import Header from "../../components/Header/header";
 import Search from "../../components/Search";
-
-import "./listHeader.styles.css";
 
 const ListHeader = () => {
   const [searchValue, setSearchValue] = useState("");

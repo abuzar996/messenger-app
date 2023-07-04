@@ -1,6 +1,6 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import "./overlay.styles.css";
+
 const Overlay = ({ children, modalOpen }) => {
   function keyDown(event) {
     //console.log(event.key);

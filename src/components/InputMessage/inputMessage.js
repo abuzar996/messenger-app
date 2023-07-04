@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import Button from "../Button";
 import "./inputMessage.styles.css";
+
+import Button from "../Button";
+
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ImageIcon from "@mui/icons-material/Image";
+
 const InputMessage = ({ value, onClick, onChange }) => {
   function onkeyDown(e) {
     if (e.key === "Enter") {

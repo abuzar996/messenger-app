@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./chatHeader.styles.css";
-import { useState } from "react";
+
 import Search from "../../components/Search";
+import Header from "../../components/Header/header";
+
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Header from "../../components/Header/header";
+
 const ChatHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
