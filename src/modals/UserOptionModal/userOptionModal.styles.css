@@ -1,0 +1,99 @@
+@keyframes options {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.user-option-modal-container {
+  display: flex;
+  background-color: var(--secondary);
+  border: 2px solid var(--primary);
+  width: fit-content;
+  border-radius: 15px;
+  flex-direction: column;
+  position: absolute;
+  z-index: 4;
+  padding-bottom: 10px;
+  animation-name: options;
+  animation-duration: 1s;
+  margin-top: 43px;
+  margin-left: 10px;
+}
+.user-option-modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary);
+  border-bottom: 2px solid var(--primary);
+}
+.user-option-modal-header > label {
+  color: var(--primary);
+  font-size: var(--text);
+  font-weight: bold;
+}
+.user-option-modal-body {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5vw;
+
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary);
+  border-bottom: 1px solid var(--primary);
+}
+.user-option-modal-body > label {
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+}
+.user-option-modal-icons {
+  color: var(--primary);
+}
+.user-option-modal-body:hover > .user-option-modal-icons {
+  color: var(--secondary);
+}
+.user-option-modal-body:hover {
+  background-color: var(--primary);
+  /* border-bottom: 1px solid var(--primary); */
+}
+.user-option-modal-body:hover > label {
+  color: var(--secondary);
+  /* border-bottom: 1px solid var(--primary); */
+}
+.user-option-close-button {
+  margin-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.option-close-button {
+  padding: 10px;
+  flex: 1;
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+  width: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+  justify-content: center;
+  background-color: var(--danger);
+}
+.option-close-button:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+}
+.options-overlay {
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  top: 0;
+  padding: 0;
+  animation-duration: 1s;
+}

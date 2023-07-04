@@ -4,13 +4,14 @@ import { useState } from "react";
 import Search from "../../components/Search";
 import Header from "../../components/Header/header";
 import "./appHeader.styles.css";
-
+import UserOptionModal from "../../modals/UserOptionModal/userOptionModal";
 import { Switch } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import profile from "../../images/profile.jpg";
 const AppHeader = ({ darkMode, setDarkMode }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [optionModalOpen, setOptionModalOpen] = useState(false);
   function onInputChange(e) {
     //console.log(e.target.value);
     setSearchValue(e.target.value);
@@ -20,9 +21,17 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
   }
   return (
     <Header>
+      {optionModalOpen ? (
+        <UserOptionModal modalOpen={setOptionModalOpen} />
+      ) : null}
       <div className="name-logo-container">
-        <div className="menu-item">
-          <FormatAlignJustifyIcon fontSize="medium" />
+        <div className={optionModalOpen ? "menu-item-open " : "menu-item"}>
+          <FormatAlignJustifyIcon
+            fontSize="medium"
+            onClick={() => {
+              setOptionModalOpen(true);
+            }}
+          />
         </div>
         <div className="logo-item">
           <label>Messenger</label>

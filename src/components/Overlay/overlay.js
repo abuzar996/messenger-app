@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import "./overlay.styles.css";
-const Overlay = ({ children, setModalOpen }) => {
+const Overlay = ({ children, modalOpen }) => {
   function keyDown(event) {
     //console.log(event.key);
     if (event.key === "Escape") {
@@ -9,7 +9,9 @@ const Overlay = ({ children, setModalOpen }) => {
     }
   }
   function close() {
-    setModalOpen(false);
+    if (modalOpen) {
+      modalOpen(false);
+    }
   }
   useEffect(() => {
     window.addEventListener("keydown", keyDown);

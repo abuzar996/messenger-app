@@ -7,7 +7,7 @@ import profile from "../../images/profile.jpg";
 import Overlay from "../../components/Overlay";
 const UserProfileModal = ({ setModalOpen }) => {
   return (
-    <Overlay setModalOpen={setModalOpen}>
+    <Overlay modalOpen={setModalOpen}>
       <div className="user-profile-modal-container">
         <div className="user-profile-header">
           <div>
