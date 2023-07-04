@@ -4,7 +4,6 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 import profile from "../../images/profile.jpg";
-import Button from "../../components/Button";
 const UserProfileModal = () => {
   return (
     <div className="user-profile-modal-container">
