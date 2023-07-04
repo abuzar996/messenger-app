@@ -1,0 +1,117 @@
+.user-profile-modal-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary);
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+  width: fit-content;
+  padding-bottom: 10px;
+  top: 25vh;
+  left: 40vw;
+}
+.user-profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  column-gap: 10vw;
+  border: 2px solid var(--primary);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.user-profile-header > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-profile-header > div > label {
+  font-size: var(--heading);
+  font-weight: bold;
+  color: var(--primary);
+}
+.user-profile-add-icon {
+  color: var(--primary);
+}
+.user-profile-add-icon:hover {
+  color: yellow;
+}
+.user-profile-image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.user-profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+}
+.user-profile-info {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  flex: 1;
+  height: fit-content;
+  flex-direction: column;
+}
+.user-profile-info-user-name {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  column-gap: 2vw;
+  flex-direction: row;
+}
+.user-profile-label {
+  font-size: var(--menu);
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.user-profile-button-container {
+  display: flex;
+  width: calc(100%);
+  flex-direction: column;
+}
+.user-profile-close-button {
+  margin-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: right;
+}
+.close-button {
+  padding: 10px;
+  flex: 1;
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+  width: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+  justify-content: center;
+  background-color: var(--danger);
+}
+.close-button:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+}
+
+.message-button {
+  padding: 10px;
+  flex: 1;
+  color: var(--secondary);
+  font-size: var(--menu);
+  font-weight: bold;
+  width: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+  justify-content: center;
+  background-color: var(--primary);
+}
+.message-button:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+  border: 2px solid var(--primary);
+}

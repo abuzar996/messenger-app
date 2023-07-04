@@ -5,15 +5,17 @@
 
 .uniform-colors {
   --warning: yellow;
-  --danger: red;
+  --danger: rgb(148, 3, 32);
 }
 .theme-light {
-  --primary: #fff;
-  --secondary: grey;
+  --primary: #ffffff;
+  --secondary: rgb(56, 56, 56);
+  background-color: var(--primary);
 }
 .theme-dark {
   --primary: #202123;
-  --secondary: #fff;
+  --secondary: #c6bdbd;
+  background-color: var(--primary);
 }
 
 @media screen and (min-width: 320px) {
@@ -69,7 +71,7 @@
   align-items: center;
 }
 ::-webkit-scrollbar {
-  width: 3px;
+  display: none;
 }
 
 /* Track */

@@ -8,7 +8,7 @@ import "./appHeader.styles.css";
 import { Switch } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-
+import profile from "../../images/profile.jpg";
 const AppHeader = ({ darkMode, setDarkMode }) => {
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
@@ -42,10 +42,10 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
       </div>
       <div className="theme-container">
         <div className="theme-inner-container">
-          <div className="theme-label">
-            <label>Dark Mode</label>
-          </div>
-          <div>
+          {/* <div className="theme-label">
+            <label></label>
+          </div> */}
+          <div style={{ paddingRight: "10px" }}>
             <Switch
               className="switch-button"
               checked={darkMode ? true : false}
@@ -53,6 +53,9 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
                 setDarkMode(!darkMode);
               }}
             />
+          </div>
+          <div className="display-div">
+            <img className="display-image" src={profile} alt={"user"} />
           </div>
         </div>
       </div>
