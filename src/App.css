@@ -88,3 +88,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+
+@keyframes animate {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

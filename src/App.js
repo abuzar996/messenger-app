@@ -7,6 +7,7 @@ import HomeLayout from "./containers/Home/homeLayout";
 import ChatList from "./containers/ChatList";
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   return (
     <div
@@ -16,15 +17,12 @@ function App() {
           : "theme-light custom-fonts App uniform-colors"
       }
     >
-      <AppHeader
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        id="app-header"
-      />
-      <UserProfileModal />
+      <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
+
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "40%" }}>
           <ChatList />
+          {modalOpen ? <UserProfileModal setModalOpen={setModalOpen} /> : null}
         </div>
         <div style={{ width: "60%" }}>
           <HomeLayout />

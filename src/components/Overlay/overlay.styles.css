@@ -1,0 +1,21 @@
+@keyframes animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+.overlay-container {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  top: 0;
+  padding: 0;
+  animation-name: animation;
+  animation-duration: 1s;
+}
