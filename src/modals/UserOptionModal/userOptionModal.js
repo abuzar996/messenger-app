@@ -7,6 +7,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const UserOptionModal = ({ modalOpen }) => {
+  function onSettingsClicked() {
+    console.log("onSettingsClicked");
+  }
+  function onLogoutClicked() {
+    console.log("onLogoutClicked");
+  }
   function close() {
     modalOpen(false);
   }
@@ -27,11 +33,11 @@ const UserOptionModal = ({ modalOpen }) => {
         <div className="user-option-modal-header">
           <label>Options</label>
         </div>
-        <div className="user-option-modal-body">
+        <div className="user-option-modal-body" onClick={onSettingsClicked}>
           <SettingsIcon className="user-option-modal-icons" />
           <label>Settings</label>
         </div>
-        <div className="user-option-modal-body">
+        <div className="user-option-modal-body" onClick={onLogoutClicked}>
           <LogoutIcon className="user-option-modal-icons" />
           <label>Logout</label>
         </div>
