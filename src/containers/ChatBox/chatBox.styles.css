@@ -3,7 +3,9 @@
   flex-direction: column;
   flex: 1;
   border: 1px solid var(--secondary);
+
   margin-top: 1px;
+  margin-left: 1px;
 }
 .chat-space {
   display: flex;

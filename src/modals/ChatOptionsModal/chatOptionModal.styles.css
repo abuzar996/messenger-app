@@ -1,0 +1,47 @@
+@keyframes modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.chat-option-modal-container {
+  opacity: 1;
+  display: flex;
+  width: fit-content;
+  position: absolute;
+  flex-direction: column;
+  background-color: var(--secondary);
+  border: 1px solid var(--primary);
+  border-radius: 15px;
+  padding: 10px 0px 10px 0px;
+  animation-duration: 1s;
+  animation-name: modal;
+}
+.chat-option-modal-list {
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+  column-gap: 3vw;
+  padding: 10px;
+  border-bottom: 1px solid var(--primary);
+}
+.chat-option-label {
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+}
+.chat-option-icons {
+  color: var(--primary);
+}
+.chat-option-modal-list:hover {
+  background-color: var(--primary);
+}
+.chat-option-modal-list:hover > .chat-option-icons {
+  color: var(--secondary);
+}
+.chat-option-modal-list:hover > .chat-option-label {
+  color: var(--secondary);
+}

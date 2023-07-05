@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./inputMessage.styles.css";
+
+import { useKeys } from "../../hooks/useKeys";
 
 import Button from "../Button";
 
@@ -8,17 +10,7 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ImageIcon from "@mui/icons-material/Image";
 
 const InputMessage = ({ value, onClick, onChange }) => {
-  function onkeyDown(e) {
-    if (e.key === "Enter") {
-      onClick();
-    }
-  }
-  useEffect(() => {
-    window.addEventListener("keydown", onkeyDown);
-    return () => {
-      window.removeEventListener("keydown", onkeyDown);
-    };
-  });
+  useKeys("Enter", onClick);
   return (
     <div className="input-message-container">
       <div>
