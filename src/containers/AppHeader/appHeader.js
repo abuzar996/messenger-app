@@ -17,6 +17,7 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
   const [searchValue, setSearchValue] = useState("");
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+
   function onInputChange(e) {
     //console.log(e.target.value);
     setSearchValue(e.target.value);
@@ -32,6 +33,7 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
       {selectModalOpen ? (
         <SelectUserModal modalOpen={setSelectModalOpen} />
       ) : null}
+
       <div className="name-logo-container">
         <div
           className={optionModalOpen ? "menu-item-open " : "menu-item"}

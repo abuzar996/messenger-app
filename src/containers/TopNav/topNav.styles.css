@@ -33,6 +33,16 @@
   padding: 3px 3px 3px 3px;
   border-radius: 5px;
 }
+.icon-item-open {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+  align-items: center;
+  padding: 3px 3px 3px 3px;
+  border-radius: 5px;
+}
 .icon-item:hover {
   background-color: var(--primary);
   color: var(--secondary);
