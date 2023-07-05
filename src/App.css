@@ -10,11 +10,13 @@
 .theme-light {
   --primary: #ffffff;
   --secondary: rgb(56, 56, 56);
+  --hover-modal: #000;
   background-color: var(--primary);
 }
 .theme-dark {
   --primary: #202123;
   --secondary: #c6bdbd;
+  --hover-modal: #fff;
   background-color: var(--primary);
 }
 

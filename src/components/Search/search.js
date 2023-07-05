@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./search.styles.css";
 
-import { useKeys } from "../../Hooks/useKeys";
+import { useKeys } from "../../hooks/useKeys";
 
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
@@ -31,7 +31,6 @@ const Search = ({ onChange, searchValue, refresh, searchData }) => {
           onChange={onChange.bind(this)}
           className="input-text"
           type="text"
-          id="search-id"
           placeholder={!searchFocus ? (searchData ? searchData : "Search") : ""}
           value={searchValue}
           onFocus={() => {

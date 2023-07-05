@@ -1,7 +1,7 @@
 import React from "react";
 import "./userOptionModal.styles.css";
 
-import { useKeys } from "../../Hooks/useKeys";
+import { useKeys } from "../../hooks/useKeys";
 import { Checkbox } from "@mui/material";
 
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,17 +18,6 @@ const UserOptionModal = ({ modalOpen }) => {
   function closeFn() {
     modalOpen(false);
   }
-  // function keyDown(event) {
-  //   if (event.key === "Escape") {
-  //     close();
-  //   }
-  // }
-  // useEffect(() => {
-  //   window.addEventListener("keydown", keyDown);
-  //   return () => {
-  //     window.removeEventListener("keydown", keyDown);
-  //   };
-  // });
   return (
     <div className="options-overlay" onClick={closeFn}>
       <div className="user-option-modal-container">

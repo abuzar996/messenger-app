@@ -1,7 +1,7 @@
 import React from "react";
 import "./overlay.styles.css";
 
-import { useKeys } from "../../Hooks/useKeys";
+import { useKeys } from "../../hooks/useKeys";
 
 const Overlay = ({ children, modalOpen }) => {
   useKeys("Escape", close);
