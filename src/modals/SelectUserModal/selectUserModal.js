@@ -4,9 +4,9 @@ import "./selectUserModal.styles.css";
 import Overlay from "../../components/Overlay";
 import User from "./Users";
 
-const SelectUserModal = () => {
+const SelectUserModal = ({ modalOpen }) => {
   return (
-    <Overlay>
+    <Overlay modalOpen={modalOpen}>
       <div className="select-user-modal-container">
         <div className="select-user-modal-header">
           <div>
@@ -21,7 +21,12 @@ const SelectUserModal = () => {
           <User />
         </div>
         <div style={{ marginTop: "5px", padding: "10px" }}>
-          <button className="select-user-close-button">Close</button>
+          <button
+            className="select-user-close-button"
+            onClick={() => modalOpen(false)}
+          >
+            Close
+          </button>
         </div>
       </div>
     </Overlay>

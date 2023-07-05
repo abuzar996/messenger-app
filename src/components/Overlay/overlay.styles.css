@@ -3,12 +3,12 @@
     opacity: 0;
   }
   to {
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 .overlay-container {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   position: absolute;
