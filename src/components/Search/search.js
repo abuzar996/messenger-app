@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./search.styles.css";
+
+import { useKeys } from "../../Hooks/useKeys";
 
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
@@ -7,13 +9,10 @@ import CloseIcon from "@mui/icons-material/Close";
 const Search = ({ onChange, searchValue, refresh, searchData }) => {
   const [searchFocus, setSearchFocus] = useState(false);
 
+  useKeys("Escape", escapePressed);
+
   function handleClick() {
     refresh();
-  }
-  function handleKeyDown(e) {
-    if (e.key === "Escape") {
-      escapePressed();
-    }
   }
   function escapePressed() {
     setSearchFocus(false);
@@ -21,12 +20,7 @@ const Search = ({ onChange, searchValue, refresh, searchData }) => {
       refresh();
     }
   }
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  });
+
   return (
     <div className="search-inner-container">
       <div className={searchFocus ? "search-none" : "search-img"}>

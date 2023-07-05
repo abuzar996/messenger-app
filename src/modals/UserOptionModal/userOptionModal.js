@@ -1,34 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./userOptionModal.styles.css";
 
+import { useKeys } from "../../Hooks/useKeys";
 import { Checkbox } from "@mui/material";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const UserOptionModal = ({ modalOpen }) => {
+  useKeys("Escape", closeFn);
   function onSettingsClicked() {
     console.log("onSettingsClicked");
   }
   function onLogoutClicked() {
     console.log("onLogoutClicked");
   }
-  function close() {
+  function closeFn() {
     modalOpen(false);
   }
-  function keyDown(event) {
-    if (event.key === "Escape") {
-      close();
-    }
-  }
-  useEffect(() => {
-    window.addEventListener("keydown", keyDown);
-    return () => {
-      window.removeEventListener("keydown", keyDown);
-    };
-  });
+  // function keyDown(event) {
+  //   if (event.key === "Escape") {
+  //     close();
+  //   }
+  // }
+  // useEffect(() => {
+  //   window.addEventListener("keydown", keyDown);
+  //   return () => {
+  //     window.removeEventListener("keydown", keyDown);
+  //   };
+  // });
   return (
-    <div className="options-overlay" onClick={close}>
+    <div className="options-overlay" onClick={closeFn}>
       <div className="user-option-modal-container">
         <div className="user-option-modal-header">
           <label>Options</label>
@@ -46,7 +48,7 @@ const UserOptionModal = ({ modalOpen }) => {
           <label>Dark Theme</label>
         </div>
         <div className="user-option-close-button">
-          <button className="option-close-button" onClick={close}>
+          <button className="option-close-button" onClick={closeFn}>
             Close
           </button>
         </div>
