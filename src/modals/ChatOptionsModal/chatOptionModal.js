@@ -6,8 +6,9 @@ import Overlay from "../../components/Overlay";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ChatOptionModal = ({ topVal, leftVal, modalOpen }) => {
+const ChatOptionModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
   const reference = useRef(null);
+
   useEffect(() => {
     if (reference) {
       localStorage.setItem("height", reference.current.clientHeight);
@@ -26,7 +27,14 @@ const ChatOptionModal = ({ topVal, leftVal, modalOpen }) => {
           <StarPurple500Icon className="chat-option-icons" />
           <label className="chat-option-label">Mark Favourite</label>
         </div>
-        <div className="chat-option-modal-list">
+        <div
+          className="chat-option-modal-list"
+          onClick={(event) => {
+            console.log("hello world");
+            deleteModal(true);
+            event.preventDefault();
+          }}
+        >
           <DeleteIcon className="chat-option-icons" />
           <label className="chat-option-label">Delete</label>
         </div>

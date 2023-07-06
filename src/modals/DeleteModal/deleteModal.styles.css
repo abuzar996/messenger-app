@@ -1,0 +1,66 @@
+.delete-modal-container {
+  display: flex;
+  border: 2px solid var(--primary);
+  background-color: var(--secondary);
+  flex-direction: column;
+  position: absolute;
+  z-index: 5;
+  width: fit-content;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  top: 35vh;
+  left: 30vw;
+}
+.delete-modal-header {
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
+}
+.delete-modal-header-label {
+  color: var(--primary);
+  font-size: var(--heading);
+  font-weight: bold;
+}
+.delete-modal-body {
+  border-top: 2px solid var(--primary);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.delete-modal-body-label {
+  font-size: var(--text);
+  color: var(--primary);
+}
+.delete-buttons-container {
+  padding: 10px;
+  justify-content: center;
+  column-gap: 2vw;
+  display: flex;
+}
+.delete-modal-cancel-button {
+  padding: 10px;
+  font-size: var(--menu);
+  font-weight: bold;
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+.delete-modal-cancel-button:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+.delete-modal-delete-button {
+  padding: 10px;
+  font-size: var(--menu);
+  font-weight: bold;
+  border-radius: 15px;
+  border: 1px solid var(--primary);
+  background-color: var(--danger);
+  color: var(--secondary);
+}
+.delete-modal-delete-button:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}

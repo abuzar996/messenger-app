@@ -5,7 +5,7 @@ import AppHeader from "./containers/AppHeader";
 import ChatBox from "./containers/ChatBox";
 //import HomeLayout from "./containers/Home/homeLayout";
 import ChatList from "./containers/ChatList";
-
+//import DeleteMadal from "./modals/DeleteModal/deleteModal";
 function App() {
   // const [modalOpen, setModalOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
@@ -22,7 +22,6 @@ function App() {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "40%" }}>
           <ChatList />
-          {/* {modalOpen ? <UserProfileModal setModalOpen={setModalOpen} /> : null} */}
         </div>
         <div style={{ width: "60%" }}>
           <ChatBox />

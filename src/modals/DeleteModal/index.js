@@ -1,2 +1,2 @@
-import DeleteMadal from "./deleteMadal";
-export default DeleteMadal;
+import DeleteModal from "./deleteModal";
+export default DeleteModal;
