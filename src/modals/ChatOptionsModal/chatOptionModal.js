@@ -6,16 +6,19 @@ import Overlay from "../../components/Overlay";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ChatOptionModal = ({ topVal, leftVal, modalOpen, setHeight }) => {
-  console.log(topVal);
+const ChatOptionModal = ({ topVal, leftVal, modalOpen }) => {
   const reference = useRef(null);
   useEffect(() => {
-    setHeight(reference.current.clientHeight);
+    if (reference) {
+      localStorage.setItem("height", reference.current.clientHeight);
+      localStorage.setItem("width", reference.current.clientWidth);
+    }
   });
   return (
     <Overlay modalOpen={modalOpen}>
       <div
         ref={reference}
+        id="modal-over"
         className="chat-option-modal-container"
         style={{ top: topVal, left: leftVal }}
       >

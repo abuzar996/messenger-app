@@ -46,26 +46,29 @@ const data = [
 ];
 const ChatList = () => {
   const refference = useRef(null);
-  const [clientHeight, setClientHeight] = useState(null);
   const [scrollValue, setScrollValue] = useState(0);
-  const [xAxis, setXaxis] = useState(null);
-  const [yAxis, setYaxis] = useState(null);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
-  function onClick(event, xValue, yValue) {
-    if (xValue) {
-      setXaxis(xValue);
-      if (clientHeight) {
-        if (
-          yValue + clientHeight - scrollValue >
-          refference.current.clientHeight
-        ) {
-          setYaxis(yValue - clientHeight + 18 - scrollValue);
-          console.log(yAxis);
+
+  function setValues(xValue, yValue) {
+    let cHeight = +localStorage.getItem("height");
+    let cWidth = +localStorage.getItem("width");
+    if (cHeight && cWidth) {
+      localStorage.setItem("xAxis", xValue - cWidth + 18);
+      if (cHeight) {
+        if (yValue + cHeight - scrollValue > refference.current.clientHeight) {
+          localStorage.setItem("yAxis", yValue - cHeight + 18 - scrollValue);
         } else {
-          setYaxis(yValue - scrollValue);
-          console.log(yAxis);
+          localStorage.setItem("yAxis", yValue - scrollValue);
         }
       }
+    }
+  }
+
+  function onClick(event, xValue, yValue) {
+    if (xValue) {
+      console.log(xValue);
+      console.log(yValue);
+      setValues(xValue, yValue);
     }
   }
 
@@ -73,9 +76,8 @@ const ChatList = () => {
     <div ref={refference} className="chat-list-container">
       {optionModalOpen ? (
         <ChatOptionModal
-          setHeight={setClientHeight}
-          topVal={yAxis}
-          leftVal={xAxis}
+          topVal={+localStorage.getItem("yAxis")}
+          leftVal={+localStorage.getItem("xAxis")}
           modalOpen={setOptionModalOpen}
         />
       ) : null}

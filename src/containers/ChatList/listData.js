@@ -5,7 +5,7 @@ const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
   const reference = useRef(null);
   useEffect(() => {
     const element = reference.current;
-    function scrollEvent(event) {
+    function scrollEvent() {
       setScrollValue(element.scrollTop);
     }
     element.addEventListener("scroll", scrollEvent);
