@@ -8,7 +8,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const ChatOptionModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
   const reference = useRef(null);
-
   useEffect(() => {
     if (reference) {
       localStorage.setItem("height", reference.current.clientHeight);
@@ -19,7 +18,6 @@ const ChatOptionModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
     <Overlay modalOpen={modalOpen}>
       <div
         ref={reference}
-        id="modal-over"
         className="chat-option-modal-container"
         style={{ top: topVal, left: leftVal }}
       >
@@ -30,7 +28,6 @@ const ChatOptionModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
         <div
           className="chat-option-modal-list"
           onClick={(event) => {
-            console.log("hello world");
             deleteModal(true);
             event.preventDefault();
           }}

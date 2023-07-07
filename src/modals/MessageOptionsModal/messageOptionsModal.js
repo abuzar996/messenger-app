@@ -1,23 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Overlay from "../../components/Overlay";
-import DeleteModal from "../DeleteModal/deleteModal";
-import "./messageOptionsModal.style.css";
+import "./messageOptionModal.styles.css";
 
 import ReplyIcon from "@mui/icons-material/Reply";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const MessageOptionsModal = ({ topVal, leftVal, modalOpen }) => {
+const MessageOptionsModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
   const reference = useRef(null);
-  const [confirmModal, setConfirmModal] = useState(false);
+  //const [confirmModal, setConfirmModal] = useState(true);
   useEffect(() => {
     if (reference) {
-      localStorage.setItem("height", reference.current.clientHeight);
-      localStorage.setItem("width", reference.current.clientWidth);
+      localStorage.setItem("height_message", reference.current.clientHeight);
+      localStorage.setItem("width_message", reference.current.clientWidth);
     }
   });
   return (
     <Overlay modalOpen={modalOpen}>
-      {confirmModal ? <DeleteModal modalOpen={setConfirmModal} /> : null}
       <div
         ref={reference}
         className="message-option-modal-container"
@@ -27,7 +25,13 @@ const MessageOptionsModal = ({ topVal, leftVal, modalOpen }) => {
           <ReplyIcon className="message-option-icons" />
           <label className="message-option-label">Reply</label>
         </div>
-        <div className="message-option-modal-list">
+        <div
+          className="message-option-modal-list"
+          onClick={(event) => {
+            deleteModal(true);
+            event.preventDefault();
+          }}
+        >
           <DeleteIcon className="message-option-icons" />
           <label className="message-option-label">Delete</label>
         </div>

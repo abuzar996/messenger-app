@@ -36,7 +36,7 @@
 .message-option-icons {
   color: var(--primary);
 }
-.chat-option-modal-list:hover {
+.message-option-modal-list:hover {
   background-color: var(--primary);
 }
 .message-option-modal-list:hover > .message-option-icons {

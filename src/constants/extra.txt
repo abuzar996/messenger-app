@@ -1,0 +1,22 @@
+console.log(index);
+    //let xValue = iconRef?.current?.offsetLeft;
+    //let yValue = iconRef?.current?.offsetTop;
+
+    //console.log(iconRef);
+    //console.log(refferences.current.clientHeight);
+
+    // let cHeight = +localStorage.getItem("height_message");
+    // let cWidth = +localStorage.getItem("width_message");
+    // if (cHeight && cWidth) {
+    //   localStorage.setItem("xAxis_message", xValue - cWidth + 18);
+    //   if (cHeight) {
+    //     if (yValue - cHeight + scrollValue > refferences.current.clientHeight) {
+    //       //localStorage.setItem("yAxis", yValue - cHeight + 18 - scrollValue);
+    //     } else {
+    //       localStorage.setItem("yAxis_message", yValue + scrollValue);
+    //     }
+    //   }
+    // }
+    //setOptionModalOpen(true);
+  }
+   

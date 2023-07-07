@@ -67,8 +67,6 @@ const ChatList = () => {
 
   function onClick(event, xValue, yValue) {
     if (xValue) {
-      console.log(xValue);
-      console.log(yValue);
       setValues(xValue, yValue);
     }
   }

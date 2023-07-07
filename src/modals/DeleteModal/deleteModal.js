@@ -2,10 +2,18 @@ import React from "react";
 import "./deleteModal.styles.css";
 
 import Overlay from "../../components/Overlay";
-const DeleteMadal = ({ headerMessage, modalOpen, deleteModal }) => {
+const DeleteMadal = ({
+  headerMessage,
+  modalOpen,
+  /*deleteModal,*/ onClose,
+}) => {
   return (
     <Overlay modalOpen={modalOpen}>
-      <div className="delete-modal-container">
+      <div
+        className={
+          onClose ? "delete-modal-container-close" : "delete-modal-container"
+        }
+      >
         <div className="delete-modal-header">
           <label className="delete-modal-header-label">{headerMessage}</label>
         </div>
