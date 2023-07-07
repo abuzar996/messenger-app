@@ -48,3 +48,4 @@ export const chats = [
     messageId: 12,
   },
 ];
+export const searchList = ["Alex", "John", "Ketty", "Justin"];

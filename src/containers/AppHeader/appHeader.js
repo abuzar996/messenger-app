@@ -9,12 +9,14 @@ import SelectUserModal from "../../modals/SelectUserModal/selectUserModal";
 import { Switch } from "@mui/material";
 
 import profile from "../../images/profile.jpg";
+import SearchModal from "../../modals/SearchModal";
 
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 
 const AppHeader = ({ darkMode, setDarkMode }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
@@ -24,9 +26,20 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
   }
   function refresh() {
     setSearchValue("");
+    setSearchFocused(false);
   }
   return (
     <Header>
+      {searchFocused ? (
+        <SearchModal
+          width={+localStorage.getItem("search_width")}
+          height={+localStorage.getItem("search_height")}
+          left={+localStorage.getItem("search_x")}
+          top={+localStorage.getItem("search_y")}
+          modalOpen={setSearchFocused}
+        />
+      ) : null}
+
       {optionModalOpen ? (
         <UserOptionModal modalOpen={setOptionModalOpen} />
       ) : null}
@@ -55,6 +68,8 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
       </div>
       <div className="search-container">
         <Search
+          useRefValue={true}
+          onFocus={setSearchFocused}
           onChange={onInputChange}
           searchValue={searchValue}
           refresh={refresh}
