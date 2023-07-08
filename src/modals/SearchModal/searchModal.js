@@ -1,6 +1,8 @@
 import React from "react";
 import "./searchModal.styles.css";
+
 import SearchList from "./searchList";
+
 const SearchModal = ({ modalOpen, width, left, height, top }) => {
   return (
     <div

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./search.styles.css";
 
 import { useKeys } from "../../hooks/useKeys";
+import { useDimentions } from "../../hooks/useDimentions";
 
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,6 +15,7 @@ const Search = ({
   onFocus,
   useRefValue,
 }) => {
+  const windowSize = useDimentions();
   const searchReference = useRef(null);
   const [searchFocus, setSearchFocus] = useState(false);
 
@@ -39,7 +41,7 @@ const Search = ({
       localStorage.setItem("search_x", searchReference.current.offsetLeft);
       localStorage.setItem("search_y", searchReference.current.offsetTop);
     }
-  }, [useRefValue]);
+  }, [useRefValue, windowSize]);
   return (
     <div ref={searchReference} className="search-inner-container">
       <div className={searchFocus ? "search-none" : "search-img"}>
