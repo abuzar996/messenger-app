@@ -5,7 +5,11 @@ const Message = ({ message, onClick, setOptionModalOpen }) => {
   const messageRef = useRef(null);
   function onHandleClick(index) {
     if (onClick) {
-      onClick(messageRef.current.offsetLeft, messageRef.current.offsetTop);
+      onClick(
+        messageRef.current.offsetLeft,
+        messageRef.current.offsetTop,
+        index
+      );
       setOptionModalOpen(true);
     }
   }

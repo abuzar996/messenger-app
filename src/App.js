@@ -7,7 +7,6 @@ import ChatBox from "./containers/ChatBox";
 import ChatList from "./containers/ChatList";
 //import DeleteMadal from "./modals/DeleteModal/deleteModal";
 function App() {
-  console.log("App component rendered");
   // const [modalOpen, setModalOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   return (

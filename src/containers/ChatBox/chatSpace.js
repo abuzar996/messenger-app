@@ -1,15 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useKeys } from "../../hooks/useKeys";
+
 import DeleteModal from "../../modals/DeleteModal/deleteModal";
+import { useDimentions } from "../../hooks/useDimentions";
+import ReplyContainer from "./replyContainer";
 import "./chatBox.styles.css";
 import { EmptyMessage } from "./emptyMessage";
 import MessageOptionsModal from "../../modals/MessageOptionsModal";
 import Message from "./message";
-const ChatSpace = ({ chatData, scrollValue, setScrollValue }) => {
+
+const ChatSpace = ({ chatData, scrollValue, setScrollValue, marginBottom }) => {
+  const dimentions = useDimentions();
+  const [documentWidth, setDocumentWidth] = useState(null);
+  const [messageReply, setMessageReply] = useState(true); //useContext(replyContext);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const refferences = useRef(null);
 
+  useKeys("Escape", toggleModal);
+
+  function toggleModal() {
+    setMessageReply(false);
+  }
+
+  useEffect(() => {
+    setDocumentWidth(refferences.current.clientWidth);
+  }, [dimentions]);
+  useEffect(() => {
+    console.log(messageReply);
+  }, [messageReply]);
   function setHorizontalDisplay(xValue, parentWidth, clientWidth) {
+    // console.log(xValue, parentWidth, clientWidth);
     if (xValue + clientWidth > parentWidth) {
       localStorage.setItem("xAxis", xValue - 110 - clientWidth);
     } else {
@@ -24,13 +45,17 @@ const ChatSpace = ({ chatData, scrollValue, setScrollValue }) => {
     }
   }
 
-  function onMessageClick(xValue, yValue) {
+  function onMessageClick(xValue, yValue, data) {
     const parentHeight = refferences.current.clientHeight;
     const parentWidth = refferences.current.clientWidth;
     const cHeight = +localStorage.getItem("height_message");
-    const cWidth = +localStorage.getItem("widht_message");
+    console.log(cHeight);
+
+    const cWidth = +localStorage.getItem("width_message");
+    console.log(cWidth);
     setHorizontalDisplay(xValue, parentWidth, cWidth);
     setVerticalDisplay(yValue, parentHeight, cHeight);
+    // console.log(data);
   }
 
   useEffect(() => {
@@ -54,20 +79,21 @@ const ChatSpace = ({ chatData, scrollValue, setScrollValue }) => {
       className={chatData.length ? "chat-space" : "chat-space justify-element"}
       ref={refferences}
     >
-      {confirmModal ? (
+      {confirmModal && (
         <DeleteModal
           headerMessage={"Delete Message"}
           modalOpen={setConfirmModal}
         />
-      ) : null}
-      {optionModalOpen ? (
+      )}
+      {optionModalOpen && (
         <MessageOptionsModal
+          setMessageReply={setMessageReply}
           deleteModal={setConfirmModal}
           topVal={+localStorage.getItem("yAxis")}
           leftVal={+localStorage.getItem("xAxis")}
           modalOpen={setOptionModalOpen}
         />
-      ) : null}
+      )}
       {!chatData.length ? (
         <EmptyMessage />
       ) : (
@@ -79,6 +105,13 @@ const ChatSpace = ({ chatData, scrollValue, setScrollValue }) => {
             setOptionModalOpen={setOptionModalOpen}
           />
         ))
+      )}
+      {messageReply && (
+        <ReplyContainer
+          width={documentWidth}
+          marginBottom={marginBottom}
+          message={"hello world!"}
+        />
       )}
     </div>
   );

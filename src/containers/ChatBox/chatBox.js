@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./chatBox.styles.css";
 //import Message from "./message";
 import { chats } from "../../constants/data";
@@ -10,11 +10,19 @@ import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 
 const ChatBox = () => {
+  //const message = new Message
+
+  //const [messageReply, setMessageReply] = useState(false);
+  const [senderHeight, setSenderHeight] = useState(null);
+  const [marginBottom, setMarginBottom] = useState(senderHeight);
   const [chatData, setChatData] = useState(chats);
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  useEffect(() => {
+    setMarginBottom(senderHeight);
+  }, [senderHeight]);
   function onSendClick() {
     if (newMessage.length) {
       let temp = newMessage?.trim();
@@ -47,12 +55,14 @@ const ChatBox = () => {
         <ChatHeader />
         <div>
           <ChatSpace
+            marginBottom={marginBottom}
             chatData={chatData}
             scrollValue={scrollValue}
             setScrollValue={setScrollValue}
           />
         </div>
         <InputMessage
+          setSenderHeight={setSenderHeight}
           value={newMessage}
           onClick={onSendClick}
           onChange={onInputChange}
