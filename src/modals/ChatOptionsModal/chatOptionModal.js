@@ -4,15 +4,17 @@ import Overlay from "../../components/Overlay";
 
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDimentions } from "../../hooks/useDimentions";
 
 const ChatOptionModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
+  const windowSize = useDimentions();
   const reference = useRef(null);
   useEffect(() => {
     if (reference) {
       localStorage.setItem("height", reference.current.clientHeight);
       localStorage.setItem("width", reference.current.clientWidth);
     }
-  });
+  }, [windowSize]);
   return (
     <Overlay modalOpen={modalOpen}>
       <div

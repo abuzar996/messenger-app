@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
+import { useDimentions } from "../../hooks/useDimentions";
 const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
+  useDimentions();
   const reference = useRef(null);
   useEffect(() => {
     const element = reference.current;

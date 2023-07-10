@@ -1,22 +1,27 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import "./card.styles.css";
 import "../../App.css";
 
 import user from "../../images/user.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useDimentions } from "../../hooks/useDimentions";
 
-const Card = ({ onClick, modalOpen, name, index }) => {
+const Card = ({ modalOpen, name }) => {
+  const windowSize = useDimentions();
   const references = useRef(null);
-  function onHandleClick(event) {
-    if (onClick) {
-      onClick(
-        event,
-        references?.current?.offsetLeft,
-        references?.current?.offsetTop
-      );
-      modalOpen(true);
-    }
+  function onHandleClick() {
+    modalOpen(true);
   }
+  useEffect(() => {
+    localStorage.setItem(
+      "chat_options_offsetx",
+      references?.current?.offsetLeft
+    );
+    localStorage.setItem(
+      "chat_options_offsety",
+      references?.current?.offsetLeft
+    );
+  }, [windowSize]);
   return (
     <div className="card-body">
       <div className="img-container">

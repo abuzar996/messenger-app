@@ -13,15 +13,16 @@ import SearchModal from "../../modals/SearchModal";
 
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import { useDimentions } from "../../hooks/useDimentions";
 
 const AppHeader = ({ darkMode, setDarkMode }) => {
+  useDimentions();
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
   function onInputChange(e) {
-    //console.log(e.target.value);
     setSearchValue(e.target.value);
   }
   function refresh() {

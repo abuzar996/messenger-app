@@ -20,7 +20,6 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
-
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
@@ -51,13 +50,13 @@ const ChatBox = () => {
   return (
     <>
       <div className="chat-box-container">
-        {optionsModal ? (
+        {optionsModal && (
           <MessageOptionModal
             modalOpen={setOptionModalOpen}
             topVal={+localStorage.getItem("yAxis_message")}
             leftVal={+localStorage.getItem("xAxis_message")}
           />
-        ) : null}
+        )}
         <ChatHeader />
         <div>
           <ChatSpace

@@ -32,8 +32,10 @@ const ChatSpace = ({
   useKeys("Escape", toggleModal);
 
   function toggleModal() {
-    setMessageReply(false);
-    setMessageData(null);
+    if (messageReply) {
+      setMessageReply(false);
+      setMessageData(null);
+    }
   }
 
   useEffect(() => {

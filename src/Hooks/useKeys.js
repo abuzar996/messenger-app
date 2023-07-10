@@ -7,7 +7,7 @@ export const useKeys = (key, fun) => {
     }
   }
   useEffect(() => {
-    window.addEventListener("keydown", keyDown);
-    return () => window.removeEventListener("keydown", keyDown);
+    window.addEventListener("keydown", keyDown, true);
+    return () => window.removeEventListener("keydown", keyDown, true);
   });
 };
