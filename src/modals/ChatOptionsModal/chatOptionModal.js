@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import "./chatOptionModal.styles.css";
-
 import Overlay from "../../components/Overlay";
 
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";

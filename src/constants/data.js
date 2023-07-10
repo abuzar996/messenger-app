@@ -64,3 +64,42 @@ export const chats = [
   },
 ];
 export const searchList = ["Alex", "John", "Ketty", "Justin"];
+
+export const data = [
+  {
+    name: "Abuzar",
+  },
+  {
+    name: "Alex",
+  },
+  {
+    name: "Jhon",
+  },
+  {
+    name: "Alpha",
+  },
+  {
+    name: "Abuzar",
+  },
+  {
+    name: "Alex",
+  },
+  {
+    name: "Jhon",
+  },
+  {
+    name: "Alpha",
+  },
+  {
+    name: "Abuzar",
+  },
+  {
+    name: "Alex",
+  },
+  {
+    name: "Jhon",
+  },
+  {
+    name: "Alpha",
+  },
+];

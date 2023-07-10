@@ -1,50 +1,13 @@
 import React, { useRef, useState } from "react";
 import "./chatList.styles.css";
 
+import { data } from "../../constants/data";
 import TopNav from "../TopNav";
 import ListHeader from "../ListHeader";
-
 import DeleteModal from "../../modals/DeleteModal/deleteModal";
 import ChatOptionModal from "../../modals/ChatOptionsModal";
 import ListData from "./listData";
-const data = [
-  {
-    name: "Abuzar",
-  },
-  {
-    name: "Alex",
-  },
-  {
-    name: "Jhon",
-  },
-  {
-    name: "Alpha",
-  },
-  {
-    name: "Abuzar",
-  },
-  {
-    name: "Alex",
-  },
-  {
-    name: "Jhon",
-  },
-  {
-    name: "Alpha",
-  },
-  {
-    name: "Abuzar",
-  },
-  {
-    name: "Alex",
-  },
-  {
-    name: "Jhon",
-  },
-  {
-    name: "Alpha",
-  },
-];
+
 const ChatList = () => {
   const refference = useRef(null);
   const [scrollValue, setScrollValue] = useState(0);
@@ -64,7 +27,6 @@ const ChatList = () => {
       }
     }
   }
-
   function onClick(event, xValue, yValue) {
     if (xValue) {
       setValues(xValue, yValue);
