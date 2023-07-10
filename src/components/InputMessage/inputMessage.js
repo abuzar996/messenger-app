@@ -27,6 +27,7 @@ const InputMessage = ({
       inputRef.current.focus();
     }
   }, [messageReply]);
+
   useEffect(() => {
     setSenderHeight(Ref.current.clientHeight);
   }, [dimentions, setSenderHeight]);
@@ -35,12 +36,14 @@ const InputMessage = ({
 
   function onEnterPress() {
     inputRef.current.blur();
+    setMessageReply(false);
     onClick();
   }
 
   useKeys("Escape", function () {
     inputRef.current.blur();
   });
+
   return (
     <div ref={Ref} className="input-message-container">
       <div>

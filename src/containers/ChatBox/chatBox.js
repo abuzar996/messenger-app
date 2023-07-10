@@ -13,6 +13,7 @@ const ChatBox = () => {
   //const message = new Message
   const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
+  const [replyData, setReplyData] = useState(null);
   const [senderHeight, setSenderHeight] = useState(null);
   const [marginBottom, setMarginBottom] = useState(senderHeight);
   const [chatData, setChatData] = useState(chats);
@@ -33,7 +34,7 @@ const ChatBox = () => {
             {
               user1: newMessage,
               messageId: prevState.length + 1,
-              reply: messageData ? messageData.messageId : null,
+              reply: replyData ? replyData.messageId : null,
             },
           ];
         });
@@ -60,6 +61,8 @@ const ChatBox = () => {
         <ChatHeader />
         <div>
           <ChatSpace
+            replyData={replyData}
+            setReplyData={setReplyData}
             messageData={messageData}
             setMessageData={setMessageData}
             messageReply={messageReply}

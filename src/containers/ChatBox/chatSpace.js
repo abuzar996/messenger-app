@@ -18,6 +18,7 @@ const ChatSpace = ({
   setMessageReply,
   messageData,
   setMessageData,
+  setReplyData,
 }) => {
   const dimentions = useDimentions();
   const [documentWidth, setDocumentWidth] = useState(null);
@@ -81,6 +82,13 @@ const ChatSpace = ({
     });
   }, [chatData, messageReply]);
 
+  useEffect(() => {
+    if (messageReply === true) {
+      setReplyData(messageData);
+    } else {
+      setReplyData(null);
+    }
+  }, [messageReply, setReplyData, messageData]);
   function onReplyClick() {
     setMessageReply(true);
     setVisual(messageData);
