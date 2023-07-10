@@ -44,9 +44,10 @@ const ChatSpace = ({
 
   function setHorizontalDisplay(xValue, parentWidth, clientWidth) {
     if (xValue + clientWidth > parentWidth) {
-      localStorage.setItem("xAxis", xValue - clientWidth);
-    } else {
-      localStorage.setItem("xAxis", xValue - clientWidth);
+      localStorage.setItem("xAxis", xValue - clientWidth + 26);
+    } else if (xValue + clientWidth < parentWidth) {
+      console.log("hello world");
+      localStorage.setItem("xAxis", xValue + 5);
     }
   }
 
