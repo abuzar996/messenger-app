@@ -11,8 +11,8 @@ import InputMessage from "../../components/InputMessage";
 
 const ChatBox = () => {
   //const message = new Message
-
-  //const [messageReply, setMessageReply] = useState(false);
+  const [messageData, setMessageData] = useState(null);
+  const [messageReply, setMessageReply] = useState(false);
   const [senderHeight, setSenderHeight] = useState(null);
   const [marginBottom, setMarginBottom] = useState(senderHeight);
   const [chatData, setChatData] = useState(chats);
@@ -30,9 +30,15 @@ const ChatBox = () => {
         setChatData((prevState) => {
           return [
             ...prevState,
-            { user1: newMessage, messageId: prevState.length + 1 },
+            {
+              user1: newMessage,
+              messageId: prevState.length + 1,
+              reply: messageData ? messageData.messageId : null,
+            },
           ];
         });
+        setMessageData(null);
+        setMessageReply(false);
       }
       setNewMessage("");
     }
@@ -43,7 +49,6 @@ const ChatBox = () => {
 
   return (
     <>
-      {/* <DeleteModal headerMessage={"message Options"} /> */}
       <div className="chat-box-container">
         {optionsModal ? (
           <MessageOptionModal
@@ -55,6 +60,10 @@ const ChatBox = () => {
         <ChatHeader />
         <div>
           <ChatSpace
+            messageData={messageData}
+            setMessageData={setMessageData}
+            messageReply={messageReply}
+            setMessageReply={setMessageReply}
             marginBottom={marginBottom}
             chatData={chatData}
             scrollValue={scrollValue}
@@ -62,6 +71,8 @@ const ChatBox = () => {
           />
         </div>
         <InputMessage
+          messageReply={messageReply}
+          setMessageReply={setMessageReply}
           setSenderHeight={setSenderHeight}
           value={newMessage}
           onClick={onSendClick}

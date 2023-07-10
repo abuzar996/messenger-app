@@ -7,7 +7,6 @@
   margin-left: 1px;
 }
 .chat-space {
-  position: relative;
   display: flex;
   height: calc(100vh - 232px);
   background-color: var(--primary);
@@ -46,6 +45,7 @@
   background-color: blueviolet;
   color: black;
   text-align: left;
+
   justify-content: flex-end;
   border-radius: 40px;
   padding: 10px;
@@ -108,4 +108,29 @@
 .chat-box-message-label {
   color: var(--primary);
   font-size: var(--text);
+}
+.chat-message-reply-container {
+  display: flex;
+  flex-direction: column;
+}
+.chat-message-reply-container-user1 {
+  display: flex;
+
+  border-radius: 15px;
+  padding: 10px;
+  justify-content: center;
+}
+.reply-innerDiv {
+  display: flex;
+  background-color: green;
+  width: fit-content;
+}
+.custom-label-reply {
+  font-size: var(--text);
+  font-weight: bolder;
+  color: var(--secondary);
+  overflow: hidden;
+  max-width: 15ch;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

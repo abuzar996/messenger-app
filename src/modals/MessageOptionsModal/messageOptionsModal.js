@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Overlay from "../../components/Overlay";
 import "./messageOptionModal.styles.css";
 
 import ReplyIcon from "@mui/icons-material/Reply";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const MessageOptionsModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
+const MessageOptionsModal = ({
+  topVal,
+  leftVal,
+  modalOpen,
+  deleteModal,
+  onReplyClick,
+}) => {
   const reference = useRef(null);
-  //const replyCtx = useContext(replyContext);
-  //const reply = useContext(replyContext);
-  // const [messageReplyOpen, setMessageReplyOpen] = useState(true);
-
-  //const [confirmModal, setConfirmModal] = useState(true);
   useEffect(() => {
     if (reference) {
       localStorage.setItem("height_message", reference.current.clientHeight);
@@ -27,9 +28,7 @@ const MessageOptionsModal = ({ topVal, leftVal, modalOpen, deleteModal }) => {
       >
         <div
           className="message-option-modal-list"
-          onClick={() => {
-            //  setMessageReplyOpen(true);
-          }}
+          onClick={onReplyClick.bind(this)}
         >
           <ReplyIcon className="message-option-icons" />
           <label className="message-option-label">Reply</label>

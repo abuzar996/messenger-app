@@ -36,16 +36,31 @@ export const chats = [
     messageId: 9,
   },
   {
-    user2: "hello",
+    user2: "hell jdnjkd jdnjko",
     messageId: 10,
   },
   {
-    user1: "Great!",
+    user1: "jefjenfjekdbcu ",
     messageId: 11,
   },
   {
     user2: "I",
     messageId: 12,
+  },
+  {
+    user2:
+      "jefjenfjekdbcu duyrfher yg egyf egbfed jhed gehdbnchd chjklcbhjkhbrbfrh hbrfnhjbfhjekb hbrjbferbfhjrfbh hjbfrbfrhf hI",
+    messageId: 13,
+  },
+  {
+    user1: "I'm good",
+    messageId: 14,
+    reply: 10,
+  },
+  {
+    user2: "I'm good",
+    messageId: 15,
+    reply: 10,
   },
 ];
 export const searchList = ["Alex", "John", "Ketty", "Justin"];

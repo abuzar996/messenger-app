@@ -49,7 +49,7 @@ const UserProfileModal = ({ setModalOpen }) => {
             <button
               className="message-button"
               onClick={() => {
-                console.log("hello world");
+                //                console.log("hello world");
               }}
             >
               Send a message

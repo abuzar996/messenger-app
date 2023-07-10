@@ -10,10 +10,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const UserOptionModal = ({ modalOpen }) => {
   useKeys("Escape", closeFn);
   function onSettingsClicked() {
-    console.log("onSettingsClicked");
+    // console.log("onSettingsClicked");
   }
   function onLogoutClicked() {
-    console.log("onLogoutClicked");
+    //console.log("onLogoutClicked");
   }
   function closeFn() {
     modalOpen(false);

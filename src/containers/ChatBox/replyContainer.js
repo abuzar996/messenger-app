@@ -9,7 +9,9 @@ const ReplyContainer = ({ width, message, marginBottom }) => {
     >
       <div className="chat-box-message-reply-inner-container">
         <div>
-          <label className="chat-box-message-label">{message}</label>
+          <label className="chat-box-message-label">
+            {message.user1 ? message.user1 : message.user2}
+          </label>
         </div>
         <div>
           <ReplyIcon className="chat-box-message-icon" />

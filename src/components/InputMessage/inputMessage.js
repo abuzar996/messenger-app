@@ -10,18 +10,43 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import ImageIcon from "@mui/icons-material/Image";
 import { useDimentions } from "../../hooks/useDimentions";
 
-const InputMessage = ({ value, onClick, onChange, setSenderHeight }) => {
+const InputMessage = ({
+  value,
+  onClick,
+  onChange,
+  setSenderHeight,
+  messageReply,
+  setMessageReply,
+}) => {
   const Ref = useRef(null);
+  const inputRef = useRef(null);
   const dimentions = useDimentions();
 
   useEffect(() => {
+    if (messageReply === true) {
+      inputRef.current.focus();
+    }
+  }, [messageReply]);
+  useEffect(() => {
     setSenderHeight(Ref.current.clientHeight);
   }, [dimentions, setSenderHeight]);
-  useKeys("Enter", onClick);
+
+  useKeys("Enter", onEnterPress);
+
+  function onEnterPress() {
+    inputRef.current.blur();
+    onClick();
+  }
+
+  useKeys("Escape", function () {
+    inputRef.current.blur();
+  });
   return (
     <div ref={Ref} className="input-message-container">
       <div>
         <textarea
+          ref={inputRef}
+          autoFocus={messageReply}
           placeholder="write a message"
           type="text"
           value={value}
