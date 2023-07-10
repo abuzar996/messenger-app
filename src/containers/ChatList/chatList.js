@@ -43,7 +43,6 @@ const ChatList = () => {
     let parentHeight = refference.current.clientHeight;
     setModalXPosition(offsetLeft - cWidth + 18);
     if (offsetTop + cHeight - scrollValue > parentHeight) {
-      console.log("hello world");
       setModalYPosition(offsetTop - cHeight + 18 - scrollValue);
     } else {
       setModalYPosition(offsetTop - cHeight - scrollValue);
