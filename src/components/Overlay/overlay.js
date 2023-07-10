@@ -4,7 +4,7 @@ import "./overlay.styles.css";
 import { useKeys } from "../../hooks/useKeys";
 
 const Overlay = ({ children, modalOpen }) => {
-  useKeys("Escape", close);
+  useKeys("Escape", close, null);
 
   function close() {
     if (modalOpen) {

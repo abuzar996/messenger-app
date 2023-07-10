@@ -18,23 +18,6 @@ const ChatList = () => {
   const [modalXPosition, setModalXPosition] = useState(null);
   const [modalYPosition, setModalYPosition] = useState(null);
 
-  function setValues(yValue) {
-    let cHeight = +localStorage.getItem("height");
-    let cWidth = +localStorage.getItem("width");
-    let offsetLeft = +localStorage.getItem("chat_options_offsetx");
-    let offsetTop = +localStorage.getItem("chat_options_offsety");
-    if (cHeight && cWidth) {
-      setModalXPosition(offsetLeft - cWidth + 18);
-      //localStorage.setItem("xAxis", xOffset - cWidth + 18);
-      if (cHeight) {
-        if (yValue + cHeight - scrollValue > refference.current.clientHeight) {
-          localStorage.setItem("yAxis", yValue - cHeight + 18 - scrollValue);
-        } else {
-          localStorage.setItem("yAxis", yValue - scrollValue);
-        }
-      }
-    }
-  }
   useEffect(() => {
     let cHeight = +localStorage.getItem("height");
     let cWidth = +localStorage.getItem("width");
@@ -45,14 +28,9 @@ const ChatList = () => {
     if (offsetTop + cHeight - scrollValue > parentHeight) {
       setModalYPosition(offsetTop - cHeight + 18 - scrollValue);
     } else {
-      setModalYPosition(offsetTop - cHeight - scrollValue);
+      setModalYPosition(offsetTop - scrollValue);
     }
-  }, [modalXPosition, modalYPosition, scrollValue, windowSize]);
-  function onClick(event, yValue) {
-    if (yValue) {
-      setValues(yValue);
-    }
-  }
+  }, [scrollValue, windowSize, optionModalOpen]);
 
   return (
     <div ref={refference} className="chat-list-container">
@@ -75,7 +53,6 @@ const ChatList = () => {
       <ListData
         setScrollValue={setScrollValue}
         data={data}
-        onClick={onClick}
         setOptionModalOpen={setOptionModalOpen}
       />
     </div>

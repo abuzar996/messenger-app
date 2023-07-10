@@ -32,7 +32,7 @@ const InputMessage = ({
     setSenderHeight(Ref.current.clientHeight);
   }, [dimentions, setSenderHeight]);
 
-  useKeys("Enter", onEnterPress);
+  useKeys("Enter", onEnterPress, null);
 
   function onEnterPress() {
     inputRef.current.blur();

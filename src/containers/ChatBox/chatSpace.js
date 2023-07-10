@@ -29,7 +29,7 @@ const ChatSpace = ({
 
   const refferences = useRef(null);
 
-  useKeys("Escape", toggleModal);
+  useKeys("Escape", toggleModal, refferences);
 
   function toggleModal() {
     if (messageReply) {

@@ -11,14 +11,14 @@ const Card = ({ modalOpen, name }) => {
   const references = useRef(null);
   function onHandleClick() {
     modalOpen(true);
+    localStorage.setItem(
+      "chat_options_offsety",
+      references?.current?.offsetTop
+    );
   }
   useEffect(() => {
     localStorage.setItem(
       "chat_options_offsetx",
-      references?.current?.offsetLeft
-    );
-    localStorage.setItem(
-      "chat_options_offsety",
       references?.current?.offsetLeft
     );
   }, [windowSize]);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useKeys = (key, fun) => {
+export const useKeys = (key, fun, element) => {
   function keyDown(event) {
     if (event.key === key) {
       fun();

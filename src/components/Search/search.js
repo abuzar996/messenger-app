@@ -17,17 +17,20 @@ const Search = ({
 }) => {
   const windowSize = useDimentions();
   const searchReference = useRef(null);
+  const inputRef = useRef(null);
   const [searchFocus, setSearchFocus] = useState(false);
 
-  useKeys("Escape", escapePressed);
+  useKeys("Escape", escapePressed, null);
 
   function handleClick() {
     refresh();
+    inputRef.current.blur();
     onFocus(false);
   }
   function escapePressed() {
     setSearchFocus(false);
     if (refresh) {
+      inputRef.current.blur();
       refresh();
     }
   }
@@ -54,6 +57,7 @@ const Search = ({
           type="text"
           placeholder={!searchFocus ? (searchData ? searchData : "Search") : ""}
           value={searchValue}
+          ref={inputRef}
           onFocus={() => {
             if (onFocus) {
               onFocus(true);
