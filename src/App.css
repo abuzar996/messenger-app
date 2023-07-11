@@ -25,6 +25,7 @@
     --text: 12px;
     --heading: 16px;
     --menu: 10px;
+    position: fixed;
   }
 }
 @media screen and (min-width: 480px) {
@@ -32,6 +33,7 @@
     --text: 13px;
     --heading: 17px;
     --menu: 11px;
+    position: fixed;
   }
 }
 @media screen and (min-width: 600px) {
@@ -39,6 +41,7 @@
     --text: 14px;
     --heading: 18px;
     --menu: 12px;
+    position: fixed;
   }
   /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 }
@@ -47,6 +50,7 @@
     --text: 15px;
     --heading: 19px;
     --menu: 13px;
+    position: fixed;
   }
   /* tablet, landscape iPad, lo-res laptops ands desktops */
 }
@@ -55,6 +59,7 @@
     --text: 16px;
     --heading: 20px;
     --menu: 14px;
+    position: fixed;
   }
   /* big landscape tablets, laptops, and desktops */
 }
@@ -64,6 +69,7 @@
     --text: 17px;
     --heading: 21px;
     --menu: 15px;
+    position: fixed;
   }
 }
 

@@ -1,0 +1,109 @@
+.sign-in-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary);
+  position: fixed;
+}
+.sign-in-card-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid var(--secondary);
+  border-radius: 17px;
+  background-color: var(--primary);
+  padding-bottom: 10px;
+}
+.sign-in-card-header {
+  display: flex;
+  border-bottom: 2px solid var(--secondary);
+  border-radius: 15px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  justify-content: center;
+  background-color: var(--primary);
+}
+.sign-in-card-header-label {
+  padding: 10px;
+  font-size: var(--heading);
+  color: var(--secondary);
+  font-weight: bold;
+}
+.sign-in-card-body {
+  display: flex;
+  flex-direction: column;
+}
+.sign-in-card-body-child {
+  padding: 10px;
+}
+.sign-in-card-body-child-input {
+  background-color: var(--primary);
+  width: 300px;
+  font-size: var(--heading);
+  color: var(--secondary);
+  padding: 0px;
+  padding-bottom: 0;
+  border: none;
+  border-bottom: 1px solid var(--secondary);
+}
+.sign-in-card-body-child-input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--warning);
+}
+.sign-in-card-button-body {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  justify-content: space-between;
+}
+.sign-in-close-button {
+  padding: 10px;
+
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+  width: fit-content;
+  border: 2px solid var(--secondary);
+  border-radius: 15px;
+  justify-content: center;
+  background-color: var(--danger);
+}
+.sign-in-close-button:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+}
+
+.sign-in-button {
+  padding: 10px;
+
+  color: var(--primary);
+  font-size: var(--menu);
+  font-weight: bold;
+  width: fit-content;
+  border: 2px solid white;
+  border-radius: 15px;
+  justify-content: center;
+  background-color: var(--secondary);
+}
+.sign-in-button:hover {
+  color: var(--secondary);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+}
+.sign-in-end-label {
+  padding-left: 10px;
+  justify-self: center;
+  font-size: var(--menu);
+  color: var(--secondary);
+  font-weight: bold;
+}
+.sign-in-end-label > span {
+  text-decoration: underline;
+}
+.sign-in-end-label > span:hover {
+  color: blueviolet;
+}
