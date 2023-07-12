@@ -1,14 +1,17 @@
 import "./App.css";
 import { useState } from "react";
-//import AppHeader from "./containers/AppHeader";
+import { Outlet } from "react-router-dom";
+import AppHeader from "./containers/AppHeader";
+//import { useNavigate } from "react-router-dom";
 //import UserProfileModal from "./modals/UserProfileModal";
-//import ChatBox from "./containers/ChatBox";
+import ChatBox from "./containers/ChatBox";
 //import HomeLayout from "./containers/Home/homeLayout";
-//import ChatList from "./containers/ChatList";
+import ChatList from "./containers/ChatList";
 //import SignIn from "./containers/SignIn";
 import SignUp from "./containers/SignUp";
 //import DeleteMadal from "./modals/DeleteModal/deleteModal";
 function App() {
+  // const navigate = useNavigate();
   // const [modalOpen, setModalOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   return (
@@ -19,17 +22,16 @@ function App() {
           : "theme-light custom-fonts App uniform-colors"
       }
     >
-      <SignUp />
-      {/* <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
+      <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: "40%" }}>
           <ChatList />
         </div>
         <div style={{ width: "60%" }}>
-          <ChatBox />
+          <Outlet redirect to="home" />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
