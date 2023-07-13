@@ -3,16 +3,19 @@ import "./userOptionModal.styles.css";
 
 import { useKeys } from "../../hooks/useKeys";
 import { Checkbox } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const UserOptionModal = ({ modalOpen }) => {
+  const navigate = useNavigate();
   useKeys("Escape", closeFn);
   function onSettingsClicked() {
     // console.log("onSettingsClicked");
   }
   function onLogoutClicked() {
+    navigate("/signIn");
     //console.log("onLogoutClicked");
   }
   function closeFn() {

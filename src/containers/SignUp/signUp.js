@@ -5,6 +5,7 @@ import "../../App.css";
 
 import { useDimentions } from "../../hooks/useDimentions";
 const SignUp = () => {
+  const [isAuthenticated] = useState(true);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
@@ -13,6 +14,11 @@ const SignUp = () => {
   const [leftVal, setLeftVal] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      navigate("/home");
+    }
+  }, [navigate, isAuthenticated]);
   useEffect(() => {
     if (pageRef) {
       const pageWidth = pageRef.current.clientWidth;
