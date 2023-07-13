@@ -107,3 +107,13 @@
     opacity: 1;
   }
 }
+.fixed-app-layout {
+  display: flex;
+  flex-direction: row;
+}
+.sidebar-layout {
+  width: 40%;
+}
+.home-layout {
+  width: 100%;
+}

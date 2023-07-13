@@ -6,9 +6,9 @@ import { useDimentions } from "../../hooks/useDimentions";
 const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
   const [list, setList] = useState(data);
   const navigate = useNavigate();
-  //const [chatValue, setChatValue] = useState(null);
   useDimentions();
   const reference = useRef(null);
+
   useEffect(() => {
     const element = reference.current;
     function scrollEvent() {
@@ -17,6 +17,7 @@ const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
     element.addEventListener("scroll", scrollEvent);
     return () => element.removeEventListener("scroll", scrollEvent);
   });
+
   function onMessageClick(data) {
     setList(
       list.map((item) =>
@@ -31,8 +32,7 @@ const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
           : item
       )
     );
-    //console.log(data);
-    navigate(`messages/${data.userId}`);
+    navigate(`/messages/${data.userId}`);
   }
   return (
     <div className="chat-list-inner-container" ref={reference}>

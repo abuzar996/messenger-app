@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-//import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
 
-import { chats } from "../../constants/data";
+import { chats, data } from "../../constants/data";
 import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 
 const ChatBox = () => {
-  //const params = useParams();
+  const { id } = useParams();
+  const [userInfo, setUserInfo] = useState(null);
+  const [usersData] = useState(data);
   const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
   const [replyData, setReplyData] = useState(null);
@@ -20,6 +22,10 @@ const ChatBox = () => {
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  useEffect(() => {
+    const user = usersData.find((user) => user.userId === +id);
+    setUserInfo(user);
+  }, [id, usersData]);
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
@@ -57,7 +63,7 @@ const ChatBox = () => {
             leftVal={+localStorage.getItem("xAxis_message")}
           />
         )}
-        <ChatHeader />
+        <ChatHeader {...userInfo} />
         <div>
           <ChatSpace
             replyData={replyData}

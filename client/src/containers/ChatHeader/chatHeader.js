@@ -6,7 +6,7 @@ import Search from "../../components/Search";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const ChatHeader = () => {
+const ChatHeader = ({ firstname }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
@@ -17,7 +17,7 @@ const ChatHeader = () => {
     setSearchValue("");
   }
   function onBackClick() {
-    navigate(-1);
+    navigate("/home");
   }
   return (
     <div className="chat-header">
@@ -26,7 +26,7 @@ const ChatHeader = () => {
           <ArrowBackIcon onClick={onBackClick} />
         </div>
         <div className="chat-name">
-          <label>Abuzar Rahim</label>
+          <label>{firstname}</label>
         </div>
       </div>
       <div className="chat-search-container">

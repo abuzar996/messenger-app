@@ -1,18 +1,9 @@
 import "./App.css";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
 import AppHeader from "./containers/AppHeader";
-//import { useNavigate } from "react-router-dom";
-//import UserProfileModal from "./modals/UserProfileModal";
-//import ChatBox from "./containers/ChatBox";
-//import HomeLayout from "./containers/Home/homeLayout";
-import ChatList from "./containers/ChatList";
-//import SignIn from "./containers/SignIn";
-//import SignUp from "./containers/SignUp";
-//import DeleteMadal from "./modals/DeleteModal/deleteModal";
+
+import HomeLayout from "./containers/Home/homeLayout";
 function App() {
-  // const navigate = useNavigate();
-  // const [modalOpen, setModalOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
   return (
     <div
@@ -24,12 +15,9 @@ function App() {
     >
       <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ width: "40%" }}>
-          <ChatList />
-        </div>
-        <div style={{ width: "60%" }}>
-          <Outlet redirect to="home" />
+      <div className="fixed-app-layout">
+        <div className="home-layout">
+          <HomeLayout />
         </div>
       </div>
     </div>

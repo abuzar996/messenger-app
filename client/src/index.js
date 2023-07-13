@@ -8,8 +8,9 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+import ChatList from "./containers/ChatList";
 import ChatBox from "./containers/ChatBox";
-import Home from "./containers/Home/homeLayout";
+import Home from "./containers/Home/homeComponent";
 import AuthUser from "./containers/AuthUser";
 import SignIn from "./containers/SignIn";
 import SignUp from "./containers/SignUp";
