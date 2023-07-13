@@ -10,35 +10,39 @@ import {
 } from "react-router-dom";
 import ChatBox from "./containers/ChatBox";
 import Home from "./containers/Home/homeLayout";
-if (window.location.pathname === "/") {
-  window.location.replace("./app");
-}
-
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      exact: true,
-      element: <App />,
-      // loader: () => {
-      //   //return redirect("/home");
-      // },
-      children: [
-        {
-          path: "messages/:id",
-          // loader: () => {
-          //   console.log("loading");
-          //   return null;
-          // },
-          element: <ChatBox />,
-        },
-        { path: "home", element: <Home /> },
-        { index: true, element: <Navigate to="/home" /> },
-      ],
-    },
-  ],
-  { basename: "/app" }
-);
+import AuthUser from "./containers/AuthUser";
+import SignIn from "./containers/SignIn";
+import SignUp from "./containers/SignUp";
+import Error from "./containers/Error";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    errorElement: <Error />,
+    element: (
+      <AuthUser>
+        <App />
+      </AuthUser>
+    ),
+    children: [
+      {
+        path: "messages/:id",
+        element: <ChatBox />,
+      },
+      { path: "home", element: <Home /> },
+      { index: true, element: <Navigate to="/home" /> },
+    ],
+  },
+  {
+    path: "/signIn",
+    errorElement: <Error />,
+    element: <SignIn />,
+  },
+  {
+    path: "/signUp",
+    errorElement: <Error />,
+    element: <SignUp />,
+  },
+]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

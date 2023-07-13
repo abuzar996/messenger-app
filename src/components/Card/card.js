@@ -6,7 +6,14 @@ import user from "../../images/user.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
 
-const Card = ({ modalOpen, firstname, lastname, lastMessage }) => {
+const Card = ({
+  modalOpen,
+  firstname,
+  lastname,
+  lastMessage,
+  onMessageClick,
+  data,
+}) => {
   const [seen, setSeen] = useState(false);
   const windowSize = useDimentions();
   const references = useRef(null);
@@ -18,12 +25,16 @@ const Card = ({ modalOpen, firstname, lastname, lastMessage }) => {
       setSeen(true);
     }
   }, [lastMessage]);
-  function onHandleClick() {
-    modalOpen(true);
-    localStorage.setItem(
-      "chat_options_offsety",
-      references?.current?.offsetTop
-    );
+  function onHandleClick(event, data) {
+    if (event.target.id === "inner-option") {
+      modalOpen(true);
+      localStorage.setItem(
+        "chat_options_offsety",
+        references?.current?.offsetTop
+      );
+    } else {
+      onMessageClick(data);
+    }
   }
 
   useEffect(() => {
@@ -34,7 +45,12 @@ const Card = ({ modalOpen, firstname, lastname, lastMessage }) => {
   }, [windowSize]);
 
   return (
-    <div className="card-body">
+    <div
+      className="card-body"
+      onClick={(event) => {
+        onHandleClick(event, data);
+      }}
+    >
       <div className="img-container">
         <img className="image" src={user} alt="user" />
       </div>
@@ -46,6 +62,7 @@ const Card = ({ modalOpen, firstname, lastname, lastMessage }) => {
           </div>
           <div ref={references} className="padding-right">
             <MoreHorizIcon
+              id="inner-option"
               fontSize="small"
               className="option "
               onClick={onHandleClick}

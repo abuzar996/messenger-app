@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
 //import Message from "./message";
 import { chats } from "../../constants/data";
@@ -10,7 +11,7 @@ import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 
 const ChatBox = () => {
-  //const message = new Message
+  const params = useParams();
   const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
   const [replyData, setReplyData] = useState(null);
@@ -20,6 +21,14 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
+  useEffect(() => {
+    //const chatData = data.filter((index) => index.userId === +params.id);
+    //if (chatData[0].lastMessage.opened === false) {
+    //  console.log("hello world!");
+    //  chatData[0].lastMessage.opened = true;
+    //  console.log("hello world!");
+    //}
+  }, [params]);
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);

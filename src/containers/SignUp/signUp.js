@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signUp.styles.css";
+import "../../App.css";
 
 import { useDimentions } from "../../hooks/useDimentions";
 const SignUp = () => {
+  const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
   const modalRef = useRef(null);
@@ -24,8 +27,8 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
   }
-  function onSignUpClick() {
-    console.log("onSignUpClick");
+  function onSignInClick() {
+    navigate("/signIn");
   }
   function onPasswordChange(e) {
     setPassword(e.target.value);
@@ -34,80 +37,82 @@ const SignUp = () => {
     setEmail(e.target.value);
   }
   return (
-    <div ref={pageRef} className="sign-up-page-container">
-      <div
-        ref={modalRef}
-        className="sign-up-card-container"
-        style={{ top: topVal, left: leftVal }}
-      >
-        <div className="sign-up-card-header">
-          <label className="sign-up-card-header-label">Sign Up</label>
-        </div>
-        <div className="sign-up-card-body">
-          <div className="sign-up-card-body-child">
-            <input
-              className="sign-up-card-body-child-input"
-              placeholder="First Name"
-              type="text"
-              autoComplete="off"
-              value={email}
-              onChange={onEmailChange}
-            />
+    <div className="theme-dark custom-fonts App uniform-colors">
+      <div ref={pageRef} className="sign-up-page-container">
+        <div
+          ref={modalRef}
+          className="sign-up-card-container"
+          style={{ top: topVal, left: leftVal }}
+        >
+          <div className="sign-up-card-header">
+            <label className="sign-up-card-header-label">Sign Up</label>
           </div>
-          <div className="sign-up-card-body-child">
-            <input
-              className="sign-up-card-body-child-input"
-              placeholder="Last Name"
-              type="text"
-              autoComplete="off"
-              value={email}
-              onChange={onEmailChange}
-            />
-          </div>
-          <div className="sign-up-card-body-child">
-            <input
-              className="sign-up-card-body-child-input"
-              placeholder="Email"
-              type="text"
-              autoComplete="off"
-              value={email}
-              onChange={onEmailChange}
-            />
-          </div>
-          <div className="sign-up-card-body-child">
-            <form>
+          <div className="sign-up-card-body">
+            <div className="sign-up-card-body-child">
               <input
                 className="sign-up-card-body-child-input"
-                placeholder="Password"
-                type="password"
+                placeholder="First Name"
+                type="text"
                 autoComplete="off"
-                value={password}
-                onChange={onPasswordChange}
+                value={email}
+                onChange={onEmailChange}
               />
-            </form>
-          </div>
-          <div className="sign-up-card-body-child">
-            <form>
+            </div>
+            <div className="sign-up-card-body-child">
               <input
                 className="sign-up-card-body-child-input"
-                placeholder="Confirm Password"
-                type="password"
+                placeholder="Last Name"
+                type="text"
                 autoComplete="off"
-                value={password}
-                onChange={onPasswordChange}
+                value={email}
+                onChange={onEmailChange}
               />
-            </form>
-          </div>
-          <div className="sign-up-card-button-body">
-            <button className="sign-up-close-button" onClick={onCancelClick}>
-              Cancel
-            </button>
-            <button className="sign-up-button">Sign Up</button>
-          </div>
-          <div className="sign-up-card-label-body">
-            <label className="sign-up-end-label">
-              Already a member? <span onClick={onSignUpClick}>SignIn</span>
-            </label>
+            </div>
+            <div className="sign-up-card-body-child">
+              <input
+                className="sign-up-card-body-child-input"
+                placeholder="Email"
+                type="text"
+                autoComplete="off"
+                value={email}
+                onChange={onEmailChange}
+              />
+            </div>
+            <div className="sign-up-card-body-child">
+              <form>
+                <input
+                  className="sign-up-card-body-child-input"
+                  placeholder="Password"
+                  type="password"
+                  autoComplete="off"
+                  value={password}
+                  onChange={onPasswordChange}
+                />
+              </form>
+            </div>
+            <div className="sign-up-card-body-child">
+              <form>
+                <input
+                  className="sign-up-card-body-child-input"
+                  placeholder="Confirm Password"
+                  type="password"
+                  autoComplete="off"
+                  value={password}
+                  onChange={onPasswordChange}
+                />
+              </form>
+            </div>
+            <div className="sign-up-card-button-body">
+              <button className="sign-up-close-button" onClick={onCancelClick}>
+                Cancel
+              </button>
+              <button className="sign-up-button">Sign Up</button>
+            </div>
+            <div className="sign-up-card-label-body">
+              <label className="sign-up-end-label">
+                Already a member? <span onClick={onSignInClick}>SignIn</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>

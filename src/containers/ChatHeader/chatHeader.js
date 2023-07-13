@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./chatHeader.styles.css";
-
+import { useNavigate } from "react-router-dom";
 import Search from "../../components/Search";
 
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ChatHeader = () => {
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
     //console.log(e.target.value);
@@ -15,11 +16,14 @@ const ChatHeader = () => {
   function refresh() {
     setSearchValue("");
   }
+  function onBackClick() {
+    navigate(-1);
+  }
   return (
     <div className="chat-header">
       <div className="chat-name-container">
         <div className="back-item">
-          <ArrowBackIcon />
+          <ArrowBackIcon onClick={onBackClick} />
         </div>
         <div className="chat-name">
           <label>Abuzar Rahim</label>
