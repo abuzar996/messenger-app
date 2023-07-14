@@ -10,11 +10,13 @@ const ListData = ({
   setScrollValue,
   mobileSize,
 }) => {
-  const [list, setList] = useState(data);
+  const [list, setList] = useState([...data]);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
-
+  useEffect(() => {
+    setList([...data]);
+  }, [data]);
   useEffect(() => {
     const element = reference.current;
     function scrollEvent() {

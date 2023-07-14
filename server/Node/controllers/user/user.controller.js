@@ -1,5 +1,4 @@
 const { user } = require("../../modal/user/user.modal");
-const { searchUserByEmail } = require("../../services/user.services");
 const getUsers = (req, res) => {
   try {
     res.status(200).send(user);
@@ -9,13 +8,28 @@ const getUsers = (req, res) => {
 };
 
 const searchAUserByEmail = (req, res) => {
-  const { email } = req.body;
-  if (searchUserByEmail(email)) {
-    user.filter();
-  }
+  const { email } = req.params;
+
   try {
-  } catch (err) {}
+    const value = user.find((us) => us.email === email);
+
+    if (value) {
+      res.status(200).send({
+        userId: value.userId,
+        firstname: value.firstname,
+        lastname: value.lastname,
+        email: value.email,
+      });
+    } else {
+      res.status(404).send({
+        message: "User not found",
+      });
+    }
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+  }
 };
 module.exports = {
   getUsers: getUsers,
+  searchAUserByEmail: searchAUserByEmail,
 };

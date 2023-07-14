@@ -19,6 +19,7 @@ const ChatSpace = ({
   messageData,
   setMessageData,
   setReplyData,
+  searchFocus,
 }) => {
   const dimentions = useDimentions();
   const [documentWidth, setDocumentWidth] = useState(null);
@@ -117,7 +118,7 @@ const ChatSpace = ({
         />
       )}
       {!chatData.length ? (
-        <EmptyMessage />
+        <EmptyMessage searchFocus={searchFocus} />
       ) : (
         chatData.map((chat, index) => (
           <Message

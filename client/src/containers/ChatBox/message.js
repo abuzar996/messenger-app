@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReplyContainerMessage from "./replyContainerMessage";
 import "./chatBox.styles.css";
+import { chats } from "../../constants/data";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 const SimpleMessage = ({
   message,
@@ -56,8 +57,9 @@ const SimpleMessage = ({
     </div>
   );
 };
-const Message = ({ message, onClick, setOptionModalOpen, chatData }) => {
+const Message = ({ message, onClick, setOptionModalOpen }) => {
   const [repliedMessage, setRepliedMessage] = useState(null);
+  const [chatData] = useState([...chats]);
   useEffect(() => {
     function filterMessage(message) {
       const replyToMess = chatData.filter(

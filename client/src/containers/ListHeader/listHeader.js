@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import "./listHeader.styles.css";
 
 import Header from "../../components/Header/header";
 import Search from "../../components/Search";
 
-const ListHeader = () => {
-  const [searchValue, setSearchValue] = useState("");
+const ListHeader = ({
+  searchFocus,
+  setSearchFocus,
+  setSearchValue,
+  searchValue,
+}) => {
   function onInputChange(e) {
-    setSearchValue(e.target.value);
+    if (setSearchValue) {
+      setSearchValue(e.target.value);
+    }
   }
   function refresh() {
-    setSearchValue("");
+    if (setSearchValue) {
+      setSearchValue("");
+    }
   }
   return (
     <div style={{ marginTop: "1px" }}>
@@ -28,6 +36,8 @@ const ListHeader = () => {
               onChange={onInputChange}
               searchValue={searchValue}
               refresh={refresh}
+              searchFocus={searchFocus}
+              setSearchFocus={setSearchFocus}
               searchData={"Search Messages"}
             />
           </div>

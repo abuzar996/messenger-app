@@ -1,9 +1,9 @@
-export const EmptyMessage = () => {
+export const EmptyMessage = ({ searchFocus }) => {
   return (
     <div className="empty-message-container">
       <div className="empty-message">
         <label className="empty-message-label">
-          No previous conversation found!
+          {searchFocus ? "No search Found" : "No previous conversation found!"}
         </label>
       </div>
     </div>

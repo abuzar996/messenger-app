@@ -18,6 +18,21 @@ const ChatList = () => {
   const [confirmModal, setConfirmModal] = useState(false);
   const [modalXPosition, setModalXPosition] = useState(null);
   const [modalYPosition, setModalYPosition] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [searchFocus, setSearchFocus] = useState(false);
+  const [userData, setUserData] = useState([...data]);
+
+  useEffect(() => {
+    if (searchValue) {
+      let tempUserData = data.filter((user) =>
+        user.firstname.includes(searchValue)
+      );
+
+      setUserData([...tempUserData]);
+    } else {
+      setUserData([...data]);
+    }
+  }, [searchValue]);
 
   useEffect(() => {
     let cHeight = +localStorage.getItem("height");
@@ -58,11 +73,16 @@ const ChatList = () => {
         />
       ) : null}
       <TopNav />
-      <ListHeader />
+      <ListHeader
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        searchFocus={searchFocus}
+        setSearchFocus={setSearchFocus}
+      />
       <ListData
         mobileSize={mobileSize}
         setScrollValue={setScrollValue}
-        data={data}
+        data={userData}
         setOptionModalOpen={setOptionModalOpen}
       />
     </div>

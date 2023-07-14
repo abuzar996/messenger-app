@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import "./search.styles.css";
 
 import { useKeys } from "../../hooks/useKeys";
@@ -14,11 +14,14 @@ const Search = ({
   searchData,
   onFocus,
   useRefValue,
+  searchFocus,
+  setSearchFocus,
 }) => {
+  //console.log(setSearchFocus);
   const windowSize = useDimentions();
   const searchReference = useRef(null);
   const inputRef = useRef(null);
-  const [searchFocus, setSearchFocus] = useState(false);
+  //const [searchFocus, setSearchFocus] = useState(false);
 
   useKeys("Escape", escapePressed, null);
 
@@ -28,7 +31,10 @@ const Search = ({
     onFocus(false);
   }
   function escapePressed() {
-    setSearchFocus(false);
+    if (setSearchFocus) {
+      setSearchFocus(false);
+    }
+
     if (refresh) {
       inputRef.current.blur();
       refresh();
@@ -62,11 +68,15 @@ const Search = ({
             if (onFocus) {
               onFocus(true);
             }
-            setSearchFocus(true);
+            if (setSearchFocus) {
+              setSearchFocus(true);
+            }
           }}
           onBlur={() => {
-            setSearchFocus(false);
-            refresh();
+            if (setSearchFocus) {
+              setSearchFocus(false);
+              refresh();
+            }
           }}
         />
       </div>

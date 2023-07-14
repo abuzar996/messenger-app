@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./chatHeader.styles.css";
 import { useNavigate } from "react-router-dom";
 import Search from "../../components/Search";
@@ -6,9 +6,15 @@ import Search from "../../components/Search";
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const ChatHeader = ({ firstname }) => {
+const ChatHeader = ({
+  firstname,
+  searchValue,
+  setSearchValue,
+  searchFocus,
+  setSearchFocus,
+}) => {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState("");
+
   function onInputChange(e) {
     setSearchValue(e.target.value);
   }
@@ -30,6 +36,8 @@ const ChatHeader = ({ firstname }) => {
       </div>
       <div className="chat-search-container">
         <Search
+          searchFocus={searchFocus}
+          setSearchFocus={setSearchFocus}
           onChange={onInputChange}
           searchValue={searchValue}
           refresh={refresh}

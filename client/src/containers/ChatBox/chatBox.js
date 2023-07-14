@@ -13,6 +13,8 @@ const ChatBox = () => {
   const { id } = useParams();
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
+  const [searchFocus, setSearchFocus] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const [usersData] = useState(data);
   const [messageData, setMessageData] = useState(null);
@@ -20,11 +22,23 @@ const ChatBox = () => {
   const [replyData, setReplyData] = useState(null);
   const [senderHeight, setSenderHeight] = useState(null);
   const [marginBottom, setMarginBottom] = useState(senderHeight);
-  const [chatData, setChatData] = useState(chats);
+  const [chatData, setChatData] = useState([...chats]);
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  useEffect(() => {
+    if (searchValue) {
+      let newData = chats.filter((data) => {
+        return data.user1
+          ? data.user1.includes(searchValue)
+          : data.user2.includes(searchValue);
+      });
+      setChatData([...newData]);
+    } else {
+      setChatData([...chats]);
+    }
+  }, [searchValue]);
   useEffect(() => {
     if (windowSize.width <= 500) {
       setMobileSize(true);
@@ -76,7 +90,13 @@ const ChatBox = () => {
             leftVal={+localStorage.getItem("xAxis_message")}
           />
         )}
-        <ChatHeader {...userInfo} />
+        <ChatHeader
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          searchFocus={searchFocus}
+          setSearchFocus={setSearchFocus}
+          {...userInfo}
+        />
         <div>
           <ChatSpace
             replyData={replyData}
@@ -89,6 +109,7 @@ const ChatBox = () => {
             chatData={chatData}
             scrollValue={scrollValue}
             setScrollValue={setScrollValue}
+            searchFocus={searchFocus}
           />
         </div>
         <InputMessage

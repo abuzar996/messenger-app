@@ -1,6 +1,5 @@
 const checkEmailRequest = (req, res, next) => {
-  const { email } = req.body;
-  if (email && email.length > 0) {
+  if (req?.params?.email) {
     next();
   } else {
     res.status(422).send({
