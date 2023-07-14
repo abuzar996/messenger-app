@@ -9,6 +9,7 @@ const ListData = ({
   setOptionModalOpen,
   setScrollValue,
   mobileSize,
+  searchFocus,
 }) => {
   const [list, setList] = useState([...data]);
   const navigate = useNavigate();
@@ -48,20 +49,30 @@ const ListData = ({
       style={mobileSize ? { borderBottomLeftRadius: "0" } : null}
       ref={reference}
     >
-      {list
-        ? list.map((value, index) => (
-            <Card
-              setList={setList}
-              onMessageClick={onMessageClick}
-              key={index}
-              {...value}
-              onClick={onClick}
-              data={value}
-              modalOpen={setOptionModalOpen}
-              index={index}
-            />
-          ))
-        : null}
+      {list.length > 0 ? (
+        list.map((value, index) => (
+          <Card
+            setList={setList}
+            onMessageClick={onMessageClick}
+            key={index}
+            {...value}
+            onClick={onClick}
+            data={value}
+            modalOpen={setOptionModalOpen}
+            index={index}
+          />
+        ))
+      ) : (
+        <div className="message-div-container">
+          <div className="message-div-container-v2">
+            <label>
+              {searchFocus
+                ? "No data on Search found!"
+                : "No previous Chats found"}
+            </label>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

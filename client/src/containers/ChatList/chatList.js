@@ -83,6 +83,7 @@ const ChatList = () => {
         mobileSize={mobileSize}
         setScrollValue={setScrollValue}
         data={userData}
+        searchFocus={searchFocus}
         setOptionModalOpen={setOptionModalOpen}
       />
     </div>

@@ -14,3 +14,20 @@
   border-bottom-left-radius: 15px;
 }
 /* width */
+.message-div-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.message-div-container-v2 {
+  background-color: var(--secondary);
+  padding: 10px;
+  border-radius: 5px;
+}
+.message-div-container-v2 > label {
+  color: var(--primary);
+  font-size: var(--text);
+  font-weight: bold;
+}
