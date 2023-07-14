@@ -7,7 +7,6 @@ import Search from "../../components/Search";
 const ListHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
-    //console.log(e.target.value);
     setSearchValue(e.target.value);
   }
   function refresh() {

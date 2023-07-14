@@ -10,7 +10,6 @@ const ChatHeader = ({ firstname }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   function onInputChange(e) {
-    //console.log(e.target.value);
     setSearchValue(e.target.value);
   }
   function refresh() {

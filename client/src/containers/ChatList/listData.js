@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
 import { useDimentions } from "../../hooks/useDimentions";
-const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
+const ListData = ({
+  data,
+  onClick,
+  setOptionModalOpen,
+  setScrollValue,
+  mobileSize,
+}) => {
   const [list, setList] = useState(data);
   const navigate = useNavigate();
   useDimentions();
@@ -35,7 +41,11 @@ const ListData = ({ data, onClick, setOptionModalOpen, setScrollValue }) => {
     navigate(`/messages/${data.userId}`);
   }
   return (
-    <div className="chat-list-inner-container" ref={reference}>
+    <div
+      className="chat-list-inner-container"
+      style={mobileSize ? { borderBottomLeftRadius: "0" } : null}
+      ref={reference}
+    >
       {list
         ? list.map((value, index) => (
             <Card

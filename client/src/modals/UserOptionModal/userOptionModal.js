@@ -11,12 +11,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const UserOptionModal = ({ modalOpen }) => {
   const navigate = useNavigate();
   useKeys("Escape", closeFn);
-  function onSettingsClicked() {
-    // console.log("onSettingsClicked");
-  }
+  function onSettingsClicked() {}
   function onLogoutClicked() {
     navigate("/signIn");
-    //console.log("onLogoutClicked");
   }
   function closeFn() {
     modalOpen(false);

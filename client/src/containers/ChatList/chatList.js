@@ -12,6 +12,7 @@ import { useDimentions } from "../../hooks/useDimentions";
 const ChatList = () => {
   const windowSize = useDimentions();
   const refference = useRef(null);
+  const [mobileSize, setMobileSize] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -32,6 +33,14 @@ const ChatList = () => {
     }
   }, [scrollValue, windowSize, optionModalOpen]);
 
+  useEffect(() => {
+    if (windowSize.width <= 500) {
+      setMobileSize(true);
+    } else {
+      setMobileSize(false);
+    }
+  }, [windowSize, mobileSize]);
+
   return (
     <div ref={refference} className="chat-list-container">
       {confirmModal ? (
@@ -51,6 +60,7 @@ const ChatList = () => {
       <TopNav />
       <ListHeader />
       <ListData
+        mobileSize={mobileSize}
         setScrollValue={setScrollValue}
         data={data}
         setOptionModalOpen={setOptionModalOpen}

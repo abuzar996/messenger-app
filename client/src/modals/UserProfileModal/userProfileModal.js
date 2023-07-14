@@ -46,12 +46,7 @@ const UserProfileModal = ({ setModalOpen }) => {
         </div>
         <div className="user-profile-button-container">
           <div className="user-profile-close-button">
-            <button
-              className="message-button"
-              onClick={() => {
-                //                console.log("hello world");
-              }}
-            >
+            <button className="message-button" onClick={() => {}}>
               Send a message
             </button>
           </div>

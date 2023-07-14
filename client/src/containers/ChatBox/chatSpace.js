@@ -46,7 +46,6 @@ const ChatSpace = ({
     if (xValue + clientWidth > parentWidth) {
       localStorage.setItem("xAxis", xValue - clientWidth + 26);
     } else if (xValue + clientWidth < parentWidth) {
-      console.log("hello world");
       localStorage.setItem("xAxis", xValue + 5);
     }
   }

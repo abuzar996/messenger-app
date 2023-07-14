@@ -7,9 +7,12 @@ import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
+import { useDimentions } from "../../hooks/useDimentions";
 
 const ChatBox = () => {
   const { id } = useParams();
+  const windowSize = useDimentions();
+  const [mobileSize, setMobileSize] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [usersData] = useState(data);
   const [messageData, setMessageData] = useState(null);
@@ -22,6 +25,13 @@ const ChatBox = () => {
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  useEffect(() => {
+    if (windowSize.width <= 500) {
+      setMobileSize(true);
+    } else {
+      setMobileSize(false);
+    }
+  }, [windowSize, mobileSize]);
   useEffect(() => {
     const user = usersData.find((user) => user.userId === +id);
     setUserInfo(user);
@@ -55,7 +65,10 @@ const ChatBox = () => {
 
   return (
     <>
-      <div className="chat-box-container">
+      <div
+        className="chat-box-container"
+        style={mobileSize ? { marginLeft: "0px" } : null}
+      >
         {optionsModal && (
           <MessageOptionModal
             modalOpen={setOptionModalOpen}
