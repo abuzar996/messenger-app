@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
@@ -77,4 +77,4 @@ const ListData = ({
   );
 };
 
-export default ListData;
+export default memo(ListData);

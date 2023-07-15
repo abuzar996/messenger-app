@@ -4,6 +4,7 @@ import "./signIn.styles.css";
 import "../../App.css";
 
 import { useDimentions } from "../../hooks/useDimentions";
+
 const SignIn = () => {
   const [isAuthenticated] = useState(true);
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { memo, useRef, useEffect } from "react";
 import "./search.styles.css";
 
 import { useKeys } from "../../hooks/useKeys";
@@ -17,7 +17,7 @@ const Search = ({
   searchFocus,
   setSearchFocus,
 }) => {
-  //console.log(setSearchFocus);
+  //console.log("search rendered");
   const windowSize = useDimentions();
   const searchReference = useRef(null);
   const inputRef = useRef(null);
@@ -91,4 +91,4 @@ const Search = ({
   );
 };
 
-export default Search;
+export default memo(Search);
