@@ -3,6 +3,7 @@ const {
   loginUser,
   getUserById,
   getAllUsersExcept,
+  findUsersByName,
 } = require("../../services/user.services");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -59,7 +60,9 @@ const createNewUser = async (req, res) => {
 };
 
 const userlogin = async (req, res) => {
-  const { email, password } = req.body;
+  const email = req.body.email;
+  const password = req.body.password;
+
   try {
     const user = await loginUser(email, password);
     if (user) {
@@ -100,11 +103,27 @@ const getAllUsers = (req, res) => {
   }
 };
 
+const getUserByName = (req, res) => {
+  const { name } = req.params;
+  const { firstname } = req.body;
+  try {
+    const usersList = findUsersByName(name, firstname);
+    if (usersList.length > 0) {
+      res.status(200).send({ users: usersList, searchedBy: firstname });
+    } else {
+      res.status(404).send({ message: "No users found" });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
+};
+
 module.exports = {
   getUsers: getUsers,
   searchAUserByEmail: searchAUserByEmail,
   createNewUser: createNewUser,
-  loginUser: userlogin,
+  userlogin: userlogin,
   searchUserById: searchUserById,
   getAllUsers: getAllUsers,
+  getUserByName: getUserByName,
 };

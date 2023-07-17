@@ -12,13 +12,23 @@ const schema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 const loginBody = Joi.object({
-  email: Joi.string().email({
-    minDomainSegments: 2,
-    tlds: { allow: ["com", "net"] },
-  }),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net"] },
+    })
+    .required(),
   password: Joi.string().min(6).required(),
+});
+
+const searhUserByNameSchema = Joi.object({ name: Joi.string().required() });
+
+const searhUserByIdSchema = Joi.object({
+  userId: Joi.string().required(),
 });
 module.exports = {
   createUser: schema,
   loginBody: loginBody,
+  searhUserByNameSchema: searhUserByNameSchema,
+  searhUserByIdSchema: searhUserByIdSchema,
 };

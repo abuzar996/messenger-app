@@ -1,4 +1,9 @@
-const { createUser, loginBody } = require("../validators/user.validatior");
+const {
+  createUser,
+  loginBody,
+  searhUserByNameSchema,
+  searhUserByIdSchema,
+} = require("../validators/user.validatior");
 const { user } = require("../modal/user/user.modal");
 const { verifyUser } = require("../services/user.services");
 const userExists = (req, res, next) => {
@@ -39,11 +44,10 @@ const validateUserRequestBody = async (req, res, next) => {
 };
 
 const validateLoginRequestBody = async (req, res, next) => {
-  const { email, password } = req.body;
   try {
     await loginBody.validateAsync({
-      email,
-      password,
+      email: req.body.email,
+      password: req.body.password,
     });
     next();
   } catch (err) {
@@ -53,8 +57,10 @@ const validateLoginRequestBody = async (req, res, next) => {
 
 const isAuthenticated = (req, res, next) => {
   const { token } = req.headers;
+
   if (token) {
     let user = verifyUser(token);
+
     if (user) {
       if (user.err) {
         res.send({ message: user.err });
@@ -68,9 +74,29 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
+const validateSearchUserByName = async (req, res, next) => {
+  const { name } = req.params;
+  try {
+    await searhUserByNameSchema.validateAsync({ name });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
+const validateSearchUserByiD = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    await searhUserByIdSchema.validateAsync({ userId });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 module.exports = {
+  validateSearchUserByiD,
   validateUserRequestBody,
   validateLoginRequestBody,
+  validateSearchUserByName,
   userExists,
   userDoesNotExists,
   isAuthenticated,

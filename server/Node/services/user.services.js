@@ -53,10 +53,17 @@ function getAllUsersExcept(id) {
   return data;
 }
 
+function findUsersByName(name, firstname) {
+  const users = user.filter((u) => {
+    return u.firstname.includes(name) && u.firstname !== firstname;
+  });
+  return users;
+}
 module.exports = {
   loginUser: loginUser,
   searchUserByEmail: searchUserByEmail,
   getUserById,
+  findUsersByName,
   getAllUsersExcept,
   verifyUser,
 };
