@@ -13,5 +13,11 @@
     "deploy": "npm run build --prefix client & npm start --prefix server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "react-redux": "^8.1.1",
+    "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1"
+  }
 }
