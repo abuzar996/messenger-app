@@ -17,6 +17,13 @@ const userModal = [
     lastname: "Doe",
     email: "John.doe@gmail.com",
   },
+  {
+    userId: 4,
+    firstname: "Allison",
+    lastname: "Jane",
+    email: "allison@gmail.com",
+    password: "$2b$10$zm8iX2YAMlumQ17ZdznFneENhg10e7mBswfL3LCBCuLZcB.2BnSFO",
+  },
 ];
 module.exports = {
   user: userModal,

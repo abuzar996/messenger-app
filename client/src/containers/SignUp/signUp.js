@@ -5,7 +5,7 @@ import "../../App.css";
 
 import { useDimentions } from "../../hooks/useDimentions";
 const SignUp = () => {
-  const [isAuthenticated] = useState(true);
+  const [isAuthenticated] = useState(false);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);

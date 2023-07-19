@@ -2,11 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signIn.styles.css";
 import "../../App.css";
-
+import { loginUser } from "../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useDimentions } from "../../hooks/useDimentions";
 
 const SignIn = () => {
-  const [isAuthenticated] = useState(true);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const dispatch = useDispatch();
+  //const [isAuthenticated] = useState(false);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
@@ -30,6 +35,14 @@ const SignIn = () => {
       navigate("/home");
     }
   }, [navigate, isAuthenticated]);
+  function onSignInClick() {
+    dispatch(
+      loginUser({
+        email: "allison@gmail.com",
+        password: "123456",
+      })
+    );
+  }
   function onCancelClick() {
     setEmail("");
     setPassword("");
@@ -81,7 +94,9 @@ const SignIn = () => {
               <button className="sign-in-close-button" onClick={onCancelClick}>
                 Cancel
               </button>
-              <button className="sign-in-button">Sign In</button>
+              <button className="sign-in-button" onClick={onSignInClick}>
+                Sign In
+              </button>
             </div>
             <div className="sign-in-card-label-body">
               <label className="sign-in-end-label">

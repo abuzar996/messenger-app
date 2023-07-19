@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./appHeader.styles.css";
 
 import Search from "../../components/Search";
@@ -15,7 +16,10 @@ import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { useDimentions } from "../../hooks/useDimentions";
 
-const AppHeader = ({ darkMode, setDarkMode }) => {
+import { changeTheme } from "../../redux/slices/appSettingSlice";
+const AppHeader = () => {
+  const darkmode = useSelector((state) => state.appReducer.darkmode);
+  const dispatch = useDispatch();
   useDimentions();
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
@@ -28,6 +32,9 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
   function refresh() {
     setSearchValue("");
     setSearchFocused(false);
+  }
+  function changeAppTheme() {
+    dispatch(changeTheme());
   }
   return (
     <Header>
@@ -86,9 +93,10 @@ const AppHeader = ({ darkMode, setDarkMode }) => {
           <div style={{ paddingRight: "10px" }}>
             <Switch
               className="switch-button"
-              checked={darkMode ? true : false}
+              checked={darkmode}
+              value={darkmode}
               onChange={() => {
-                setDarkMode(!darkMode);
+                changeAppTheme();
               }}
             />
           </div>

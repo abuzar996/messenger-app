@@ -44,6 +44,7 @@ const validateUserRequestBody = async (req, res, next) => {
 };
 
 const validateLoginRequestBody = async (req, res, next) => {
+  console.log("I'm in validation middleware");
   try {
     await loginBody.validateAsync({
       email: req.body.email,

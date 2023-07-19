@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 const AuthUser = ({ children }) => {
   const navigate = useNavigate();
-  const [isAuthenticated] = useState(true);
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/signIn");
