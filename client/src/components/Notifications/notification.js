@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import "./notification.styles.css";
 
 import ClearSharpIcon from "@mui/icons-material/ClearSharp";

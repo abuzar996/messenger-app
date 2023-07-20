@@ -3,11 +3,14 @@ import Form from "./form";
 import { useNavigate } from "react-router-dom";
 import "./signIn.styles.css";
 import "../../App.css";
+
+//import { EventEmmiter } from "events";
 //import { loginUser } from "../../redux/slices/authSlice";
 //import { useDispatch, useSelector } from "react-redux";
 import { useDimentions } from "../../hooks/useDimentions";
 
 const SignIn = () => {
+  //console.log(EventEmmiter);
   const isAuthenticated = false;
   // const isAuthenticated = useSelector(
   //   (state) => state.authReducer.isAuthenticated

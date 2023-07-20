@@ -15,8 +15,8 @@
   border-radius: 15px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  position: absolute;
-  top: 100px;
+  position: fixed;
+  top: 70px;
   right: 0;
   animation-name: notifications;
   animation-duration: 0.3s;
