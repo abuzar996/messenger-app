@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Form from "./form";
 import { useNavigate } from "react-router-dom";
+import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
 
@@ -10,7 +11,6 @@ import "../../App.css";
 import { useDimentions } from "../../hooks/useDimentions";
 
 const SignIn = () => {
-  //console.log(EventEmmiter);
   const isAuthenticated = false;
   // const isAuthenticated = useSelector(
   //   (state) => state.authReducer.isAuthenticated
@@ -52,28 +52,32 @@ const SignIn = () => {
   }
 
   return (
-    <div className="theme-dark custom-fonts App uniform-colors">
-      <div ref={pageRef} className="sign-in-page-container">
-        <div
-          ref={modalRef}
-          className="sign-in-card-container"
-          style={{ top: topVal, left: leftVal }}
-        >
-          <div className="sign-in-card-header">
-            <label className="sign-in-card-header-label">Sign In</label>
-          </div>
+    <>
+      <div className="theme-dark custom-fonts App uniform-colors">
+        <div ref={pageRef} className="sign-in-page-container">
+          <div
+            ref={modalRef}
+            className="sign-in-card-container"
+            style={{ top: topVal, left: leftVal }}
+          >
+            <div className="sign-in-card-header">
+              <label className="sign-in-card-header-label">Sign In</label>
+            </div>
 
-          <div className="sign-in-card-body">
-            <Form />
-            <div className="sign-in-card-label-body">
-              <label className="sign-in-end-label">
-                Not a member? <span onClick={onSignUpClick}>SignUp</span>
-              </label>
+            <div className="sign-in-card-body">
+              <Form />
+              <div className="sign-in-card-label-body">
+                <label className="sign-in-end-label">
+                  Not a member? <span onClick={onSignUpClick}>SignUp</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <Notification />
+    </>
   );
 };
 

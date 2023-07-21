@@ -1,8 +1,10 @@
 @keyframes notifications {
-  from {
+  0% {
     right: -100px;
+    opacity: 0;
   }
-  to {
+  100% {
+    opacity: 1;
     right: 0;
   }
 }
@@ -10,7 +12,7 @@
   display: flex;
   width: fit-content;
   flex-direction: column;
-  background-color: var(--secondary);
+  background-color: orange;
   border: 2px solid var(--primary);
   border-radius: 15px;
   border-top-right-radius: 0;
@@ -26,13 +28,25 @@
   justify-content: center;
   align-items: center;
   column-gap: 3vw;
+  background-color: var(--secondary);
   display: flex;
   flex-direction: row;
   padding: 10px;
+  border-radius: 15px 0px 0px 15px;
 }
 .notification-header > label {
   color: var(--primary);
   padding-left: 10px;
   font-size: var(--menu);
+
   font-weight: 800;
+}
+
+.notification-display {
+  right: 0px;
+  opacity: 1;
+  display: inline-block;
+  margin-top: 100px;
+  animation-name: notifications;
+  animation-duration: 0.5s;
 }
