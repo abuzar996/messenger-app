@@ -6,8 +6,6 @@ import ClearSharpIcon from "@mui/icons-material/ClearSharp";
 import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 
 const Notification = ({ type, message, timeOut }) => {
-  //console.log(type, message, timeOut);
-
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {

@@ -6,11 +6,12 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { validateForm, submitForm, signInForm } from "./formik";
 //import Notification from "../../components/Notifications";
-import { notificationManager } from "../../components/Notifications";
-import { changeNotify } from "../../redux/slices/appSettingSlice";
+//import { notificationManager } from "../../components/Notifications";
+//import { changeNotify } from "../../redux/slices/appSettingSlice";
+import { addNotification } from "../../redux/slices/notificationSlice";
 const Form = () => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(0);
+  const [error, setError] = useState(false);
   //   const [submitClicked, setSubmitted] = useState(false);
   //   const [error, setError] = useState(false);
   //   const [notification, setNotification] = useState(null);
@@ -21,27 +22,27 @@ const Form = () => {
     onSubmit: submitForm,
     validateOnChange: false,
     validateOnBlur: false,
+    validateOnSubmit: true,
   });
 
   useEffect(() => {
     let errorMessage = Object.keys(formik.errors)[0];
     let message = errorMessage ? formik.errors[errorMessage] : null;
-    if (message) {
+    if (message && !error) {
+      if (!error) {
+        //  setCount(count + 1);
+        // notificationManager.error(message, "error", 5000);
+      }
+      setError(true);
       //console.log(message);
       // toast.success(message);
       //
     }
-  }, [formik.errors]);
-  function onClick(e) {
-    //  console.log("hello world");
-    dispatch(changeNotify());
-    setCount(count + 1);
-    notificationManager.success(count, "success", 5000);
-    e.preventDefault();
-  }
+  }, [formik.errors, error]);
+
   return (
     <>
-      <form /*onSubmit={formik.handleSubmit}*/>
+      <form onSubmit={formik.handleSubmit}>
         <div className="sign-in-card-body-child">
           <input
             style={
@@ -80,16 +81,20 @@ const Form = () => {
             type="reset"
             //onClick={formik.resetForm}
             onClick={() => {
-              dispatch(changeNotify());
-              notificationManager.error("message", "error", 3000);
+              //dispatch(changeNotify());
+              //notificationManager.error("message", "error", 3000);
+              dispatch(
+                addNotification({
+                  message: "hello",
+                  type: "error",
+                  timeOut: 3000,
+                })
+              );
             }}
           >
             Cancel
           </button>
-          <button
-            className="sign-in-button" /*type="submit"*/
-            onClick={onClick}
-          >
+          <button className="sign-in-button" type="submit">
             Sign In
           </button>
         </div>

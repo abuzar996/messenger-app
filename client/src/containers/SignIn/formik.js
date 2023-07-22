@@ -23,6 +23,7 @@ export const validateForm = (values) => {
 };
 
 export const submitForm = (values, { validate }) => {
+  console.log("submit");
   validate && validate(values);
 
   console.log("on submit Clicked");
