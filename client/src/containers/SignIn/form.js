@@ -85,8 +85,8 @@ const Form = () => {
               //notificationManager.error("message", "error", 3000);
               dispatch(
                 addNotification({
-                  message: "hello",
-                  type: "error",
+                  message: "Hello My Name is Abuzar",
+                  type: "Success",
                   timeOut: 3000,
                 })
               );

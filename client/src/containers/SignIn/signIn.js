@@ -23,7 +23,9 @@ const SignIn = () => {
   const modalRef = useRef(null);
   const [topVal, setTopVal] = useState(null);
   const [leftVal, setLeftVal] = useState(null);
-
+  // useEffect(() => {
+  //   console.log("signIn Rerender");
+  // });
   useEffect(() => {
     if (pageRef) {
       const pageWidth = pageRef.current.clientWidth;

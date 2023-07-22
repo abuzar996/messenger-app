@@ -30,11 +30,23 @@
   column-gap: 3vw;
   background-color: var(--secondary);
   display: flex;
-  flex-direction: row;
-  padding: 10px;
+  flex-direction: column;
+
   border-radius: 15px 0px 0px 15px;
 }
 .notification-header > label {
+  color: var(--primary);
+  padding-left: 10px;
+  font-size: var(--menu);
+
+  font-weight: 800;
+}
+.notification-head-body {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.notification-header-body > label {
   color: var(--primary);
   padding-left: 10px;
   font-size: var(--menu);
@@ -49,4 +61,44 @@
   margin-top: 100px;
   animation-name: notifications;
   animation-duration: 0.5s;
+  overflow-y: scroll;
+}
+
+.notification-message-header-label {
+  font-weight: bold;
+  padding: 10px;
+  color: var(--primary);
+}
+.notification-message-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.notification-border-green {
+  border: 2px solid green;
+  border-radius: 17px 0px 0px 17px;
+}
+.notification-border-red {
+  border: 2px solid red;
+  border-radius: 15px 0px 0px 15px;
+}
+.notification-message-container {
+  display: flex;
+  flex-direction: column;
+}
+.notification-message-body {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  padding-top: 0px;
+}
+.notification-icon-div {
+  padding-right: 10px;
+}
+.notification-body-label {
+  color: var(--primary);
+  text-align: center;
+  font-size: var(--text);
+  font-weight: 600;
 }

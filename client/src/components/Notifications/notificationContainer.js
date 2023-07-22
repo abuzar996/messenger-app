@@ -8,25 +8,19 @@ import { useSelector } from "react-redux";
 
 const NotificationContainer = () => {
   const notifications = useSelector((state) => state.notify.notification);
-  console.log(notifications);
   const [notification, setNotification] = useState(notifications);
   useEffect(() => {
     setNotification(notifications);
   }, [notifications]);
 
   return (
-    <>
+    <React.Fragment>
       {notification &&
         notification.length > 0 &&
         notification.map((notification, index) => (
-          <Notification
-            key={index}
-            type={notification.type}
-            message={notification.message}
-            timeOut={notification.timeOut}
-          />
+          <Notification key={index} {...notification} />
         ))}
-    </>
+    </React.Fragment>
   );
 };
 
