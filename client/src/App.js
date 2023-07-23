@@ -1,14 +1,13 @@
 import "./App.css";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import AppHeader from "./containers/AppHeader";
 import Notification from "./components/Notifications/notificationContainer";
+
 import HomeLayout from "./containers/Home/homeLayout";
 
 function App() {
-  //console.log(`${process.env.REACT_APP_URL}`);
   const darkmode = useSelector((state) => state.appReducer.darkmode);
-  const [darkMode, setDarkMode] = useState(true);
+
   return (
     <div
       className={
@@ -17,8 +16,7 @@ function App() {
           : "theme-light custom-fonts App uniform-colors"
       }
     >
-      <AppHeader darkMode={darkMode} setDarkMode={setDarkMode} />
-
+      <AppHeader />
       <div className="fixed-app-layout">
         <div className="home-layout">
           <HomeLayout />
