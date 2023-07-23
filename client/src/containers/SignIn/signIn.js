@@ -5,27 +5,21 @@ import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
 
-//import { EventEmmiter } from "events";
-//import { loginUser } from "../../redux/slices/authSlice";
-//import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useDimentions } from "../../hooks/useDimentions";
 
 const SignIn = () => {
-  const isAuthenticated = false;
-  // const isAuthenticated = useSelector(
-  //   (state) => state.authReducer.isAuthenticated
-  // );
-  //const dispatch = useDispatch();
-  //const [isAuthenticated] = useState(false);
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
   const modalRef = useRef(null);
   const [topVal, setTopVal] = useState(null);
   const [leftVal, setLeftVal] = useState(null);
-  // useEffect(() => {
-  //   console.log("signIn Rerender");
-  // });
+
   useEffect(() => {
     if (pageRef) {
       const pageWidth = pageRef.current.clientWidth;
@@ -36,6 +30,7 @@ const SignIn = () => {
       setTopVal(pageHeight / 2 - modalHeight / 2);
     }
   }, [windowSize]);
+
   useEffect(() => {
     if (isAuthenticated === true) {
       navigate("/home");
@@ -70,8 +65,6 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-
-      <Notification />
     </>
   );
 };

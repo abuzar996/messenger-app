@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { validateForm, signInForm, NormalizeErrors, getErrors } from "./formik";
 import { addNotification } from "../../redux/slices/notificationSlice";
+import { loginUser as signIn } from "../../redux/slices/authSlice.js";
 import useErrors from "./useErrors";
 const Form = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Form = () => {
         timeOut: 5000,
       })
     );
+    dispatch(signIn());
   };
 
   const formik = useFormik({
