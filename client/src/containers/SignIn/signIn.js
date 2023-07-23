@@ -42,13 +42,6 @@ const SignIn = () => {
     }
   }, [navigate, isAuthenticated]);
 
-  // dispatch(
-  //   loginUser({
-  //     email: "allison@gmail.com",
-  //     password: "123456",
-  //   })
-  // );
-
   function onSignUpClick() {
     navigate("/signup");
   }

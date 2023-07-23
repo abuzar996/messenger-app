@@ -1,55 +1,69 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./signIn.styles.css";
 import "../../App.css";
-//import { ToastContainer, toast } from "react-toastify";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { validateForm, submitForm, signInForm } from "./formik";
-//import Notification from "../../components/Notifications";
-//import { notificationManager } from "../../components/Notifications";
-//import { changeNotify } from "../../redux/slices/appSettingSlice";
+import { validateForm, signInForm, NormalizeErrors, getErrors } from "./formik";
 import { addNotification } from "../../redux/slices/notificationSlice";
+import useErrors from "./useErrors";
 const Form = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState(false);
-  //   const [submitClicked, setSubmitted] = useState(false);
-  //   const [error, setError] = useState(false);
-  //   const [notification, setNotification] = useState(null);
+
+  const [errorList, setErrorList] = useState(null);
+  const { emailError, passwordError } = useErrors(errorList);
+
+  const submitForm = (values) => {
+    let errors = validateForm(values);
+    let errorData;
+    if (errors) {
+      errorData = NormalizeErrors(errors);
+      let listErrors = getErrors(errors);
+      if (listErrors.length > 0) {
+        setErrorList(listErrors);
+      } else {
+        setErrorList(null);
+      }
+      if (errorData.length > 0) {
+        errorData.forEach((error) =>
+          dispatch(
+            addNotification({
+              message: error,
+              type: "Error",
+              timeOut: 5000,
+            })
+          )
+        );
+        return;
+      } else {
+        loginUser();
+      }
+      return;
+    }
+  };
+
+  const loginUser = () => {
+    dispatch(
+      addNotification({
+        message: "Login Successful",
+        type: "Success",
+        timeOut: 5000,
+      })
+    );
+  };
+
   const formik = useFormik({
     initialValues: signInForm,
-
-    validate: validateForm,
     onSubmit: submitForm,
     validateOnChange: false,
     validateOnBlur: false,
-    validateOnSubmit: true,
   });
-
-  useEffect(() => {
-    let errorMessage = Object.keys(formik.errors)[0];
-    let message = errorMessage ? formik.errors[errorMessage] : null;
-    if (message && !error) {
-      if (!error) {
-        //  setCount(count + 1);
-        // notificationManager.error(message, "error", 5000);
-      }
-      setError(true);
-      //console.log(message);
-      // toast.success(message);
-      //
-    }
-  }, [formik.errors, error]);
 
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
         <div className="sign-in-card-body-child">
           <input
-            style={
-              formik.touched.email && formik.errors.email
-                ? { borderBottom: "2px solid red" }
-                : null
-            }
+            style={emailError ? { borderBottom: "2px solid red" } : null}
             placeholder="Email"
             type="text"
             autoComplete="off"
@@ -61,11 +75,7 @@ const Form = () => {
         </div>
         <div className="sign-in-card-body-child">
           <input
-            style={
-              formik.touched.password && formik.errors.password
-                ? { borderBottom: "2px solid red" }
-                : null
-            }
+            style={passwordError ? { borderBottom: "2px solid red" } : null}
             placeholder="Password"
             type="password"
             autoComplete="off"
@@ -79,18 +89,7 @@ const Form = () => {
           <button
             className="sign-in-close-button"
             type="reset"
-            //onClick={formik.resetForm}
-            onClick={() => {
-              //dispatch(changeNotify());
-              //notificationManager.error("message", "error", 3000);
-              dispatch(
-                addNotification({
-                  message: "Hello My Name is Abuzar",
-                  type: "Success",
-                  timeOut: 3000,
-                })
-              );
-            }}
+            onClick={formik.resetForm}
           >
             Cancel
           </button>
