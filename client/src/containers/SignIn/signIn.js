@@ -32,7 +32,6 @@ const SignIn = () => {
   }, [windowSize]);
 
   useEffect(() => {
-    console.log(isAuthenticated);
     if (isAuthenticated === true) {
       navigate("/home");
     }

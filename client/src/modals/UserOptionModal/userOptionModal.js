@@ -3,7 +3,7 @@ import "./userOptionModal.styles.css";
 
 import { useKeys } from "../../hooks/useKeys";
 import { Checkbox } from "@mui/material";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/authSlice";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -11,13 +11,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 const UserOptionModal = ({ modalOpen }) => {
   const dispatch = useDispatch();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   useKeys("Escape", closeFn);
   function onSettingsClicked() {}
   function onLogoutClicked() {
     console.log("hello wolrd");
     dispatch(logoutUser());
-    //navigate("/signIn");
+    navigate("/signIn");
   }
   function closeFn() {
     modalOpen(false);
