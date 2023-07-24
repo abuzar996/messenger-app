@@ -7,14 +7,18 @@ import {
   removeAllNotifications,
   addNotification,
 } from "../src/redux/slices/notificationSlice";
+//import { setIsMounted } from "../src/redux/slices/appSettingSlice";
 import HomeLayout from "./containers/Home/homeLayout";
 import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-  const darkmode = useSelector((state) => state.appReducer.darkmode);
+  const { darkmode, isMounted } = useSelector((state) => state.appReducer);
+
   useEffect(() => {
+    //console.log(isMounted);
     dispatch(removeAllNotifications());
+
     dispatch(
       addNotification({
         message: "User Login Successfull",
@@ -22,7 +26,7 @@ function App() {
         timeOut: 3000,
       })
     );
-  }, [dispatch]);
+  }, [dispatch, isMounted]);
   return (
     <>
       <div

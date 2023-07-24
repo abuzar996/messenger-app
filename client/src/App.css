@@ -6,12 +6,12 @@
 }
 
 .uniform-colors {
-  --warning: yellow;
+  --warning: green;
   --danger: rgb(148, 3, 32);
 }
 .theme-light {
-  --primary: #ffffff;
-  --secondary: rgb(56, 56, 56);
+  --primary: #c5c6c7;
+  --secondary: #64485c;
   --hover-modal: #000;
   background-color: var(--primary);
 }

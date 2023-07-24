@@ -5,14 +5,18 @@ import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useDimentions } from "../../hooks/useDimentions";
-
+import { removeAllNotifications } from "../../redux/slices/notificationSlice";
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const { darkmode } = useSelector((state) => state.appReducer);
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
-
+  useEffect(() => {
+    dispatch(removeAllNotifications());
+  }, [dispatch]);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
@@ -41,9 +45,10 @@ const SignIn = () => {
     navigate("/signup");
   }
 
+  let classname = darkmode ? "theme-dark" : "theme-light";
   return (
     <>
-      <div className="theme-dark custom-fonts App uniform-colors">
+      <div className={`${classname} custom-fonts App uniform-colors`}>
         <div ref={pageRef} className="sign-in-page-container">
           <div
             ref={modalRef}

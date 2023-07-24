@@ -5,6 +5,7 @@ const initialState = {
   error: [],
   darkmode: true,
   notifyCount: 0,
+  isMounted: false,
 };
 
 const appSettingSlice = createSlice({
@@ -17,10 +18,13 @@ const appSettingSlice = createSlice({
         : (state.darkmode = false);
     },
     changeNotify: (state) => {
-      // console.log("hello");
       state.notifyCount = state.notifyCount + 1;
+    },
+    setIsMounted: (state) => {
+      state.isMounted = true;
     },
   },
 });
-export const { changeTheme, changeNotify } = appSettingSlice.actions;
+export const { changeTheme, changeNotify, setIsMounted } =
+  appSettingSlice.actions;
 export default appSettingSlice.reducer;

@@ -1,19 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Form from "./form";
 import "./signUp.styles.css";
 import "../../App.css";
-
+import { useDispatch } from "react-redux";
+import { removeAllNotifications } from "../../redux/slices/notificationSlice";
 import { useDimentions } from "../../hooks/useDimentions";
+import NotificationContainer from "../../components/Notifications/notificationContainer";
 const SignUp = () => {
-  const [isAuthenticated] = useState(false);
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
   const modalRef = useRef(null);
   const [topVal, setTopVal] = useState(null);
   const [leftVal, setLeftVal] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  useEffect(() => {
+    dispatch(removeAllNotifications());
+  }, [dispatch]);
   useEffect(() => {
     if (isAuthenticated === true) {
       navigate("/home");
@@ -29,100 +35,36 @@ const SignUp = () => {
       setTopVal(pageHeight / 2 - modalHeight / 2);
     }
   }, [windowSize]);
-  function onCancelClick() {
-    setEmail("");
-    setPassword("");
-  }
+
   function onSignInClick() {
     navigate("/signIn");
   }
-  function onPasswordChange(e) {
-    setPassword(e.target.value);
-  }
-  function onEmailChange(e) {
-    setEmail(e.target.value);
-  }
+
   return (
-    <div className="theme-dark custom-fonts App uniform-colors">
-      <div ref={pageRef} className="sign-up-page-container">
-        <div
-          ref={modalRef}
-          className="sign-up-card-container"
-          style={{ top: topVal, left: leftVal }}
-        >
-          <div className="sign-up-card-header">
-            <label className="sign-up-card-header-label">Sign Up</label>
-          </div>
-          <div className="sign-up-card-body">
-            <div className="sign-up-card-body-child">
-              <input
-                className="sign-up-card-body-child-input"
-                placeholder="First Name"
-                type="text"
-                autoComplete="off"
-                value={email}
-                onChange={onEmailChange}
-              />
+    <>
+      <div className="theme-dark custom-fonts App uniform-colors">
+        <div ref={pageRef} className="sign-up-page-container">
+          <div
+            ref={modalRef}
+            className="sign-up-card-container"
+            style={{ top: topVal, left: leftVal }}
+          >
+            <div className="sign-up-card-header">
+              <label className="sign-up-card-header-label">Sign Up</label>
             </div>
-            <div className="sign-up-card-body-child">
-              <input
-                className="sign-up-card-body-child-input"
-                placeholder="Last Name"
-                type="text"
-                autoComplete="off"
-                value={email}
-                onChange={onEmailChange}
-              />
-            </div>
-            <div className="sign-up-card-body-child">
-              <input
-                className="sign-up-card-body-child-input"
-                placeholder="Email"
-                type="text"
-                autoComplete="off"
-                value={email}
-                onChange={onEmailChange}
-              />
-            </div>
-            <div className="sign-up-card-body-child">
-              <form>
-                <input
-                  className="sign-up-card-body-child-input"
-                  placeholder="Password"
-                  type="password"
-                  autoComplete="off"
-                  value={password}
-                  onChange={onPasswordChange}
-                />
-              </form>
-            </div>
-            <div className="sign-up-card-body-child">
-              <form>
-                <input
-                  className="sign-up-card-body-child-input"
-                  placeholder="Confirm Password"
-                  type="password"
-                  autoComplete="off"
-                  value={password}
-                  onChange={onPasswordChange}
-                />
-              </form>
-            </div>
-            <div className="sign-up-card-button-body">
-              <button className="sign-up-close-button" onClick={onCancelClick}>
-                Cancel
-              </button>
-              <button className="sign-up-button">Sign Up</button>
-            </div>
-            <div className="sign-up-card-label-body">
-              <label className="sign-up-end-label">
-                Already a member? <span onClick={onSignInClick}>SignIn</span>
-              </label>
+            <div className="sign-up-card-body">
+              <Form />
+              <div className="sign-up-card-label-body">
+                <label className="sign-up-end-label">
+                  Already a member? <span onClick={onSignInClick}>SignIn</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <NotificationContainer />
+    </>
   );
 };
 
