@@ -1,23 +1,20 @@
-import { createSlice /*, createAsyncThunk*/ } from "@reduxjs/toolkit";
-//import axios from "axios";
-//const API = "http://localhost:3000";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+const API = "http://localhost:3001";
 const initialState = {
   loading: false,
   isAuthenticated: false,
+  email: "",
   error: "",
 };
-// export const loginUser = createAsyncThunk("loginUser", async (param) => {
-//   console.log(param);
-//   const response = await axios
-//     .post(`${API}/users/login`, param)
-//     .then((response) => response)
-//     .catch((error) => error.response);
-//   //console.log(response);
-//   if (response.status === 200) {
-//     localStorage.setItem("Token", response.data);
-//   }
-//   return response;
-// });
+export const loginUser = createAsyncThunk("loginUser", async (param) => {
+  const response = await axios
+    .post(`${API}/users/login`, param)
+    .then((response) => response)
+    .catch((error) => error.response);
+  return response;
+});
+
 const AuthSlice = createSlice({
   name: "auth",
   initialState,
@@ -25,28 +22,33 @@ const AuthSlice = createSlice({
     logoutUser: (state) => {
       state.isAuthenticated = false;
     },
-    loginUser: (state) => {
-      state.isAuthenticated = true;
-    },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(loginUser.pending, (state, action) => {
-  //     state.loading = true;
-  //   });
-  //   builder.addCase(loginUser.fulfilled, (state, action) => {
-  //     state.loading = false;
-  //     if (action.payload.status === 200) {
-  //       state.isAuthenticated = true;
-  //     } else if (action.payload.status === 400) {
-  //       state.isAuthenticated = false;
-  //       state.error = "Cannot Login";
-  //     }
-  //   });
-  //   builder.addCase(loginUser.rejected, (state, action) => {
-  //     state.loading = false;
-  //     state.error = action.payload;
-  //   });
-  //},
+  extraReducers: (builder) => {
+    builder.addCase(loginUser.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload.status === 200) {
+        state.isAuthenticated = true;
+        state.email = action.payload.data.email;
+        state.error = "";
+        localStorage.setItem("Token", action.payload.data.authToken);
+      } else if (action.payload.status === 400) {
+        state.isAuthenticated = false;
+        state.error = "Cannot Login";
+        state.email = "";
+      } else {
+        state.isAuthenticated = false;
+        state.error = action.payload.data.message || "Network Error";
+        state.email = "";
+      }
+    });
+    builder.addCase(loginUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+  },
 });
-export const { logoutUser, loginUser } = AuthSlice.actions;
+export const { logoutUser } = AuthSlice.actions;
 export default AuthSlice.reducer;

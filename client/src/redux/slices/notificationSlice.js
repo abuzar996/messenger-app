@@ -19,7 +19,6 @@ const notificationSlice = createSlice({
       state.notification.push({ ...action.payload, id: createUUID() });
     },
     removeAllNotifications: (state) => {
-      console.log(state.notification.length);
       state.notification = [];
     },
     removeNotification: (state, action) => {

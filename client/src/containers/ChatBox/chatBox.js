@@ -9,9 +9,9 @@ import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 
-import { io } from "socket.io-client";
+//import { io } from "socket.io-client";
 
-const socket = io("ws://localhost:3000");
+//const socket = io("ws://localhost:3000");
 
 const ChatBox = () => {
   const { id } = useParams();
@@ -57,11 +57,11 @@ const ChatBox = () => {
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
-  useEffect(() => {
-    socket.on("connect", () => console.log(socket.id));
-  }, []);
+  // useEffect(() => {
+  //   socket.on("connect", () => console.log(socket.id));
+  // }, []);
   function onSendClick() {
-    socket.emit("send", "a message has been sent to You");
+    //socket.emit("send", "a message has been sent to You");
     if (newMessage.length) {
       let temp = newMessage?.trim();
       if (temp.length) {

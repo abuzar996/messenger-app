@@ -3,29 +3,35 @@ import { useSelector } from "react-redux";
 import AppHeader from "./containers/AppHeader";
 import Notification from "./components/Notifications/notificationContainer";
 import { useDispatch } from "react-redux";
+import Loader from "./components/Loader";
 import {
   removeAllNotifications,
-  addNotification,
+  //addNotification,
 } from "../src/redux/slices/notificationSlice";
 //import { setIsMounted } from "../src/redux/slices/appSettingSlice";
 import HomeLayout from "./containers/Home/homeLayout";
 import { useEffect } from "react";
+import { getUser } from "./redux/slices/userSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const { email } = useSelector((state) => state.authReducer);
+  const userData = useSelector((state) => state.user);
   const { darkmode, isMounted } = useSelector((state) => state.appReducer);
-
   useEffect(() => {
-    //console.log(isMounted);
+    if (email) {
+      dispatch(getUser(email));
+    }
+  }, [email, dispatch]);
+  useEffect(() => {
     dispatch(removeAllNotifications());
-
-    dispatch(
-      addNotification({
-        message: "User Login Successfull",
-        type: "Success",
-        timeOut: 3000,
-      })
-    );
+    // dispatch(
+    //   addNotification({
+    //     message: "User Login Successfull",
+    //     type: "Success",
+    //     timeOut: 3000,
+    //   })
+    // );
   }, [dispatch, isMounted]);
   return (
     <>
@@ -36,6 +42,7 @@ function App() {
             : "theme-light custom-fonts App uniform-colors"
         }
       >
+        {userData.loading && <Loader />}
         <AppHeader />
         <div className="fixed-app-layout">
           <div className="home-layout">

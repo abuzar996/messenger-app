@@ -1,10 +1,11 @@
 const path = require("path");
-
+const cors = require("cors");
 const express = require("express");
 const userRouter = require("./Node/routes/user/user.routes");
 require("dotenv").config();
 const app = express();
 
+app.use(cors({ origin: "http://localhost/3000" }));
 app.use(express.static(path.join(__dirname, "..", "server", "public")));
 app.use(express.json());
 

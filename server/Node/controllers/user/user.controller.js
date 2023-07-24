@@ -67,10 +67,10 @@ const userlogin = async (req, res) => {
     const user = await loginUser(email, password);
     if (user) {
       if (user.message) {
-        res.status(401).json(user.message);
+        res.status(401).json({ message: user.message });
       } else if (!user.message) {
         let token = jwt.sign(user, "secretKey");
-        res.send(token);
+        res.send({ authToken: token, email: email });
       }
     }
   } catch (err) {

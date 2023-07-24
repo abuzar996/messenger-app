@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./signIn.styles.css";
 import "../../App.css";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { validateForm, signInForm, NormalizeErrors, getErrors } from "./formik";
 import { addNotification } from "../../redux/slices/notificationSlice";
 import { loginUser as signIn } from "../../redux/slices/authSlice.js";
 import useErrors from "./useErrors";
 const Form = () => {
   const dispatch = useDispatch();
-
+  const { error } = useSelector((state) => state.authReducer);
   const [errorList, setErrorList] = useState(null);
   const { emailError, passwordError } = useErrors(errorList);
+
+  useEffect(() => {
+    if (error) {
+      dispatch(
+        addNotification({ message: error, type: "Error", timeOut: 3000 })
+      );
+    }
+  }, [error, dispatch]);
 
   const submitForm = (values) => {
     let errors = validateForm(values);
@@ -44,13 +52,8 @@ const Form = () => {
 
   const loginUser = () => {
     dispatch(
-      addNotification({
-        message: "Login Successful",
-        type: "Success",
-        timeOut: 5000,
-      })
+      signIn({ email: formik.values.email, password: formik.values.password })
     );
-    dispatch(signIn());
   };
 
   const formik = useFormik({
