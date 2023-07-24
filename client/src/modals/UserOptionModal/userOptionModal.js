@@ -15,7 +15,6 @@ const UserOptionModal = ({ modalOpen }) => {
   useKeys("Escape", closeFn);
   function onSettingsClicked() {}
   function onLogoutClicked() {
-    console.log("hello wolrd");
     dispatch(logoutUser());
     navigate("/signIn");
   }

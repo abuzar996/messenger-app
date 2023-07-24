@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
-
+import { loginWithToken } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useDimentions } from "../../hooks/useDimentions";
 import { removeAllNotifications } from "../../redux/slices/notificationSlice";
@@ -14,9 +14,7 @@ const SignIn = () => {
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
-  useEffect(() => {
-    dispatch(removeAllNotifications());
-  }, [dispatch]);
+
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
@@ -36,11 +34,19 @@ const SignIn = () => {
   }, [windowSize]);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      let token = localStorage.getItem("Token");
+      if (token) {
+        dispatch(loginWithToken());
+      }
+    }
     if (isAuthenticated === true) {
       navigate("/home");
     }
-  }, [navigate, isAuthenticated]);
-
+  }, [navigate, isAuthenticated, dispatch]);
+  useEffect(() => {
+    dispatch(removeAllNotifications());
+  }, [dispatch]);
   function onSignUpClick() {
     navigate("/signup");
   }

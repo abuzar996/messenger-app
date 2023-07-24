@@ -15,14 +15,12 @@ import { getUser } from "./redux/slices/userSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const { email } = useSelector((state) => state.authReducer);
   const userData = useSelector((state) => state.user);
   const { darkmode, isMounted } = useSelector((state) => state.appReducer);
   useEffect(() => {
-    if (email) {
-      dispatch(getUser(email));
-    }
-  }, [email, dispatch]);
+    let email = localStorage.getItem("Email");
+    dispatch(getUser(email));
+  }, [dispatch]);
   useEffect(() => {
     dispatch(removeAllNotifications());
     // dispatch(

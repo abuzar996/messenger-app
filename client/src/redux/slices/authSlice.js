@@ -19,8 +19,12 @@ const AuthSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    loginWithToken: (state) => {
+      state.isAuthenticated = true;
+    },
     logoutUser: (state) => {
       state.isAuthenticated = false;
+      localStorage.removeItem("Token");
     },
   },
   extraReducers: (builder) => {
@@ -34,6 +38,7 @@ const AuthSlice = createSlice({
         state.email = action.payload.data.email;
         state.error = "";
         localStorage.setItem("Token", action.payload.data.authToken);
+        localStorage.setItem("Email", action.payload.data.email);
       } else if (action.payload.status === 400) {
         state.isAuthenticated = false;
         state.error = "Cannot Login";
@@ -50,5 +55,5 @@ const AuthSlice = createSlice({
     });
   },
 });
-export const { logoutUser } = AuthSlice.actions;
+export const { logoutUser, loginWithToken } = AuthSlice.actions;
 export default AuthSlice.reducer;
