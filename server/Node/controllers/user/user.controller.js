@@ -60,7 +60,6 @@ const createNewUser = async (req, res) => {
 };
 
 const userlogin = async (req, res) => {
-  console.log("hello I'm in here");
   const email = req.body.email;
   const password = req.body.password;
 

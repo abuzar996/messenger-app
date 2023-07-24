@@ -3,6 +3,7 @@ const {
   loginBody,
   searhUserByNameSchema,
   searhUserByIdSchema,
+  searhUserByEmailSchema,
 } = require("../validators/user.validatior");
 const { user } = require("../modal/user/user.modal");
 const { verifyUser } = require("../services/user.services");
@@ -44,7 +45,6 @@ const validateUserRequestBody = async (req, res, next) => {
 };
 
 const validateLoginRequestBody = async (req, res, next) => {
-  console.log("I'm in validation middleware");
   try {
     await loginBody.validateAsync({
       email: req.body.email,
@@ -93,11 +93,21 @@ const validateSearchUserByiD = async (req, res, next) => {
     res.status(409).send({ message: err.message });
   }
 };
+const validateSearchUserByEmail = async (req, res, next) => {
+  const { email } = req.params;
+  try {
+    await searhUserByEmailSchema.validateAsync({ email });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 module.exports = {
   validateSearchUserByiD,
   validateUserRequestBody,
   validateLoginRequestBody,
   validateSearchUserByName,
+  validateSearchUserByEmail,
   userExists,
   userDoesNotExists,
   isAuthenticated,

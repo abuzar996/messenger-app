@@ -5,12 +5,14 @@ const {
   searchUserById,
   getAllUsers,
   getUserByName,
+  searchAUserByEmail,
 } = require("../../controllers/user/user.controller.js");
 const {
   userExists,
   validateUserRequestBody,
   validateLoginRequestBody,
   validateSearchUserByName,
+  validateSearchUserByEmail,
   validateSearchUserByiD,
   userDoesNotExists,
   isAuthenticated,
@@ -25,11 +27,12 @@ userRouter.get(
   validateSearchUserByiD,
   searchUserById
 );
-// userRouter.get(
-//   "/get-user-by-email/:email",
-//   checkEmailRequest,
-//   userController.searchAUserByEmail
-// );
+userRouter.get(
+  "/get-user-by-email/:email",
+  isAuthenticated,
+  validateSearchUserByEmail,
+  searchAUserByEmail
+);
 userRouter.post(
   "/add-user",
   validateUserRequestBody,

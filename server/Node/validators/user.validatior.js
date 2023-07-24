@@ -26,9 +26,14 @@ const searhUserByNameSchema = Joi.object({ name: Joi.string().required() });
 const searhUserByIdSchema = Joi.object({
   userId: Joi.string().required(),
 });
+
+const searhUserByEmailSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
 module.exports = {
   createUser: schema,
   loginBody: loginBody,
+  searhUserByEmailSchema: searhUserByEmailSchema,
   searhUserByNameSchema: searhUserByNameSchema,
   searhUserByIdSchema: searhUserByIdSchema,
 };
