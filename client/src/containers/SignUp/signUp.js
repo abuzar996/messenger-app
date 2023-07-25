@@ -5,13 +5,20 @@ import Form from "./form";
 import "./signUp.styles.css";
 import "../../App.css";
 import { useDispatch } from "react-redux";
-import { removeAllNotifications } from "../../redux/slices/notificationSlice";
+import {
+  removeAllNotifications,
+  addNotification,
+} from "../../redux/slices/notificationSlice";
+
+import { refreshState } from "../../redux/slices/userSlice";
+
 import { useDimentions } from "../../hooks/useDimentions";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const { darkmode } = useSelector((state) => state.appReducer);
-  const { isAuthenticated } = useSelector((state) => state.authReducer);
+
+  const { error, success } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const windowSize = useDimentions();
   const pageRef = useRef(null);
@@ -19,13 +26,32 @@ const SignUp = () => {
   const [topVal, setTopVal] = useState(null);
   const [leftVal, setLeftVal] = useState(null);
   useEffect(() => {
+    if (error !== "")
+      dispatch(
+        addNotification({
+          message: error,
+          type: "Error",
+          timeOut: "3000",
+        })
+      );
+  }, [error, dispatch]);
+  useEffect(() => {
+    if (success) {
+      dispatch(
+        addNotification({
+          message: "User Created",
+          type: "Success",
+          timeOut: 3000,
+        })
+      );
+      dispatch(refreshState());
+      navigate("/signIn");
+    }
+  }, [success, dispatch, navigate]);
+  useEffect(() => {
     dispatch(removeAllNotifications());
   }, [dispatch]);
-  useEffect(() => {
-    if (isAuthenticated === true) {
-      navigate("/home");
-    }
-  }, [navigate, isAuthenticated]);
+
   useEffect(() => {
     if (pageRef) {
       const pageWidth = pageRef.current.clientWidth;

@@ -5,16 +5,15 @@ const initialState = {
   user: {},
   loading: false,
   error: "",
+  success: false,
 };
 
 export const addnewUser = createAsyncThunk("addnewUser", async (user) => {
-  console.log(user);
-  //console.log(user);
   const response = await axios
     .post(`${API}/users/add-user`, user)
     .then((response) => response)
     .catch((error) => error.response);
-  console.log(response);
+
   return response;
 });
 
@@ -30,12 +29,16 @@ export const getUser = createAsyncThunk("getUser", async (email) => {
 const userSlice = createSlice({
   name: "User",
   initialState,
+  reducers: {
+    refreshState: (state) => {
+      state.success = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUser.pending, (state, action) => {
       state.loading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      console.log("hello from getUser");
       state.loading = false;
       if (action.payload.status === 200) {
         state.user = action.payload.data;
@@ -51,6 +54,12 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addnewUser.fulfilled, (state, action) => {
+      if (action.payload.status === 201) {
+        state.success = true;
+      } else {
+        state.error = action.payload.data.message || "Something Went Wrong";
+        state.success = false;
+      }
       state.loading = false;
     });
     builder.addCase(addnewUser.rejected, (state, action) => {
@@ -59,4 +68,5 @@ const userSlice = createSlice({
     });
   },
 });
+export const { refreshState } = userSlice.actions;
 export default userSlice.reducer;

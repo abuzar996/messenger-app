@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import Form from "./form";
-import { useNavigate } from "react-router-dom";
-//import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
-import { loginWithToken } from "../../redux/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+
+import Form from "./form";
+
 import { useDimentions } from "../../hooks/useDimentions";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { loginWithToken } from "../../redux/slices/authSlice";
 import { removeAllNotifications } from "../../redux/slices/notificationSlice";
+
 const SignIn = () => {
   const dispatch = useDispatch();
   const { darkmode } = useSelector((state) => state.appReducer);
@@ -41,12 +45,11 @@ const SignIn = () => {
       }
     }
     if (isAuthenticated === true) {
+      dispatch(removeAllNotifications());
       navigate("/app/home");
     }
   }, [navigate, isAuthenticated, dispatch]);
-  useEffect(() => {
-    dispatch(removeAllNotifications());
-  }, [dispatch]);
+
   function onSignUpClick() {
     navigate("/signup");
   }
