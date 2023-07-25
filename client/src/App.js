@@ -8,7 +8,7 @@ import {
   removeAllNotifications,
   //addNotification,
 } from "../src/redux/slices/notificationSlice";
-//import { setIsMounted } from "../src/redux/slices/appSettingSlice";
+
 import HomeLayout from "./containers/Home/homeLayout";
 import { useEffect } from "react";
 import { getUser } from "./redux/slices/userSlice";

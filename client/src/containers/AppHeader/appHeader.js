@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./appHeader.styles.css";
 
@@ -11,11 +11,12 @@ import { Switch } from "@mui/material";
 
 import profile from "../../images/profile.jpg";
 import SearchModal from "../../modals/SearchModal";
-
+import UserProfileModal from "../../modals/UserProfileModal";
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { useDimentions } from "../../hooks/useDimentions";
 
+import { searchUsers } from "../../redux/slices/searchSlice";
 import { changeTheme } from "../../redux/slices/appSettingSlice";
 const AppHeader = () => {
   const darkmode = useSelector((state) => state.appReducer.darkmode);
@@ -25,6 +26,22 @@ const AppHeader = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(true);
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    let timer;
+
+    timer = setTimeout(() => {
+      dispatch(searchUsers(searchValue));
+    }, 300);
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [searchValue, dispatch]);
 
   function onInputChange(e) {
     setSearchValue(e.target.value);
@@ -36,8 +53,18 @@ const AppHeader = () => {
   function changeAppTheme() {
     dispatch(changeTheme());
   }
+  function handleUserClick(user) {
+    if (user) {
+      setProfileData(user);
+      setProfileModalOpen(true);
+      setSearchValue("");
+    }
+  }
   return (
     <Header>
+      {profileModalOpen && (
+        <UserProfileModal setModalOpen={setProfileModalOpen} {...profileData} />
+      )}
       {searchFocused ? (
         <SearchModal
           width={+localStorage.getItem("search_width")}
@@ -45,6 +72,7 @@ const AppHeader = () => {
           left={+localStorage.getItem("search_x")}
           top={+localStorage.getItem("search_y")}
           modalOpen={setSearchFocused}
+          handleUserClick={handleUserClick}
         />
       ) : null}
 
@@ -87,9 +115,6 @@ const AppHeader = () => {
       </div>
       <div className="theme-container">
         <div className="theme-inner-container">
-          {/* <div className="theme-label">
-            <label></label>
-          </div> */}
           <div style={{ paddingRight: "10px" }}>
             <Switch
               className="switch-button"

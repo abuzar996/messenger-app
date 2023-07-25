@@ -2,15 +2,26 @@ import React from "react";
 import "./searchModal.styles.css";
 
 import SearchList from "./searchList";
+import Overlay from "../../components/Overlay";
 
-const SearchModal = ({ modalOpen, width, left, height, top }) => {
+const SearchModal = ({
+  modalOpen,
+  width,
+  left,
+  height,
+  top,
+  users,
+  handleUserClick,
+}) => {
   return (
-    <div
-      style={{ left: left, width: width, top: height + top + 4 }}
-      className="search-modal-area-container"
-    >
-      <SearchList />
-    </div>
+    <Overlay modalOpen={modalOpen}>
+      <div
+        style={{ left: left, width: width, top: height + top + 4 }}
+        className="search-modal-area-container"
+      >
+        <SearchList users={users} handleUserClick={handleUserClick} />
+      </div>
+    </Overlay>
   );
 };
 

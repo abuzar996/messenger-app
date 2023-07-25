@@ -13,7 +13,7 @@ const userModal = [
   },
   {
     userId: 3,
-    firstname: "abuzar",
+    firstname: "Abuzar",
     lastname: "Doe",
     email: "John.doe@gmail.com",
   },

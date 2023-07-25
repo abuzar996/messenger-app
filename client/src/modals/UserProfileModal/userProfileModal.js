@@ -9,13 +9,13 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 
-const UserProfileModal = ({ setModalOpen }) => {
+const UserProfileModal = ({ setModalOpen, firstname, lastname, email }) => {
   return (
     <Overlay modalOpen={setModalOpen}>
       <div className="user-profile-modal-container">
         <div className="user-profile-header">
           <div>
-            <label>Abuzar Rahim</label>
+            <label>{`${firstname} ${lastname}`}</label>
           </div>
           <div>
             <PersonAddIcon className="user-profile-add-icon" />
@@ -30,7 +30,7 @@ const UserProfileModal = ({ setModalOpen }) => {
               <PersonIcon className="user-profile-add-icon" />
             </div>
             <div>
-              <label className="user-profile-label">abuzar.rahim.1</label>
+              <label className="user-profile-label">{email}</label>
             </div>
           </div>
         </div>
