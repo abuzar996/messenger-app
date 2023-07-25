@@ -198,6 +198,28 @@ export const data = [
       opened: false,
     },
   },
+  {
+    userId: 13,
+    firstname: "Jhon",
+    lastname: "Doe",
+    lastMessage: {
+      user2: "I'm good",
+      messageId: 15,
+      reply: 10,
+      opened: false,
+    },
+  },
+  {
+    userId: 14,
+    firstname: "Jhon",
+    lastname: "Doe",
+    lastMessage: {
+      user2: "I'm good",
+      messageId: 15,
+      reply: 10,
+      opened: false,
+    },
+  },
 ];
 export const updateData = (id) => {
   return (data[id].lastMessage.opened = true);

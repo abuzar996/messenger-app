@@ -28,7 +28,6 @@ const ListData = ({
   });
 
   function onMessageClick(data) {
-    console.log(data);
     setList(
       list.map((item) =>
         item.userId === data.userId
@@ -42,7 +41,7 @@ const ListData = ({
           : item
       )
     );
-    navigate(`messages/${data.userId}`);
+    navigate(`/app/messages/${data.userId}`);
   }
   return (
     <div

@@ -4,8 +4,9 @@ import axios from "axios";
 import NotificationContainer from "../../components/Notifications/notificationContainer";
 
 const Applayout = () => {
+  console.log("Applayout");
   const [isServerReachable, setServerReachable] = useState(false);
-
+  const [isOnline, setOnline] = useState(true);
   const checkServerStatus = async () => {
     await axios
       .get("http://localhost:3001")
@@ -18,13 +19,26 @@ const Applayout = () => {
         setServerReachable(false);
       });
   };
+  const handleOnlineState = () => {
+    setOnline(true);
+  };
+  const handleOfflineState = () => {
+    setOnline(false);
+  };
   useEffect(() => {
     checkServerStatus();
   });
-
+  useEffect(() => {
+    window.addEventListener("online", handleOnlineState);
+    window.addEventListener("offline", handleOfflineState);
+    return () => {
+      window.removeEventListener("online", handleOnlineState);
+      window.removeEventListener("offline", handleOfflineState);
+    };
+  }, []);
   return (
     <>
-      {isServerReachable ? (
+      {isServerReachable && isOnline ? (
         <>
           <div>
             <Outlet />

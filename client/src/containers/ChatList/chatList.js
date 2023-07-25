@@ -49,7 +49,7 @@ const ChatList = () => {
   }, [scrollValue, windowSize, optionModalOpen]);
 
   useEffect(() => {
-    if (windowSize.width <= 500) {
+    if (windowSize.width <= 600) {
       setMobileSize(true);
     } else {
       setMobileSize(false);

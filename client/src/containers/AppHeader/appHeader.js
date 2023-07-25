@@ -110,7 +110,7 @@ const AppHeader = () => {
       <div className="theme-container">
         <div className="theme-inner-container">
           <div style={{ paddingRight: "10px" }}>
-            <div className="logo-item" style={{ borderRadius: "5px" }}>
+            <div className="logo-item-new">
               <label>{user.firstname}</label>
             </div>
           </div>

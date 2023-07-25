@@ -8,7 +8,7 @@ const HomeLayout = () => {
   const dimentions = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   useEffect(() => {
-    if (dimentions.width <= 500) {
+    if (dimentions.width <= 600) {
       setMobileSize(true);
     } else {
       setMobileSize(false);

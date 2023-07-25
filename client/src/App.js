@@ -13,6 +13,7 @@ function App() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   const { darkmode } = useSelector((state) => state.appReducer);
+
   useEffect(() => {
     let email = localStorage.getItem("Email");
     dispatch(getUser(email));
