@@ -4,10 +4,7 @@ import AppHeader from "./containers/AppHeader";
 import Notification from "./components/Notifications/notificationContainer";
 import { useDispatch } from "react-redux";
 import Loader from "./components/Loader";
-import {
-  removeAllNotifications,
-  //addNotification,
-} from "../src/redux/slices/notificationSlice";
+import { removeAllNotifications } from "../src/redux/slices/notificationSlice";
 
 import HomeLayout from "./containers/Home/homeLayout";
 import { useEffect } from "react";

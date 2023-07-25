@@ -6,9 +6,6 @@ import Search from "../../components/Search";
 import Header from "../../components/Header/header";
 import UserOptionModal from "../../modals/UserOptionModal/userOptionModal";
 import SelectUserModal from "../../modals/SelectUserModal/selectUserModal";
-
-import { Switch } from "@mui/material";
-
 import profile from "../../images/profile.jpg";
 import SearchModal from "../../modals/SearchModal";
 import UserProfileModal from "../../modals/UserProfileModal";
@@ -17,18 +14,18 @@ import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { useDimentions } from "../../hooks/useDimentions";
 
 import { searchUsers } from "../../redux/slices/searchSlice";
-import { changeTheme } from "../../redux/slices/appSettingSlice";
+
 const AppHeader = () => {
-  const darkmode = useSelector((state) => state.appReducer.darkmode);
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+
   useDimentions();
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
-  const [profileModalOpen, setProfileModalOpen] = useState(true);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [profileData, setProfileData] = useState(null);
-
   useEffect(() => {
     let timer;
 
@@ -49,9 +46,6 @@ const AppHeader = () => {
   function refresh() {
     setSearchValue("");
     setSearchFocused(false);
-  }
-  function changeAppTheme() {
-    dispatch(changeTheme());
   }
   function handleUserClick(user) {
     if (user) {
@@ -116,14 +110,9 @@ const AppHeader = () => {
       <div className="theme-container">
         <div className="theme-inner-container">
           <div style={{ paddingRight: "10px" }}>
-            <Switch
-              className="switch-button"
-              checked={darkmode}
-              value={darkmode}
-              onChange={() => {
-                changeAppTheme();
-              }}
-            />
+            <div className="logo-item" style={{ borderRadius: "5px" }}>
+              <label>{user.firstname}</label>
+            </div>
           </div>
           <div className="display-div">
             <img className="display-image" src={profile} alt={"user"} />

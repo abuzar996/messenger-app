@@ -1,6 +1,6 @@
 import React from "react";
 import "./userOptionModal.styles.css";
-
+import { useSelector } from "react-redux";
 import { useKeys } from "../../hooks/useKeys";
 import { Checkbox } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/authSlice";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import { changeTheme } from "../../redux/slices/appSettingSlice";
 const UserOptionModal = ({ modalOpen }) => {
+  const { darkmode } = useSelector((state) => state.appReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useKeys("Escape", closeFn);
@@ -36,7 +37,15 @@ const UserOptionModal = ({ modalOpen }) => {
           <label>Logout</label>
         </div>
         <div className="user-option-modal-body">
-          <Checkbox style={{ width: "20px" }} color="default" size="small" />
+          <Checkbox
+            style={{ width: "20px" }}
+            color="default"
+            size="small"
+            checked={darkmode}
+            onChange={() => {
+              dispatch(changeTheme());
+            }}
+          />
           <label>Dark Theme</label>
         </div>
         <div className="user-option-close-button">

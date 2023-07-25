@@ -22,7 +22,7 @@ const ChatHeader = ({
     setSearchValue("");
   }
   function onBackClick() {
-    navigate("/home");
+    navigate("/app/home");
   }
   return (
     <div className="chat-header">

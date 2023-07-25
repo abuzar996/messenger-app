@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-//import NotificationContainer from "./components/Notifications/notificationContainer";
+import Applayout from "./containers/appLayout";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -21,40 +21,47 @@ import Error from "./containers/Error";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Applayout />,
     errorElement: <Error />,
-    element: (
-      <AuthUser>
-        <App />
-      </AuthUser>
-    ),
     children: [
       {
-        path: "messages/:id",
-        element: <ChatBox />,
+        path: "/app",
+        errorElement: <Error />,
+        element: (
+          <AuthUser>
+            <App />
+          </AuthUser>
+        ),
+        children: [
+          {
+            path: "messages/:id",
+            element: <ChatBox />,
+          },
+          { path: "home", element: <Home /> },
+          { index: true, element: <Navigate to="home" /> },
+        ],
       },
-      { path: "home", element: <Home /> },
-      { index: true, element: <Navigate to="/home" /> },
+      {
+        index: true,
+        element: <Navigate to="app" />,
+      },
+      {
+        path: "signIn",
+        errorElement: <Error />,
+        element: <SignIn />,
+      },
+      {
+        path: "signUp",
+        errorElement: <Error />,
+        element: <SignUp />,
+      },
     ],
-  },
-  {
-    path: "/signIn",
-    errorElement: <Error />,
-    element: <SignIn />,
-  },
-  {
-    path: "/signUp",
-    errorElement: <Error />,
-    element: <SignUp />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router}>
-      <AuthUser>
-        <App />
-      </AuthUser>
-    </RouterProvider>
+    <RouterProvider router={router}></RouterProvider>
   </Provider>
 );
 

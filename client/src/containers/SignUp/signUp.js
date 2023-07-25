@@ -7,9 +7,10 @@ import "../../App.css";
 import { useDispatch } from "react-redux";
 import { removeAllNotifications } from "../../redux/slices/notificationSlice";
 import { useDimentions } from "../../hooks/useDimentions";
-import NotificationContainer from "../../components/Notifications/notificationContainer";
+
 const SignUp = () => {
   const dispatch = useDispatch();
+  const { darkmode } = useSelector((state) => state.appReducer);
   const { isAuthenticated } = useSelector((state) => state.authReducer);
   const navigate = useNavigate();
   const windowSize = useDimentions();
@@ -39,10 +40,10 @@ const SignUp = () => {
   function onSignInClick() {
     navigate("/signIn");
   }
-
+  let classname = darkmode ? "theme-dark" : "theme-light";
   return (
     <>
-      <div className="theme-dark custom-fonts App uniform-colors">
+      <div className={`${classname} custom-fonts App uniform-colors`}>
         <div ref={pageRef} className="sign-up-page-container">
           <div
             ref={modalRef}
@@ -63,7 +64,6 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <NotificationContainer />
     </>
   );
 };

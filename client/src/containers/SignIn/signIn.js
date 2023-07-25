@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Form from "./form";
 import { useNavigate } from "react-router-dom";
-import Notification from "../../components/Notifications/notificationContainer";
+//import Notification from "../../components/Notifications/notificationContainer";
 import "./signIn.styles.css";
 import "../../App.css";
 import { loginWithToken } from "../../redux/slices/authSlice";
@@ -41,7 +41,7 @@ const SignIn = () => {
       }
     }
     if (isAuthenticated === true) {
-      navigate("/home");
+      navigate("/app/home");
     }
   }, [navigate, isAuthenticated, dispatch]);
   useEffect(() => {
@@ -76,7 +76,6 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <Notification />
     </>
   );
 };

@@ -41,7 +41,7 @@ const ListData = ({
           : item
       )
     );
-    navigate(`/messages/${data.userId}`);
+    navigate(`messages/${data.userId}`);
   }
   return (
     <div

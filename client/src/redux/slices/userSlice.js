@@ -6,6 +6,18 @@ const initialState = {
   loading: false,
   error: "",
 };
+
+export const addnewUser = createAsyncThunk("addnewUser", async (user) => {
+  console.log(user);
+  //console.log(user);
+  const response = await axios
+    .post(`${API}/users/add-user`, user)
+    .then((response) => response)
+    .catch((error) => error.response);
+  console.log(response);
+  return response;
+});
+
 export const getUser = createAsyncThunk("getUser", async (email) => {
   const response = await axios
     .get(`${API}/users/get-user-by-email/${email}`, {
@@ -23,6 +35,7 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
+      console.log("hello from getUser");
       state.loading = false;
       if (action.payload.status === 200) {
         state.user = action.payload.data;
@@ -32,6 +45,17 @@ const userSlice = createSlice({
     builder.addCase(getUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    });
+
+    builder.addCase(addnewUser.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(addnewUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(addnewUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = "Something Went Wrong";
     });
   },
 });

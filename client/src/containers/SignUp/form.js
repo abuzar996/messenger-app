@@ -3,7 +3,7 @@ import "./signUp.styles.css";
 import { useDispatch } from "react-redux";
 import { addNotification } from "../../redux/slices/notificationSlice";
 import { useFormik } from "formik";
-import { loginUser as signIn } from "../../redux/slices/authSlice.js";
+import { addnewUser } from "../../redux/slices/userSlice";
 import useErrors from "./useErrors.js";
 import {
   initialValues,
@@ -22,15 +22,16 @@ const Form = () => {
     confirmPasswordError,
   } = useErrors(errorList);
 
-  const loginUser = () => {
+  const addUser = (values) => {
+    const { firstname, lastname, email, password } = values;
     dispatch(
-      addNotification({
-        message: "Login Successful",
-        type: "Success",
-        timeOut: 5000,
+      addnewUser({
+        firstname,
+        lastname,
+        email,
+        password,
       })
     );
-    dispatch(signIn());
   };
   const submitForm = (values) => {
     let errors = validateForm(values);
@@ -56,7 +57,7 @@ const Form = () => {
         return;
       } else {
         //console.log("hello world");
-        loginUser();
+        addUser(values);
       }
       return;
     }
