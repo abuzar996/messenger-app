@@ -28,6 +28,7 @@ const ListData = ({
   });
 
   function onMessageClick(data) {
+    console.log(data);
     setList(
       list.map((item) =>
         item.userId === data.userId

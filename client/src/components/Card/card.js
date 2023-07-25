@@ -65,7 +65,7 @@ const Card = ({
               id="inner-option"
               fontSize="small"
               className="option "
-              onClick={onHandleClick}
+              onClick={(event) => onHandleClick(event, data)}
             />
           </div>
         </div>
