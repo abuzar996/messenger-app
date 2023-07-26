@@ -1,23 +1,20 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
 import { useDimentions } from "../../hooks/useDimentions";
 const ListData = ({
-  data,
   onClick,
   setOptionModalOpen,
   setScrollValue,
   mobileSize,
   searchFocus,
 }) => {
-  const [list, setList] = useState([...data]);
+  const { chatlist } = useSelector((state) => state.chats);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
-  useEffect(() => {
-    setList([...data]);
-  }, [data]);
   useEffect(() => {
     const element = reference.current;
     function scrollEvent() {
@@ -28,19 +25,19 @@ const ListData = ({
   });
 
   function onMessageClick(data) {
-    setList(
-      list.map((item) =>
-        item.userId === data.userId
-          ? {
-              ...item,
-              lastMessage: {
-                ...data.lastMessage,
-                opened: true,
-              },
-            }
-          : item
-      )
-    );
+    // setList(
+    //   list.map((item) =>
+    //     item.userId === data.userId
+    //       ? {
+    //           ...item,
+    //           lastMessage: {
+    //             ...data.lastMessage,
+    //             opened: true,
+    //           },
+    //         }
+    //       : item
+    //   )
+    // );
     navigate(`/app/messages/${data.userId}`);
   }
   return (
@@ -49,10 +46,9 @@ const ListData = ({
       style={mobileSize ? { borderBottomLeftRadius: "0" } : null}
       ref={reference}
     >
-      {list.length > 0 ? (
-        list.map((value, index) => (
+      {chatlist.length > 0 ? (
+        chatlist.map((value, index) => (
           <Card
-            setList={setList}
             onMessageClick={onMessageClick}
             key={index}
             {...value}

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./chatList.styles.css";
-
+import { useDispatch, useSelector } from "react-redux";
 import { data } from "../../constants/data";
 import TopNav from "../TopNav";
 import ListHeader from "../ListHeader";
@@ -8,8 +8,11 @@ import DeleteModal from "../../modals/DeleteModal/deleteModal";
 import ChatOptionModal from "../../modals/ChatOptionsModal";
 import ListData from "./listData";
 import { useDimentions } from "../../hooks/useDimentions";
+import { getChatList } from "../../redux/slices/chatSlice";
 
 const ChatList = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const refference = useRef(null);
   const [mobileSize, setMobileSize] = useState(false);
@@ -22,6 +25,11 @@ const ChatList = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const [userData, setUserData] = useState([...data]);
 
+  useEffect(() => {
+    if (user.userId) {
+      dispatch(getChatList(user.userId));
+    }
+  }, [dispatch, user]);
   useEffect(() => {
     if (searchValue) {
       let tempUserData = data.filter((user) =>

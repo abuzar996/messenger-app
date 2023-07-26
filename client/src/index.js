@@ -18,6 +18,7 @@ import AuthUser from "./containers/AuthUser";
 import SignIn from "./containers/SignIn";
 import SignUp from "./containers/SignUp";
 import Error from "./containers/Error";
+//require("dotenv").config();
 const router = createBrowserRouter([
   {
     path: "/",

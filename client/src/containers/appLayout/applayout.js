@@ -5,6 +5,7 @@ import NotificationContainer from "../../components/Notifications/notificationCo
 import useStatus from "../../hooks/useStatus";
 
 const Applayout = () => {
+  //console.log(process.env.REACT_APP_URL);
   const isServerReachable = useStatus();
   const [isOnline, setOnline] = useState(true);
 

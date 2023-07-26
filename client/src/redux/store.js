@@ -4,6 +4,7 @@ import authReducer from "./slices/authSlice";
 import notificationReducer from "./slices/notificationSlice";
 import userReducer from "./slices/userSlice";
 import searchReducer from "./slices/searchSlice";
+import chatReducer from "./slices/chatSlice";
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -15,5 +16,6 @@ export const store = configureStore({
     notify: notificationReducer,
     user: userReducer,
     search: searchReducer,
+    chats: chatReducer,
   },
 });
