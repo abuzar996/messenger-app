@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-import Applayout from "./containers/appLayout";
+import Applayout from "./containers/AppLayout";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
