@@ -1,4 +1,4 @@
-.error-container {
+.server-error-container {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -6,30 +6,30 @@
   justify-content: center;
   align-items: center;
 }
-.error-route-container {
+.server-error-route-container {
   display: flex;
   flex-direction: column;
   row-gap: 2vh;
 }
-.big-label {
+.server-big-label {
   color: var(--secondary);
   font-size: 40px;
   font-weight: bolder;
 }
-.label-inner {
+.server-label-inner {
   color: var(--secondary);
   font-size: large;
   font-weight: bold;
 }
-.error-no-found {
+.server-error-no-found {
   display: flex;
   justify-content: center;
 }
-.button-div-go-back {
+.server-server-button-div-go-back {
   display: flex;
   justify-content: center;
 }
-.button-go-back {
+.server-button-go-back {
   padding: 10px;
   font-size: var(--text);
   border-radius: 10px;
@@ -39,7 +39,7 @@
   justify-content: center;
   color: var(--primary);
 }
-.button-go-back:hover {
+.server-button-go-back:hover {
   border: 1px solid var(--secondary);
   background-color: var(--primary);
   color: var(--secondary);
