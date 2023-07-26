@@ -21,10 +21,13 @@ const AuthSlice = createSlice({
   reducers: {
     loginWithToken: (state) => {
       state.isAuthenticated = true;
+      state.email = localStorage.getItem("Email");
     },
     logoutUser: (state) => {
       state.isAuthenticated = false;
+      state.email = "";
       localStorage.removeItem("Token");
+      localStorage.removeItem("Email");
     },
   },
   extraReducers: (builder) => {

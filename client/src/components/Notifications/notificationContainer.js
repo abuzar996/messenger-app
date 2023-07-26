@@ -10,7 +10,9 @@ const NotificationContainer = () => {
   const notifications = useSelector((state) => state.notify.notification);
   const [notification, setNotification] = useState(notifications);
   useEffect(() => {
-    setNotification(notifications);
+    if (notifications.length > 0) {
+      setNotification(notifications);
+    }
   }, [notifications]);
 
   return (
