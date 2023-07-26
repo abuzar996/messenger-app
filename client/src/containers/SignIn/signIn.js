@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { loginWithToken } from "../../redux/slices/authSlice";
-import { removeAllNotifications } from "../../redux/slices/notificationSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -45,7 +44,6 @@ const SignIn = () => {
       }
     }
     if (isAuthenticated === true) {
-      dispatch(removeAllNotifications());
       navigate("/app/home");
     }
   }, [navigate, isAuthenticated, dispatch]);

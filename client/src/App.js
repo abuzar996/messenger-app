@@ -1,7 +1,6 @@
 import "./App.css";
 import { useSelector } from "react-redux";
 import AppHeader from "./containers/AppHeader";
-import Notification from "./components/Notifications/notificationContainer";
 import { useDispatch } from "react-redux";
 import Loader from "./components/Loader";
 
@@ -35,7 +34,6 @@ function App() {
           </div>
         </div>
       </div>
-      <Notification />
     </>
   );
 }

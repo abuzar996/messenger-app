@@ -5,10 +5,7 @@ import Form from "./form";
 import "./signUp.styles.css";
 import "../../App.css";
 import { useDispatch } from "react-redux";
-import {
-  removeAllNotifications,
-  addNotification,
-} from "../../redux/slices/notificationSlice";
+import { addNotification } from "../../redux/slices/notificationSlice";
 
 import { refreshState } from "../../redux/slices/userSlice";
 
@@ -48,9 +45,6 @@ const SignUp = () => {
       navigate("/signIn");
     }
   }, [success, dispatch, navigate]);
-  useEffect(() => {
-    dispatch(removeAllNotifications());
-  }, [dispatch]);
 
   useEffect(() => {
     if (pageRef) {
