@@ -19,7 +19,7 @@ const {
 } = require("../../middlewares/user.middlewares.js");
 const userRouter = express.Router();
 
-userRouter.get("/", isAuthenticated, getAllUsers);
+userRouter.get("/get-all-users", isAuthenticated, getAllUsers);
 
 userRouter.get(
   "/:userId",

@@ -39,7 +39,6 @@ const searchAUserByEmail = (req, res) => {
 };
 
 const createNewUser = async (req, res) => {
-  console.log("hello I'm here in createNewUser");
   const { firstname, lastname, email, password } = req.body;
   try {
     const salt = await bcrypt.genSalt();

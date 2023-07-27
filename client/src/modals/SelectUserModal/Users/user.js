@@ -4,7 +4,7 @@ import "./user.styles.css";
 import SendIcon from "@mui/icons-material/Send";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-const User = () => {
+const User = ({ firstname, lastname }) => {
   return (
     <div className="modal-user-container">
       <div>
@@ -15,10 +15,12 @@ const User = () => {
             alt={"user"}
           />
         </div>
+
         <div className="option-label-div">
-          <label className="option-label">Abuzar Rahim</label>
+          <label className="option-label">{`${firstname} ${lastname}`}</label>
         </div>
       </div>
+
       <div className="option-icons">
         <div>
           <PersonAddIcon className="option-icon-select" />

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/authSlice";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { removeAllUsers } from "../../redux/slices/userSlice";
 import { changeTheme } from "../../redux/slices/appSettingSlice";
 const UserOptionModal = ({ modalOpen }) => {
   const { darkmode } = useSelector((state) => state.appReducer);
@@ -17,6 +18,7 @@ const UserOptionModal = ({ modalOpen }) => {
   function onSettingsClicked() {}
   function onLogoutClicked() {
     dispatch(logoutUser());
+    dispatch(removeAllUsers());
     navigate("/signIn");
   }
   function closeFn() {

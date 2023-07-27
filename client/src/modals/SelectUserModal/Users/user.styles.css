@@ -5,6 +5,7 @@
   background-color: var(--secondary);
   border-bottom: 1px solid var(--primary);
   align-items: center;
+  justify-content: space-between;
   column-gap: 10vw;
 }
 .modal-user-container > div {
@@ -42,4 +43,11 @@
 }
 .option-icon-select:hover {
   color: var(--hover-modal);
+}
+.user-loader-styles-userslist {
+  flex-direction: row;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }

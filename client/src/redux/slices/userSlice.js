@@ -2,11 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const API = "http://localhost:3001";
 const initialState = {
+  listLoading: false,
+  usersList: [],
   user: {},
   loading: false,
   error: "",
   success: false,
 };
+
+export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
+  const response = await axios
+    .get(`${API}/users/get-all-users`, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  return response;
+});
 
 export const addnewUser = createAsyncThunk("addnewUser", async (user) => {
   const response = await axios
@@ -32,6 +45,9 @@ const userSlice = createSlice({
   reducers: {
     refreshState: (state) => {
       state.success = false;
+    },
+    removeAllUsers: (state) => {
+      state.usersList = [];
     },
   },
   extraReducers: (builder) => {
@@ -66,7 +82,24 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = "Something Went Wrong";
     });
+
+    builder.addCase(getAllUsers.pending, (state) => {
+      state.listLoading = true;
+      state.error = "";
+    });
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.listLoading = false;
+        state.usersList = action.payload.data.users;
+      } else {
+        state.listLoading = false;
+        state.error = "Something went wrong";
+      }
+    });
+    builder.addCase(getAllUsers.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
   },
 });
-export const { refreshState } = userSlice.actions;
+export const { refreshState, removeAllUsers } = userSlice.actions;
 export default userSlice.reducer;
