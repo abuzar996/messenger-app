@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useDimentions } from "../../hooks/useDimentions";
 const ListData = ({
   onClick,
@@ -11,7 +12,7 @@ const ListData = ({
   mobileSize,
   searchFocus,
 }) => {
-  const { chatlist } = useSelector((state) => state.chats);
+  const { chatlist, loading } = useSelector((state) => state.chats);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
@@ -46,7 +47,11 @@ const ListData = ({
       style={mobileSize ? { borderBottomLeftRadius: "0" } : null}
       ref={reference}
     >
-      {chatlist.length > 0 ? (
+      {loading ? (
+        <div className="loader-styles-list">
+          <CircularProgress color="success" />
+        </div>
+      ) : chatlist.length > 0 ? (
         chatlist.map((value, index) => (
           <Card
             onMessageClick={onMessageClick}

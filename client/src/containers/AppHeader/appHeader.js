@@ -28,10 +28,11 @@ const AppHeader = () => {
   const [profileData, setProfileData] = useState(null);
   useEffect(() => {
     let timer;
-
-    timer = setTimeout(() => {
-      dispatch(searchUsers(searchValue));
-    }, 300);
+    if (searchValue) {
+      timer = setTimeout(() => {
+        dispatch(searchUsers(searchValue));
+      }, 300);
+    }
 
     return () => {
       if (timer) {
