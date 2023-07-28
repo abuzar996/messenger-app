@@ -4,9 +4,14 @@ const {
   searhUserByNameSchema,
   searhUserByIdSchema,
   searhUserByEmailSchema,
+  addUserToFriendListSchema,
 } = require("../validators/user.validatior");
+
 const { user } = require("../modal/user/user.modal");
-const { verifyUser } = require("../services/user.services");
+const {
+  verifyUser,
+  searchAUserByIdcheck,
+} = require("../services/user.services");
 const userExists = (req, res, next) => {
   const { email } = req.body;
   const duplicateEmail = user.find((u) => u.email === email);
@@ -40,7 +45,31 @@ const validateUserRequestBody = async (req, res, next) => {
     });
     next();
   } catch (err) {
-    return res.status(400).send({ message: err });
+    return res.status(400).send({ message: err.message });
+  }
+};
+const validateAddToFriendList = async (req, res, next) => {
+  try {
+    const { friendId } = req.body;
+    await addUserToFriendListSchema.validateAsync({
+      friendId,
+    });
+    next();
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+};
+const verifyUsersAvailable = (req, res, next) => {
+  const { friendId } = req.body;
+  try {
+    let user = searchAUserByIdcheck(friendId);
+    if (user) {
+      next();
+    } else {
+      res.status(400).send({ message: "Bad request" });
+    }
+  } catch (err) {
+    res.status(404).send({ message: err.message });
   }
 };
 
@@ -52,7 +81,7 @@ const validateLoginRequestBody = async (req, res, next) => {
     });
     next();
   } catch (err) {
-    return res.status(400).send({ message: err });
+    return res.status(400).send({ message: err.message });
   }
 };
 
@@ -66,7 +95,7 @@ const isAuthenticated = (req, res, next) => {
       if (user.err) {
         res.send({ message: user.err });
       } else {
-        req.body = user;
+        req.body.user = user;
         next();
       }
     }
@@ -102,13 +131,26 @@ const validateSearchUserByEmail = async (req, res, next) => {
     res.status(409).send({ message: err.message });
   }
 };
+
+const checkIfNotYourSelf = (req, res, next) => {
+  const { friendId, user } = req.body;
+  let selfCheck = +friendId !== user.userId;
+  if (selfCheck) {
+    next();
+  } else {
+    res.status(403).send({ message: "You cannot add your self as a friend" });
+  }
+};
 module.exports = {
+  validateAddToFriendList,
   validateSearchUserByiD,
   validateUserRequestBody,
   validateLoginRequestBody,
   validateSearchUserByName,
   validateSearchUserByEmail,
+  verifyUsersAvailable,
   userExists,
   userDoesNotExists,
   isAuthenticated,
+  checkIfNotYourSelf,
 };

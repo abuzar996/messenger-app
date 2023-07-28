@@ -6,6 +6,8 @@ const {
   getAllUsers,
   getUserByName,
   searchAUserByEmail,
+  addUserToFriendList,
+  getUserFriends,
 } = require("../../controllers/user/user.controller.js");
 const {
   userExists,
@@ -14,15 +16,18 @@ const {
   validateSearchUserByName,
   validateSearchUserByEmail,
   validateSearchUserByiD,
+  validateAddToFriendList,
+  verifyUsersAvailable,
   userDoesNotExists,
   isAuthenticated,
+  checkIfNotYourSelf,
 } = require("../../middlewares/user.middlewares.js");
 const userRouter = express.Router();
 
 userRouter.get("/get-all-users", isAuthenticated, getAllUsers);
 
 userRouter.get(
-  "/:userId",
+  "/get-by-id/:userId",
   isAuthenticated,
   validateSearchUserByiD,
   searchUserById
@@ -52,4 +57,14 @@ userRouter.get(
   validateSearchUserByName,
   getUserByName
 );
+userRouter.post(
+  "/add-to-friend-list",
+  isAuthenticated,
+  validateAddToFriendList,
+  verifyUsersAvailable,
+  checkIfNotYourSelf,
+  addUserToFriendList
+);
+
+userRouter.get("/get-User-friends", isAuthenticated, getUserFriends);
 module.exports = userRouter;

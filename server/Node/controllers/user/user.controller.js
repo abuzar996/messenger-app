@@ -4,6 +4,9 @@ const {
   getUserById,
   getAllUsersExcept,
   findUsersByName,
+  addUserToFriend,
+  addUserBack,
+  fetchFriends,
 } = require("../../services/user.services");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -118,6 +121,31 @@ const getUserByName = (req, res) => {
   }
 };
 
+const addUserToFriendList = (req, res) => {
+  const { friendId, user: users } = req.body;
+  try {
+    addUserToFriend(+friendId, users.userId);
+    addUserBack(+friendId, users.userId);
+    res.status(200).send({ message: "Successfully Added" });
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
+
+const getUserFriends = (req, res) => {
+  const { user: users } = req.body;
+  try {
+    let friends = fetchFriends(users.userId);
+
+    if (friends) {
+      return res.status(200).send({ friends });
+    }
+
+    res.status(404).send({ message: "Not Found" });
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
 module.exports = {
   getUsers: getUsers,
   searchAUserByEmail: searchAUserByEmail,
@@ -126,4 +154,6 @@ module.exports = {
   searchUserById: searchUserById,
   getAllUsers: getAllUsers,
   getUserByName: getUserByName,
+  addUserToFriendList: addUserToFriendList,
+  getUserFriends: getUserFriends,
 };

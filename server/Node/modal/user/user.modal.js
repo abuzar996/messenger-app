@@ -37,6 +37,7 @@ const userModal = [
     lastname: "Henry",
     email: "chris@gmail.com",
     password: "$2b$10$zm8iX2YAMlumQ17ZdznFneENhg10e7mBswfL3LCBCuLZcB.2BnSFO",
+    friends: [],
   },
   {
     userId: 7,
@@ -44,6 +45,7 @@ const userModal = [
     lastname: "Phillips",
     email: "glen@gmail.com",
     password: "$2b$10$zm8iX2YAMlumQ17ZdznFneENhg10e7mBswfL3LCBCuLZcB.2BnSFO",
+    friends: [],
   },
 ];
 module.exports = {
