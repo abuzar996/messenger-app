@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./topNav.styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/header";
@@ -8,16 +8,24 @@ import {
   closeSendMessageModal,
 } from "../../redux/slices/appSettingSlice";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import { useDimentions } from "../../hooks/useDimentions";
 
 const TopNav = () => {
+  const windowSize = useDimentions();
+  const topNavRef = useRef();
   const dispatch = useDispatch();
   const { sendMessageModal } = useSelector((state) => state.appReducer);
 
   function closeModal() {
     dispatch(closeSendMessageModal());
   }
+
+  useEffect(() => {
+    localStorage.setItem("top-nav-height", topNavRef.current.clientHeight);
+  }, [windowSize]);
+
   return (
-    <div className="top-nav-container">
+    <div className="top-nav-container" ref={topNavRef}>
       {sendMessageModal ? (
         <SelectUserMessageModal modalOpen={closeModal} />
       ) : null}

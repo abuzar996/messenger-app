@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./listHeader.styles.css";
 
 import Header from "../../components/Header/header";
 import Search from "../../components/Search";
-
+import { useDimentions } from "../../hooks/useDimentions";
 const ListHeader = ({
   searchFocus,
   setSearchFocus,
   setSearchValue,
   searchValue,
 }) => {
+  const listRef = useRef();
+  const windowSize = useDimentions();
   function onInputChange(e) {
     if (setSearchValue) {
       setSearchValue(e.target.value);
@@ -20,8 +22,11 @@ const ListHeader = ({
       setSearchValue("");
     }
   }
+  useEffect(() => {
+    localStorage.setItem("list-header-height", listRef.current.clientHeight);
+  }, [windowSize]);
   return (
-    <div style={{ marginTop: "1px" }}>
+    <div style={{ marginTop: "1px" }} ref={listRef}>
       <Header>
         <div className="list-search-container">
           <div

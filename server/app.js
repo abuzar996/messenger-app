@@ -5,8 +5,8 @@ const userRouter = require("./Node/routes/user/user.routes");
 const chatsRouter = require("./Node/routes/chats/chats.routes");
 require("dotenv").config();
 const app = express();
-
-app.use(cors({ origin: "http://localhost/3000" }));
+//const origin = ["http://localhost/3000"];
+app.use(cors({ origin: true }));
 app.use(express.static(path.join(__dirname, "..", "server", "public")));
 app.use(express.json());
 

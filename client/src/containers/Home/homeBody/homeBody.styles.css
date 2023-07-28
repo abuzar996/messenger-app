@@ -28,3 +28,14 @@
   text-decoration: none;
   color: blueviolet;
 }
+.logo-img-theme-dark {
+  color: var(--secondary);
+  filter: invert(85%) sepia(12%) saturate(0%) hue-rotate(114deg) brightness(89%)
+    contrast(91%);
+}
+
+.logo-img-theme-light {
+  color: var(--secondary);
+  filter: invert(27%) sepia(25%) saturate(516%) hue-rotate(265deg)
+    brightness(98%) contrast(86%);
+}

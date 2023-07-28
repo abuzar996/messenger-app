@@ -13,6 +13,7 @@ const ListData = ({
   searchFocus,
 }) => {
   const { chatlist, loading } = useSelector((state) => state.chats);
+
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
@@ -44,7 +45,13 @@ const ListData = ({
   return (
     <div
       className="chat-list-inner-container"
-      style={mobileSize ? { borderBottomLeftRadius: "0" } : null}
+      style={
+        mobileSize
+          ? {
+              borderBottomLeftRadius: "0",
+            }
+          : null
+      }
       ref={reference}
     >
       {loading ? (
