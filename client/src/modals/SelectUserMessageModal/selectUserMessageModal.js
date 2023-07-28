@@ -1,9 +1,11 @@
 import React from "react";
 import "./selectUserMessageModal.styles.css";
-
+import { useDispatch } from "react-redux";
+import { closeSendMessageModal } from "../../redux/slices/appSettingSlice";
 import User from "./Users";
 import Overlay from "../../components/Overlay";
 const SelectUserMessageModal = ({ modalOpen }) => {
+  const dispatch = useDispatch();
   return (
     <Overlay modalOpen={modalOpen}>
       <div className="select-message-user-modal-container">
@@ -22,7 +24,9 @@ const SelectUserMessageModal = ({ modalOpen }) => {
         <div style={{ marginTop: "5px", padding: "10px" }}>
           <button
             className="select-message-user-close-button"
-            onClick={() => modalOpen(false)}
+            onClick={() => {
+              dispatch(closeSendMessageModal());
+            }}
           >
             Close
           </button>

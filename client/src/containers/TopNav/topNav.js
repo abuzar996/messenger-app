@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "./topNav.styles.css";
-
+import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/header";
 import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
-
+import {
+  openSendMessageModal,
+  closeSendMessageModal,
+} from "../../redux/slices/appSettingSlice";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 
 const TopNav = () => {
-  const [messageModalOpen, setMessageSelectModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { sendMessageModal } = useSelector((state) => state.appReducer);
+
+  function closeModal() {
+    dispatch(closeSendMessageModal());
+  }
   return (
     <div className="top-nav-container">
-      {messageModalOpen ? (
-        <SelectUserMessageModal modalOpen={setMessageSelectModalOpen} />
+      {sendMessageModal ? (
+        <SelectUserMessageModal modalOpen={closeModal} />
       ) : null}
       <Header>
         <div className="top-nav-inner-container">
@@ -22,9 +30,9 @@ const TopNav = () => {
           </div>
           <div className="icon-container">
             <div
-              className={messageModalOpen ? "icon-item-open" : "icon-item"}
+              className={sendMessageModal ? "icon-item-open" : "icon-item"}
               onClick={() => {
-                setMessageSelectModalOpen(true);
+                dispatch(openSendMessageModal());
               }}
             >
               <ForwardToInboxIcon />

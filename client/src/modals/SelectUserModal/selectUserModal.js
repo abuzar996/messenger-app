@@ -5,11 +5,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Overlay from "../../components/Overlay";
 import User from "./Users";
 import { getAllUsers } from "../../redux/slices/userSlice";
-
+import { closeAddfriendsModal } from "../../redux/slices/appSettingSlice";
 const SelectUserModal = ({ modalOpen }) => {
   const dispatch = useDispatch();
   const { usersList, listLoading } = useSelector((state) => state.user);
-  console.log(listLoading);
   useEffect(() => {
     if (usersList.length === 0) {
       dispatch(getAllUsers());
@@ -39,7 +38,7 @@ const SelectUserModal = ({ modalOpen }) => {
         <div style={{ marginTop: "5px", padding: "10px" }}>
           <button
             className="select-user-close-button"
-            onClick={() => modalOpen(false)}
+            onClick={() => dispatch(closeAddfriendsModal())}
           >
             Close
           </button>

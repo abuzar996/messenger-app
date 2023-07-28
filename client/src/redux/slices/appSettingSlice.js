@@ -6,6 +6,8 @@ const initialState = {
   darkmode: true,
   notifyCount: 0,
   isMounted: false,
+  addFriendsModal: false,
+  sendMessageModal: false,
 };
 
 const appSettingSlice = createSlice({
@@ -23,8 +25,27 @@ const appSettingSlice = createSlice({
     setIsMounted: (state) => {
       state.isMounted = true;
     },
+    openAddfriendsModal: (state) => {
+      state.addFriendsModal = true;
+    },
+    closeAddfriendsModal: (state) => {
+      state.addFriendsModal = false;
+    },
+    openSendMessageModal: (state) => {
+      state.sendMessageModal = true;
+    },
+    closeSendMessageModal: (state) => {
+      state.sendMessageModal = false;
+    },
   },
 });
-export const { changeTheme, changeNotify, setIsMounted } =
-  appSettingSlice.actions;
+export const {
+  changeTheme,
+  changeNotify,
+  setIsMounted,
+  openAddfriendsModal,
+  closeAddfriendsModal,
+  openSendMessageModal,
+  closeSendMessageModal,
+} = appSettingSlice.actions;
 export default appSettingSlice.reducer;
