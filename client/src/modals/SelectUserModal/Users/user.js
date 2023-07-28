@@ -1,10 +1,15 @@
 import React from "react";
 import "./user.styles.css";
-
+import { addFriends } from "../../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 import SendIcon from "@mui/icons-material/Send";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-const User = ({ firstname, lastname }) => {
+const User = ({ userId, firstname, lastname }) => {
+  const dispatch = useDispatch();
+  function onAddClicked(data) {
+    dispatch(addFriends({ friendId: data.toString() }));
+  }
   return (
     <div className="modal-user-container">
       <div>
@@ -22,7 +27,11 @@ const User = ({ firstname, lastname }) => {
       </div>
 
       <div className="option-icons">
-        <div>
+        <div
+          onClick={() => {
+            onAddClicked(userId);
+          }}
+        >
           <PersonAddIcon className="option-icon-select" />
         </div>
         <div>

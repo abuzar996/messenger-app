@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Overlay from "../../components/Overlay";
 import User from "./Users";
 import { getAllUsers } from "../../redux/slices/userSlice";
+
 import { closeAddfriendsModal } from "../../redux/slices/appSettingSlice";
 const SelectUserModal = ({ modalOpen }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,13 @@ const SelectUserModal = ({ modalOpen }) => {
             <div className="user-loader-styles-userslist">
               <CircularProgress color="success" />
             </div>
-          ) : null}
+          ) : (
+            <div className="select-user-no-user-record">
+              <label className="select-user-no-user-record-label">
+                No Users Found!
+              </label>
+            </div>
+          )}
         </div>
         <div style={{ marginTop: "5px", padding: "10px" }}>
           <button

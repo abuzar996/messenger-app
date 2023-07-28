@@ -2,13 +2,37 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const API = "http://localhost:3001";
 const initialState = {
+  addLoading: false,
   listLoading: false,
-  usersList: [],
-  user: {},
   loading: false,
+  usersList: [],
+  friends: [],
+  user: {},
   error: "",
   success: false,
 };
+
+export const getAllFriends = createAsyncThunk("GetAllFriends", async () => {
+  const response = await axios
+    .get(`${API}/users/get-user-friends`, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  return response;
+});
+
+export const addFriends = createAsyncThunk("AddFriends", async (data) => {
+  const response = await axios
+    .post(`${API}/users/add-to-friend-list`, data, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  return response;
+});
 
 export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   const response = await axios
@@ -23,7 +47,7 @@ export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
 
 export const addnewUser = createAsyncThunk("addnewUser", async (user) => {
   const response = await axios
-    .post(`${API}/users/add-user`, user)
+    .post(`${API}/users/add-to-friend-list`, user)
     .then((response) => response)
     .catch((error) => error.response);
 
@@ -97,6 +121,33 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(getAllUsers.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(addFriends.pending, (state) => {
+      state.listLoading = true;
+      state.error = "";
+    });
+    builder.addCase(addFriends.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.listLoading = false;
+      }
+    });
+    builder.addCase(addFriends.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(getAllFriends.pending, (state) => {
+      state.listLoading = true;
+      state.error = "";
+    });
+    builder.addCase(getAllFriends.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.listLoading = false;
+        state.friends = action.payload.data.friends;
+      }
+    });
+    builder.addCase(getAllFriends.rejected, (state) => {
       state.error = "Something went wrong";
     });
   },

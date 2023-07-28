@@ -5,6 +5,7 @@
   background-color: var(--secondary);
   border-bottom: 1px solid var(--primary);
   align-items: center;
+  justify-content: space-between;
   column-gap: 10vw;
 }
 .modal-message-user-container > div {
