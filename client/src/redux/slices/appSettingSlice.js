@@ -8,6 +8,7 @@ const initialState = {
   isMounted: false,
   addFriendsModal: false,
   sendMessageModal: false,
+  userProfileModal: false,
 };
 
 const appSettingSlice = createSlice({
@@ -37,6 +38,12 @@ const appSettingSlice = createSlice({
     closeSendMessageModal: (state) => {
       state.sendMessageModal = false;
     },
+    openProfileModal: (state) => {
+      state.userProfileModal = true;
+    },
+    closeProfileModal: (state) => {
+      state.userProfileModal = false;
+    },
   },
 });
 export const {
@@ -47,5 +54,7 @@ export const {
   closeAddfriendsModal,
   openSendMessageModal,
   closeSendMessageModal,
+  openProfileModal,
+  closeProfileModal,
 } = appSettingSlice.actions;
 export default appSettingSlice.reducer;

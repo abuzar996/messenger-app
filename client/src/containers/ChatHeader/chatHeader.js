@@ -5,15 +5,15 @@ import Search from "../../components/Search";
 
 import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
+import { useSelector } from "react-redux";
 const ChatHeader = ({
-  firstname,
   searchValue,
   setSearchValue,
   searchFocus,
   setSearchFocus,
 }) => {
   const navigate = useNavigate();
+  const { userById } = useSelector((state) => state.user);
 
   function onInputChange(e) {
     setSearchValue(e.target.value);
@@ -31,7 +31,7 @@ const ChatHeader = ({
           <ArrowBackIcon onClick={onBackClick} />
         </div>
         <div className="chat-name">
-          <label>{firstname}</label>
+          <label>{userById.firstname}</label>
         </div>
       </div>
       <div className="chat-search-container">

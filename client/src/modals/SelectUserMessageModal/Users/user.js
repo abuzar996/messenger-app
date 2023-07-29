@@ -2,8 +2,9 @@ import React from "react";
 import "./user.styles.css";
 
 import SendIcon from "@mui/icons-material/Send";
-
-const User = ({ firstname, lastname }) => {
+import { useNavigate } from "react-router-dom";
+const User = ({ firstname, lastname, userId }) => {
+  const navigate = useNavigate();
   return (
     <div className="modal-message-user-container">
       <div>
@@ -22,7 +23,12 @@ const User = ({ firstname, lastname }) => {
       </div>
       <div className="option-message-icons">
         <div>
-          <SendIcon className="option-message-icon-select" />
+          <SendIcon
+            className="option-message-icon-select"
+            onClick={() => {
+              navigate(`/app/messages/${userId}`);
+            }}
+          />
         </div>
       </div>
     </div>

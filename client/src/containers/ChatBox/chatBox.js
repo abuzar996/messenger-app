@@ -8,17 +8,15 @@ import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
-import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { getUserById } from "../../redux/slices/userSlice";
 const ChatBox = () => {
   const { id } = useParams();
-  const { chatlist } = useSelector((state) => state.chats);
-
+  const dispatch = useDispatch();
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
   const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
   const [replyData, setReplyData] = useState(null);
@@ -28,6 +26,11 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {
+    dispatch(getUserById(id));
+  }, [dispatch, id]);
+
   useEffect(() => {
     if (searchValue) {
       let newData = chats.filter((data) => {
@@ -47,10 +50,7 @@ const ChatBox = () => {
       setMobileSize(false);
     }
   }, [windowSize, mobileSize]);
-  useEffect(() => {
-    const user = chatlist.find((user) => user.userId === +id);
-    setUserInfo(user);
-  }, [id, chatlist]);
+
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
@@ -97,7 +97,6 @@ const ChatBox = () => {
           setSearchValue={setSearchValue}
           searchFocus={searchFocus}
           setSearchFocus={setSearchFocus}
-          {...userInfo}
         />
         <div>
           <ChatSpace

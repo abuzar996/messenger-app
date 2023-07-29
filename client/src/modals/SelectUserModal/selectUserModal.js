@@ -7,7 +7,7 @@ import User from "./Users";
 import { getAllUsers } from "../../redux/slices/userSlice";
 
 import { closeAddfriendsModal } from "../../redux/slices/appSettingSlice";
-const SelectUserModal = ({ modalOpen }) => {
+const SelectUserModal = ({ modalOpen, handleUserClick }) => {
   const dispatch = useDispatch();
   const { usersList, listLoading } = useSelector((state) => state.user);
   useEffect(() => {
@@ -25,7 +25,7 @@ const SelectUserModal = ({ modalOpen }) => {
           {usersList.length > 0 ? (
             usersList.map((user) => (
               <div key={user.userId}>
-                <User {...user} />
+                <User {...user} handleUserClick={handleUserClick} />
               </div>
             ))
           ) : listLoading ? (

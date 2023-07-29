@@ -93,7 +93,10 @@ const AppHeader = () => {
 
         {optionModalOpen && <UserOptionModal modalOpen={setOptionModalOpen} />}
         {addFriendsModal && (
-          <SelectUserModal modalOpen={closeUserSelectModal} />
+          <SelectUserModal
+            handleUserClick={handleUserClick}
+            modalOpen={closeUserSelectModal}
+          />
         )}
 
         <div className="name-logo-container">

@@ -1,15 +1,21 @@
 import React from "react";
 import "./userProfileModal.styles.css";
-
+import { useNavigate } from "react-router-dom";
 import Overlay from "../../components/Overlay";
 
 import profile from "../../images/profile.jpg";
 
-import PhoneIcon from "@mui/icons-material/Phone";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
 
-const UserProfileModal = ({ setModalOpen, firstname, lastname, email }) => {
+const UserProfileModal = ({
+  setModalOpen,
+  firstname,
+  lastname,
+  email,
+  userId,
+}) => {
+  const navigate = useNavigate();
   return (
     <Overlay modalOpen={setModalOpen}>
       <div className="user-profile-modal-container">
@@ -34,19 +40,15 @@ const UserProfileModal = ({ setModalOpen, firstname, lastname, email }) => {
             </div>
           </div>
         </div>
-        <div className="user-profile-info">
-          <div className="user-profile-info-user-name">
-            <div>
-              <PhoneIcon className="user-profile-add-icon" />
-            </div>
-            <div>
-              <label className="user-profile-label">+923227258697</label>
-            </div>
-          </div>
-        </div>
+        <div className="user-profile-info"></div>
         <div className="user-profile-button-container">
           <div className="user-profile-close-button">
-            <button className="message-button" onClick={() => {}}>
+            <button
+              className="message-button"
+              onClick={() => {
+                navigate(`/app/messages/${userId}`);
+              }}
+            >
               Send a message
             </button>
           </div>

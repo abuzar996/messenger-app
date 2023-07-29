@@ -4,8 +4,8 @@ const chats = [
     chatListData: [
       {
         userId: 1,
-        firstname: "Abuzar",
-        lastname: "Rahim",
+        firstname: "Alex",
+        lastname: "Phillips",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -15,8 +15,8 @@ const chats = [
       },
       {
         userId: 2,
-        firstname: "Alex",
-        lastname: "Phill",
+        firstname: "John",
+        lastname: "Doe",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -64,8 +64,8 @@ const chats = [
     chatListData: [
       {
         userId: 1,
-        firstname: "Abuzar",
-        lastname: "Rahim",
+        firstname: "Alex",
+        lastname: "Phillips",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -75,8 +75,8 @@ const chats = [
       },
       {
         userId: 2,
-        firstname: "Alex",
-        lastname: "Phill",
+        firstname: "John",
+        lastname: "Doe",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -86,8 +86,8 @@ const chats = [
       },
       {
         userId: 3,
-        firstname: "Jhon",
-        lastname: "Doe",
+        firstname: "Thomas",
+        lastname: "Snow",
         lastMessage: {
           user2: "I'm good",
           messageId: 15,
@@ -96,9 +96,9 @@ const chats = [
         },
       },
       {
-        userId: 4,
-        firstname: "Alpha",
-        lastname: "Doe",
+        userId: 5,
+        firstname: "Kane",
+        lastname: "Nick",
         lastMessage: {
           user2: "I'm good",
           messageId: 15,
@@ -107,20 +107,9 @@ const chats = [
         },
       },
       {
-        userId: 14,
-        firstname: "Jhon",
-        lastname: "Doe",
-        lastMessage: {
-          user2: "I'm good",
-          messageId: 15,
-          reply: 10,
-          opened: false,
-        },
-      },
-      {
-        userId: 1,
-        firstname: "Abuzar",
-        lastname: "Rahim",
+        userId: 6,
+        firstname: "Chris",
+        lastname: "Henry",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -129,9 +118,9 @@ const chats = [
         },
       },
       {
-        userId: 2,
-        firstname: "Alex",
-        lastname: "Phill",
+        userId: 7,
+        firstname: "Glen",
+        lastname: "Phillips",
         lastMessage: {
           user1: "I'm good",
           messageId: 15,
@@ -140,9 +129,9 @@ const chats = [
         },
       },
       {
-        userId: 3,
-        firstname: "Jhon",
-        lastname: "Doe",
+        userId: 8,
+        firstname: "Ben",
+        lastname: "Stokes",
         lastMessage: {
           user2: "I'm good",
           messageId: 15,
@@ -151,9 +140,9 @@ const chats = [
         },
       },
       {
-        userId: 4,
-        firstname: "Alpha",
-        lastname: "Doe",
+        userId: 9,
+        firstname: "Joe",
+        lastname: "Root",
         lastMessage: {
           user2: "I'm good",
           messageId: 15,
@@ -161,17 +150,17 @@ const chats = [
           opened: false,
         },
       },
-      {
-        userId: 14,
-        firstname: "Jhon",
-        lastname: "Doe",
-        lastMessage: {
-          user2: "I'm good",
-          messageId: 15,
-          reply: 10,
-          opened: false,
-        },
-      },
+      // {
+      //   userId: 10,
+      //   firstname: "Steven",
+      //   lastname: "Smith",
+      //   lastMessage: {
+      //     user2: "I'm good",
+      //     messageId: 15,
+      //     reply: 10,
+      //     opened: false,
+      //   },
+      // },
     ],
   },
 ];

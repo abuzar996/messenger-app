@@ -2,10 +2,9 @@ import React from "react";
 import "./user.styles.css";
 import { addFriends } from "../../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
-import SendIcon from "@mui/icons-material/Send";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-const User = ({ userId, firstname, lastname }) => {
+const User = ({ handleUserClick, userId, firstname, lastname, email }) => {
   const dispatch = useDispatch();
   function onAddClicked(data) {
     dispatch(addFriends({ friendId: data.toString() }));
@@ -21,7 +20,12 @@ const User = ({ userId, firstname, lastname }) => {
           />
         </div>
 
-        <div className="option-label-div">
+        <div
+          className="option-label-div"
+          onClick={() => {
+            handleUserClick({ userId, firstname, lastname, email });
+          }}
+        >
           <label className="option-label">{`${firstname} ${lastname}`}</label>
         </div>
       </div>
@@ -33,9 +37,6 @@ const User = ({ userId, firstname, lastname }) => {
           }}
         >
           <PersonAddIcon className="option-icon-select" />
-        </div>
-        <div>
-          <SendIcon className="option-icon-select" />
         </div>
       </div>
     </div>
