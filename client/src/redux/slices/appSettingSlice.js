@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
 const initialState = {
   loading: false,
   error: [],
-  darkmode: true,
+  darkmode: darkThemeMq.matches ? true : false,
   notifyCount: 0,
   isMounted: false,
   addFriendsModal: false,

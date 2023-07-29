@@ -2,29 +2,28 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
 
-import { chats, data } from "../../constants/data";
+import { chats } from "../../constants/data";
 import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //import { getUserById } from "../../redux/slices/userSlice";
 //import { io } from "socket.io-client";
 
 //const socket = io("ws://localhost:3000");
 
 const ChatBox = () => {
-  const dispatch = useDispatch();
   //const { userById } = useSelector((state) => state.user);
   const { id } = useParams();
+  const { chatlist } = useSelector((state) => state.chats);
 
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [userInfo, setUserInfo] = useState(null);
-  const [usersData] = useState(data);
   const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
   const [replyData, setReplyData] = useState(null);
@@ -34,11 +33,6 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
-
-  useEffect(() => {
-    // dispatch(getUserById(id));
-  }, [dispatch, id]);
-
   useEffect(() => {
     if (searchValue) {
       let newData = chats.filter((data) => {
@@ -59,9 +53,9 @@ const ChatBox = () => {
     }
   }, [windowSize, mobileSize]);
   useEffect(() => {
-    const user = usersData.find((user) => user.userId === +id);
+    const user = chatlist.find((user) => user.userId === +id);
     setUserInfo(user);
-  }, [id, usersData]);
+  }, [id, chatlist]);
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
