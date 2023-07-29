@@ -11,10 +11,8 @@ const SelectUserModal = ({ modalOpen }) => {
   const dispatch = useDispatch();
   const { usersList, listLoading } = useSelector((state) => state.user);
   useEffect(() => {
-    if (usersList.length === 0) {
-      dispatch(getAllUsers());
-    }
-  }, [dispatch, usersList]);
+    dispatch(getAllUsers());
+  }, [dispatch]);
   return (
     <Overlay modalOpen={modalOpen}>
       <div className="select-user-modal-container">

@@ -8,13 +8,17 @@ import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
-
+import { useDispatch } from "react-redux";
+//import { getUserById } from "../../redux/slices/userSlice";
 //import { io } from "socket.io-client";
 
 //const socket = io("ws://localhost:3000");
 
 const ChatBox = () => {
+  const dispatch = useDispatch();
+  //const { userById } = useSelector((state) => state.user);
   const { id } = useParams();
+
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
@@ -30,6 +34,10 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {
+    // dispatch(getUserById(id));
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (searchValue) {

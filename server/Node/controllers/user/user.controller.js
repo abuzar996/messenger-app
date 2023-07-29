@@ -84,10 +84,18 @@ const userlogin = async (req, res) => {
 
 const searchUserById = (req, res) => {
   const { userId } = req.params;
-  const searcher = req.body;
+  const { user: users } = req.body;
   const user = getUserById(+userId);
   if (user) {
-    res.status(200).send({ user: user, searchedBy: searcher.firstname });
+    res.status(200).send({
+      user: {
+        userId: user.userId,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+      },
+      searchedBy: users.firstname,
+    });
   } else {
     res.status(404).send({ message: "User not found" });
   }
@@ -152,7 +160,6 @@ const getNonFriends = (req, res) => {
   const { user: users } = req.body;
   try {
     const freindList = fetchFriends(users.userId);
-    // console.log(freindList);
     const allUsers = getAllUsersExcept(users.userId).map(
       ({ userId, firstname, lastname, email }) => {
         return {

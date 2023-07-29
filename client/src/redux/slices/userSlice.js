@@ -1,13 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const API = "http://localhost:3001";
+import { API } from "../../constants/data";
+
 const initialState = {
+  userByIdLoading: false,
   addLoading: false,
   listLoading: false,
   loading: false,
   usersList: [],
   friends: [],
   user: {},
+  userById: {},
   error: "",
   success: false,
 };
@@ -63,6 +66,17 @@ export const getUser = createAsyncThunk("getUser", async (email) => {
     .catch((error) => error.response);
   return response;
 });
+
+export const getUserById = createAsyncThunk("getUserById", async (userId) => {
+  const response = await axios
+    .get(`${API}/users/get-by-id/${userId}`, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+  return response;
+});
+
 const userSlice = createSlice({
   name: "User",
   initialState,
@@ -148,6 +162,20 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(getAllFriends.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(getUserById.pending, (state) => {
+      state.userByIdLoading = true;
+      state.error = "";
+    });
+    builder.addCase(getUserById.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.userByIdLoading = false;
+        state.userById = action.payload.data.user;
+      }
+    });
+    builder.addCase(getUserById.rejected, (state) => {
       state.error = "Something went wrong";
     });
   },

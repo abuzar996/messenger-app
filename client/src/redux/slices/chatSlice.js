@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const API = "http://localhost:3001";
+import { API } from "../../constants/data";
 const initialState = {
   chatlist: [],
   loading: false,
