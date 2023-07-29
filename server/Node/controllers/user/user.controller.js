@@ -7,6 +7,7 @@ const {
   addUserToFriend,
   addUserBack,
   fetchFriends,
+  fetchNonFriends,
 } = require("../../services/user.services");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -146,6 +147,32 @@ const getUserFriends = (req, res) => {
     res.send({ message: err.message });
   }
 };
+
+const getNonFriends = (req, res) => {
+  const { user: users } = req.body;
+  try {
+    const freindList = fetchFriends(users.userId);
+    // console.log(freindList);
+    const allUsers = getAllUsersExcept(users.userId).map(
+      ({ userId, firstname, lastname, email }) => {
+        return {
+          userId,
+          firstname,
+          lastname,
+          email,
+        };
+      }
+    );
+    if (freindList && freindList.length > 0) {
+      const usersNonFriends = fetchNonFriends(users.userId, allUsers);
+      res.status(200).send({ users: usersNonFriends });
+    } else {
+      res.status(200).send({ users: allUsers });
+    }
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
 module.exports = {
   getUsers: getUsers,
   searchAUserByEmail: searchAUserByEmail,
@@ -156,4 +183,5 @@ module.exports = {
   getUserByName: getUserByName,
   addUserToFriendList: addUserToFriendList,
   getUserFriends: getUserFriends,
+  getNonFriends,
 };

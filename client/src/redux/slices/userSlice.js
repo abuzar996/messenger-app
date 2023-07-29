@@ -36,7 +36,7 @@ export const addFriends = createAsyncThunk("AddFriends", async (data) => {
 
 export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   const response = await axios
-    .get(`${API}/users/get-all-users`, {
+    .get(`${API}/users/get-non-friends`, {
       headers: { token: localStorage.getItem("Token") },
     })
     .then((response) => response)

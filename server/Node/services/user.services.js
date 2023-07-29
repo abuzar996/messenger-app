@@ -117,7 +117,29 @@ const fetchFriends = (userId) => {
 
     return allFriendsData;
   }
+
   return [];
+};
+
+const fetchNonFriends = (userId, allUsers) => {
+  let userData = user.find((u) => u.userId === userId);
+  if (userData) {
+    if (userData.friends) {
+      userData.friends.forEach((friend) => {
+        let index = allUsers.findIndex((u) => u.userId === friend);
+        if (index !== -1) {
+          allUsers.splice(index, 1);
+        }
+      });
+      return allUsers;
+    } else {
+      return [];
+    }
+  } else {
+    return [];
+  }
+  //let data = user.friends?.filter((u) => u !== userId);
+  //console.log(data);
 };
 
 module.exports = {
@@ -130,5 +152,6 @@ module.exports = {
   searchAUserByIdcheck: searchAUserByIdcheck,
   addUserToFriend,
   addUserBack,
+  fetchNonFriends,
   fetchFriends,
 };

@@ -8,6 +8,7 @@ const {
   searchAUserByEmail,
   addUserToFriendList,
   getUserFriends,
+  getNonFriends,
 } = require("../../controllers/user/user.controller.js");
 const {
   userExists,
@@ -67,4 +68,6 @@ userRouter.post(
 );
 
 userRouter.get("/get-User-friends", isAuthenticated, getUserFriends);
+
+userRouter.get("/get-non-friends", isAuthenticated, getNonFriends);
 module.exports = userRouter;
