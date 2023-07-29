@@ -9,13 +9,8 @@ import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useSelector } from "react-redux";
-//import { getUserById } from "../../redux/slices/userSlice";
-//import { io } from "socket.io-client";
-
-//const socket = io("ws://localhost:3000");
 
 const ChatBox = () => {
-  //const { userById } = useSelector((state) => state.user);
   const { id } = useParams();
   const { chatlist } = useSelector((state) => state.chats);
 
@@ -59,11 +54,8 @@ const ChatBox = () => {
   useEffect(() => {
     setMarginBottom(senderHeight);
   }, [senderHeight]);
-  // useEffect(() => {
-  //   socket.on("connect", () => console.log(socket.id));
-  // }, []);
+
   function onSendClick() {
-    //socket.emit("send", "a message has been sent to You");
     if (newMessage.length) {
       let temp = newMessage?.trim();
       if (temp.length) {
