@@ -8,6 +8,10 @@ const {
   addUserBack,
   fetchFriends,
   fetchNonFriends,
+  getFriendList,
+  checkIfTheyAreFriends,
+  removeFriendFromUser,
+  removeuserFromFriend,
 } = require("../../services/user.services");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -180,6 +184,40 @@ const getNonFriends = (req, res) => {
     res.send({ message: err.message });
   }
 };
+
+const checkIfUserHasFriend = (req, res) => {
+  const { friendId } = req.params;
+  const { user } = req.body;
+  try {
+    const friendList = getFriendList(user.userId);
+    if (friendList.length > 0 && friendList) {
+      let value = checkIfTheyAreFriends(friendList, +friendId);
+      if (value) {
+        res.status(200).send({ friends: true });
+      } else {
+        res.status(400).send({ friends: false });
+      }
+    } else {
+      res.send({ friends: false });
+    }
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
+const postUnfriendUser = (req, res) => {
+  const { friendId, user } = req.body;
+  try {
+    let friendRemove = removeFriendFromUser(user.userId, friendId);
+    let userRemove = removeuserFromFriend(user.userId, friendId);
+    if (friendRemove && userRemove) {
+      res.status(200).send({ message: "User Removed Succesfully" });
+    } else {
+      res.status(404).send({ message: "Something went Wrong!" });
+    }
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
 module.exports = {
   getUsers: getUsers,
   searchAUserByEmail: searchAUserByEmail,
@@ -191,4 +229,6 @@ module.exports = {
   addUserToFriendList: addUserToFriendList,
   getUserFriends: getUserFriends,
   getNonFriends,
+  checkIfUserHasFriend,
+  postUnfriendUser,
 };

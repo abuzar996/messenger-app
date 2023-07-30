@@ -10,6 +10,7 @@ const initialState = {
   usersList: [],
   friends: [],
   user: {},
+  isFriend: false,
   userById: {},
   error: "",
   success: false,
@@ -48,14 +49,28 @@ export const getAllUsers = createAsyncThunk("getAllUsers", async () => {
   return response;
 });
 
-export const addnewUser = createAsyncThunk("addnewUser", async (user) => {
+export const addnewUser = createAsyncThunk("addToFriendList", async (user) => {
   const response = await axios
-    .post(`${API}/users/add-to-friend-list`, user)
+    .post(`${API}/users/add-user`, user)
     .then((response) => response)
     .catch((error) => error.response);
 
   return response;
 });
+
+export const checkIfUserHasFriend = createAsyncThunk(
+  "checkIfFriend",
+  async (friendId) => {
+    const response = await axios
+      .get(`${API}/users/check-is-friend/${friendId}`, {
+        headers: { token: localStorage.getItem("Token") },
+      })
+      .then((response) => response)
+      .catch((error) => error.response);
+
+    return response;
+  }
+);
 
 export const getUser = createAsyncThunk("getUser", async (email) => {
   const response = await axios
@@ -176,6 +191,23 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(getUserById.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(checkIfUserHasFriend.pending, (state) => {
+      state.userByIdLoading = true;
+      state.error = "";
+    });
+    builder.addCase(checkIfUserHasFriend.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.userByIdLoading = false;
+        state.isFriend = action.payload.data.friends;
+      } else {
+        state.userByIdLoading = false;
+        state.isFriend = action.payload.data.friends;
+      }
+    });
+    builder.addCase(checkIfUserHasFriend.rejected, (state) => {
       state.error = "Something went wrong";
     });
   },

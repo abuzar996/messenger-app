@@ -1,7 +1,10 @@
 import React from "react";
 import "./user.styles.css";
 import { useDispatch } from "react-redux";
-import { openProfileModal } from "../../../redux/slices/appSettingSlice";
+import {
+  openProfileModal,
+  setData,
+} from "../../../redux/slices/appSettingSlice";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 const User = ({ firstname, lastname, userId, email }) => {
@@ -20,7 +23,8 @@ const User = ({ firstname, lastname, userId, email }) => {
         <div
           className="option-message-label-div"
           onClick={() => {
-            dispatch(openProfileModal({ userId, firstname, lastname, email }));
+            dispatch(openProfileModal());
+            dispatch(setData({ userId, firstname, lastname, email }));
           }}
         >
           <label className="option-message-label">

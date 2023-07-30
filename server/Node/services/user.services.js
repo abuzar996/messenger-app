@@ -138,10 +138,54 @@ const fetchNonFriends = (userId, allUsers) => {
   } else {
     return [];
   }
-  //let data = user.friends?.filter((u) => u !== userId);
-  //console.log(data);
 };
 
+const getFriendList = (userId) => {
+  const friends = user.find((u) => u.userId === userId);
+  if (friends) {
+    return friends.friends ? friends.friends : [];
+  }
+  return [];
+};
+
+const checkIfTheyAreFriends = (friendList, friendId) => {
+  const friends = friendList.find((friend) => friend === friendId);
+  return friends;
+};
+const removeFriendFromUser = (userId, friendId) => {
+  try {
+    let userData = user.find((u) => u.userId === userId);
+    if (userData) {
+      let index = userData.friends.indexOf(friendId);
+      if (index !== -1) {
+        userData.friends.splice(index, 1);
+        user = user.map((u) => (u.userId === userId ? userData : u));
+        return true;
+      }
+      return false;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
+const removeuserFromFriend = (userId, friendId) => {
+  try {
+    let friendData = user.find((u) => u.userId === friendId);
+    if (friendData) {
+      let index = friendData.friends.indexOf(userId);
+      if (index !== -1) {
+        friendData.friends.splice(index, 1);
+        user = user.map((u) => (u.userId === friendId ? friendData : u));
+        return true;
+      }
+      return false;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
 module.exports = {
   loginUser: loginUser,
   searchUserByEmail: searchUserByEmail,
@@ -154,4 +198,8 @@ module.exports = {
   addUserBack,
   fetchNonFriends,
   fetchFriends,
+  getFriendList,
+  checkIfTheyAreFriends,
+  removeFriendFromUser,
+  removeuserFromFriend,
 };

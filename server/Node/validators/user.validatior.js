@@ -34,6 +34,9 @@ const searhUserByEmailSchema = Joi.object({
 const addUserToFriendListSchema = Joi.object({
   friendId: Joi.string().required(),
 });
+const removeUserFromFriendListSchema = Joi.object({
+  friendId: Joi.number().required(),
+});
 module.exports = {
   createUser: schema,
   loginBody: loginBody,
@@ -42,4 +45,5 @@ module.exports = {
   searhUserByIdSchema: searhUserByIdSchema,
   addUserToFriendListSchema,
   addUserToFriendListSchema,
+  removeUserFromFriendListSchema,
 };

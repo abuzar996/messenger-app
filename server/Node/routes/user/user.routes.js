@@ -9,6 +9,8 @@ const {
   addUserToFriendList,
   getUserFriends,
   getNonFriends,
+  checkIfUserHasFriend,
+  postUnfriendUser,
 } = require("../../controllers/user/user.controller.js");
 const {
   userExists,
@@ -19,6 +21,7 @@ const {
   validateSearchUserByiD,
   validateAddToFriendList,
   verifyUsersAvailable,
+  validateRemoveFromFriendList,
   userDoesNotExists,
   isAuthenticated,
   checkIfNotYourSelf,
@@ -70,4 +73,16 @@ userRouter.post(
 userRouter.get("/get-User-friends", isAuthenticated, getUserFriends);
 
 userRouter.get("/get-non-friends", isAuthenticated, getNonFriends);
+userRouter.get(
+  "/check-is-friend/:friendId",
+  isAuthenticated,
+  checkIfUserHasFriend
+);
+
+userRouter.post(
+  "/unfriend-user",
+  isAuthenticated,
+  validateRemoveFromFriendList,
+  postUnfriendUser
+);
 module.exports = userRouter;

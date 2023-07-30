@@ -5,6 +5,7 @@ const {
   searhUserByIdSchema,
   searhUserByEmailSchema,
   addUserToFriendListSchema,
+  removeUserFromFriendListSchema,
 } = require("../validators/user.validatior");
 
 const { user } = require("../modal/user/user.modal");
@@ -59,6 +60,18 @@ const validateAddToFriendList = async (req, res, next) => {
     return res.status(400).send({ message: err.message });
   }
 };
+const validateRemoveFromFriendList = async (req, res, next) => {
+  try {
+    const { friendId } = req.body;
+    await removeUserFromFriendListSchema.validateAsync({
+      friendId,
+    });
+    next();
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+};
+
 const verifyUsersAvailable = (req, res, next) => {
   const { friendId } = req.body;
   try {
@@ -148,6 +161,7 @@ module.exports = {
   validateLoginRequestBody,
   validateSearchUserByName,
   validateSearchUserByEmail,
+  validateRemoveFromFriendList,
   verifyUsersAvailable,
   userExists,
   userDoesNotExists,
