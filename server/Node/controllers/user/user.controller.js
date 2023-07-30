@@ -121,7 +121,7 @@ const getAllUsers = (req, res) => {
 
 const getUserByName = (req, res) => {
   const { name } = req.params;
-  const { firstname } = req.body;
+  const { firstname } = req.body.user;
   try {
     const usersList = findUsersByName(name, firstname);
     if (usersList.length > 0) {
