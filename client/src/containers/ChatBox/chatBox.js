@@ -8,11 +8,12 @@ import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { chatsHidden } = useSelector((state) => state.appReducer);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
@@ -83,7 +84,13 @@ const ChatBox = () => {
     <>
       <div
         className="chat-box-container"
-        style={mobileSize ? { marginLeft: "0px" } : null}
+        style={
+          mobileSize
+            ? { marginLeft: "0px" }
+            : chatsHidden
+            ? { marginLeft: "0px" }
+            : null
+        }
       >
         {optionsModal && (
           <MessageOptionModal

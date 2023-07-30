@@ -10,6 +10,7 @@ const initialState = {
   addFriendsModal: false,
   sendMessageModal: false,
   userProfileModal: false,
+  chatsHidden: false,
 };
 
 const appSettingSlice = createSlice({
@@ -48,6 +49,12 @@ const appSettingSlice = createSlice({
     setData: (state, action) => {
       state.profileData = action.payload;
     },
+    showChats: (state) => {
+      state.chatsHidden = false;
+    },
+    hideChats: (state) => {
+      state.chatsHidden = true;
+    },
   },
 });
 export const {
@@ -61,5 +68,7 @@ export const {
   openProfileModal,
   closeProfileModal,
   setData,
+  hideChats,
+  showChats,
 } = appSettingSlice.actions;
 export default appSettingSlice.reducer;

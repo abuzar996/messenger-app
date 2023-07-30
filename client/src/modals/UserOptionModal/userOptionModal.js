@@ -8,10 +8,14 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/authSlice";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import HideSourceIcon from "@mui/icons-material/HideSource";
 import { removeAllUsers } from "../../redux/slices/userSlice";
 import { changeTheme } from "../../redux/slices/appSettingSlice";
+import PreviewIcon from "@mui/icons-material/Preview";
+import { showChats, hideChats } from "../../redux/slices/appSettingSlice";
 const UserOptionModal = ({ modalOpen }) => {
-  const { darkmode } = useSelector((state) => state.appReducer);
+  const { darkmode, chatsHidden } = useSelector((state) => state.appReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useKeys("Escape", closeFn);
@@ -30,6 +34,30 @@ const UserOptionModal = ({ modalOpen }) => {
         <div className="user-option-modal-header">
           <label>Options</label>
         </div>
+        {!chatsHidden && (
+          <div
+            className="user-option-modal-body"
+            onClick={() => {
+              dispatch(hideChats());
+            }}
+          >
+            <HideSourceIcon className="user-option-modal-icons" />
+            <label>Hide Chats</label>
+          </div>
+        )}
+
+        {chatsHidden && (
+          <div
+            className="user-option-modal-body"
+            onClick={() => {
+              dispatch(showChats());
+            }}
+          >
+            <PreviewIcon className="user-option-modal-icons" />
+            <label>Show Chats</label>
+          </div>
+        )}
+
         <div className="user-option-modal-body" onClick={onSettingsClicked}>
           <SettingsIcon className="user-option-modal-icons" />
           <label>Settings</label>

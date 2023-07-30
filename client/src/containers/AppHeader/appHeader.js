@@ -21,9 +21,14 @@ import { useDimentions } from "../../hooks/useDimentions";
 
 import { searchUsers } from "../../redux/slices/searchSlice";
 
+import { closeSendMessageModal } from "../../redux/slices/appSettingSlice";
+
+import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
+
 const AppHeader = () => {
   const refferencesHeader = useRef(null);
   const dispatch = useDispatch();
+  const { sendMessageModal } = useSelector((state) => state.appReducer);
   const { user } = useSelector((state) => state.user);
   const { addFriendsModal, userProfileModal } = useSelector(
     (state) => state.appReducer
@@ -46,6 +51,10 @@ const AppHeader = () => {
       }
     };
   }, [searchValue, dispatch]);
+
+  function closeModal() {
+    dispatch(closeSendMessageModal());
+  }
 
   function onInputChange(e) {
     setSearchValue(e.target.value);
@@ -81,6 +90,7 @@ const AppHeader = () => {
         {userProfileModal && (
           <UserProfileModal setModalOpen={closeUserProfileModal} />
         )}
+        {sendMessageModal && <SelectUserMessageModal modalOpen={closeModal} />}
         {searchFocused ? (
           <SearchModal
             width={+localStorage.getItem("search_width")}

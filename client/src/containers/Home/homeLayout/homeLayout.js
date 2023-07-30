@@ -3,9 +3,10 @@ import "./homeLayout.styles.css";
 import { Outlet } from "react-router-dom";
 import ChatList from "../../ChatList";
 import { useDimentions } from "../../../hooks/useDimentions";
-
+import { useSelector } from "react-redux";
 const HomeLayout = () => {
   const dimentions = useDimentions();
+  const { chatsHidden } = useSelector((state) => state.appReducer);
   const [mobileSize, setMobileSize] = useState(false);
   useEffect(() => {
     if (dimentions.width <= 600) {
@@ -27,10 +28,13 @@ const HomeLayout = () => {
 
   return (
     <div className="home-layout-container">
-      <div style={{ width: "40%" }}>
-        <ChatList />
-      </div>
-      <div style={{ width: "60%" }}>
+      {!chatsHidden && (
+        <div style={{ width: "40%" }}>
+          {" "}
+          <ChatList />
+        </div>
+      )}
+      <div style={chatsHidden ? { width: "100%" } : { width: "60%" }}>
         <Outlet />
       </div>
     </div>
