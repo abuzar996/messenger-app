@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./appHeader.styles.css";
-
+import {
+  openProfileModal,
+  closeProfileModal,
+  openAddfriendsModal,
+  closeAddfriendsModal,
+  setData,
+} from "../../redux/slices/appSettingSlice";
 import Search from "../../components/Search";
 import Header from "../../components/Header/header";
 import UserOptionModal from "../../modals/UserOptionModal/userOptionModal";
@@ -11,10 +17,6 @@ import SearchModal from "../../modals/SearchModal";
 import UserProfileModal from "../../modals/UserProfileModal";
 import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import {
-  openAddfriendsModal,
-  closeAddfriendsModal,
-} from "../../redux/slices/appSettingSlice";
 import { useDimentions } from "../../hooks/useDimentions";
 
 import { searchUsers } from "../../redux/slices/searchSlice";
@@ -23,14 +25,13 @@ const AppHeader = () => {
   const refferencesHeader = useRef(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { addFriendsModal } = useSelector((state) => state.appReducer);
+  const { addFriendsModal, userProfileModal } = useSelector(
+    (state) => state.appReducer
+  );
   const windowSize = useDimentions();
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
-
-  const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const [profileData, setProfileData] = useState(null);
   useEffect(() => {
     let timer;
     if (searchValue) {
@@ -55,13 +56,16 @@ const AppHeader = () => {
   }
   function handleUserClick(user) {
     if (user) {
-      setProfileData(user);
-      setProfileModalOpen(true);
+      dispatch(openProfileModal());
+      dispatch(setData(user));
       setSearchValue("");
     }
   }
   function closeUserSelectModal() {
     dispatch(closeAddfriendsModal());
+  }
+  function closeUserProfileModal() {
+    dispatch(closeProfileModal());
   }
   useEffect(() => {
     if (refferencesHeader) {
@@ -74,11 +78,8 @@ const AppHeader = () => {
   return (
     <div ref={refferencesHeader}>
       <Header>
-        {profileModalOpen && (
-          <UserProfileModal
-            setModalOpen={setProfileModalOpen}
-            {...profileData}
-          />
+        {userProfileModal && (
+          <UserProfileModal setModalOpen={closeUserProfileModal} />
         )}
         {searchFocused ? (
           <SearchModal

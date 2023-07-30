@@ -5,6 +5,7 @@ const initialState = {
   error: [],
   darkmode: darkThemeMq.matches ? true : false,
   notifyCount: 0,
+  profileData: {},
   isMounted: false,
   addFriendsModal: false,
   sendMessageModal: false,
@@ -44,6 +45,9 @@ const appSettingSlice = createSlice({
     closeProfileModal: (state) => {
       state.userProfileModal = false;
     },
+    setData: (state, action) => {
+      state.profileData = action.payload;
+    },
   },
 });
 export const {
@@ -56,5 +60,6 @@ export const {
   closeSendMessageModal,
   openProfileModal,
   closeProfileModal,
+  setData,
 } = appSettingSlice.actions;
 export default appSettingSlice.reducer;
