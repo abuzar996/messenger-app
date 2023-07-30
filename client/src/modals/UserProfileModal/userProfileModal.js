@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Overlay from "../../components/Overlay";
 import PeopleIcon from "@mui/icons-material/People";
 import profile from "../../images/profile.jpg";
+
 //import { addFriends } from "../../../redux/slices/userSlice";
 import { addFriends } from "../../redux/slices/userSlice";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonIcon from "@mui/icons-material/Person";
-import { checkIfUserHasFriend } from "../../redux/slices/userSlice";
+import {
+  checkIfUserHasFriend,
+  removeFriends,
+} from "../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const UserProfileModal = ({ setModalOpen }) => {
@@ -34,15 +38,17 @@ const UserProfileModal = ({ setModalOpen }) => {
                   dispatch(
                     addFriends({ friendId: profileData.userId.toString() })
                   );
-                  //console.log();
-                  //onAddClicked(profileData.userId);
                 }}
               >
                 <PersonAddIcon className="user-profile-add-icon" />
               </div>
             )}
             {isFriend && (
-              <div>
+              <div
+                onClick={() => {
+                  dispatch(removeFriends({ friendId: profileData.userId }));
+                }}
+              >
                 <PeopleIcon className="user-profile-add-icon" />
               </div>
             )}

@@ -27,9 +27,20 @@ export const getAllFriends = createAsyncThunk("GetAllFriends", async () => {
   return response;
 });
 
-export const addFriends = createAsyncThunk("AddFriends", async (data) => {
+export const addFriends = createAsyncThunk("addFriends", async (data) => {
   const response = await axios
     .post(`${API}/users/add-to-friend-list`, data, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  return response;
+});
+
+export const removeFriends = createAsyncThunk("removeFriends", async (data) => {
+  const response = await axios
+    .post(`${API}/users/unfriend-user`, data, {
       headers: { token: localStorage.getItem("Token") },
     })
     .then((response) => response)
@@ -208,6 +219,18 @@ const userSlice = createSlice({
       }
     });
     builder.addCase(checkIfUserHasFriend.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(removeFriends.pending, (state) => {
+      state.userByIdLoading = true;
+      state.error = "";
+    });
+    builder.addCase(removeFriends.fulfilled, (state, action) => {
+      state.userByIdLoading = false;
+      state.error = "";
+    });
+    builder.addCase(removeFriends.rejected, (state) => {
       state.error = "Something went wrong";
     });
   },
