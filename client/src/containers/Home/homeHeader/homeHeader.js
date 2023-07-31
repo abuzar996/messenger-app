@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { useDimentions } from "../../../hooks/useDimentions";
 import "./homeHeader.styles.css";
-
+import { useSelector } from "react-redux";
 const HomeHeader = () => {
+  const { chatsHidden } = useSelector((state) => state.appReducer);
   const homeHeaderRef = useRef();
   const windowSize = useDimentions();
   useEffect(() => {
@@ -14,7 +15,11 @@ const HomeHeader = () => {
     }
   }, [windowSize]);
   return (
-    <div className="home-header-container" ref={homeHeaderRef}>
+    <div
+      className="home-header-container"
+      style={chatsHidden ? { marginLeft: "0px" } : null}
+      ref={homeHeaderRef}
+    >
       <div>
         <label>Messenger Web Application</label>
       </div>

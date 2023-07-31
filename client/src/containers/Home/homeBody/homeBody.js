@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { useDimentions } from "../../../hooks/useDimentions";
 
 const HomeBody = () => {
-  const { darkmode } = useSelector((state) => state.appReducer);
+  const { darkmode, chatsHidden } = useSelector((state) => state.appReducer);
   const windowSize = useDimentions();
   const [bodyHeight, setBodyHeight] = useState(null);
 
@@ -24,7 +24,12 @@ const HomeBody = () => {
   return (
     <div
       className="home-body-container"
-      style={{ height: `calc(100vh - ${bodyHeight})` }}
+      //style={chatsHidden ? { marginLeft: "0px" } : null}
+      style={
+        chatsHidden
+          ? { height: `calc(100vh - ${bodyHeight})`, marginLeft: "0px" }
+          : { height: `calc(100vh - ${bodyHeight})` }
+      }
     >
       <img
         src={logo}

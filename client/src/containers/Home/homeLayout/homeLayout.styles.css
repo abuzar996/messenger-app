@@ -1,5 +1,4 @@
 .home-layout-container {
   display: flex;
   flex-direction: row;
-  border-bottom-right-radius: 15px;
 }

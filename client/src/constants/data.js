@@ -226,4 +226,4 @@ export const updateData = (id) => {
   return (data[id].lastMessage.opened = true);
 };
 
-export const API = "http://localhost:3001";
+export const API = "http://localhost:3000";
