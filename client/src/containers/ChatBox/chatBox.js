@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
-
+import { io } from "socket.io-client";
+import { API } from "../../constants/data";
 import { chats } from "../../constants/data";
 import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
@@ -10,10 +11,13 @@ import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
+let socket; // =
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+
   const { chatsHidden } = useSelector((state) => state.appReducer);
+  const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
@@ -27,6 +31,25 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
+
+  ///////////////////////////////////////////
+  /////////////////////////////////////////////
+  //////////////////////////////////////////
+
+  useEffect(() => {
+    socket = io(API);
+    socket.emit("setup", user);
+  }, [user]);
+
+  useEffect(() => {
+    socket.emit("join chat", id + "chatroom");
+  }, [id]);
+  function sendChat() {
+    socket.emit("chat", "hello world");
+  }
+  //////////////////////////////////
+  ///////////////////////////////
+  //////////////////////////////
 
   useEffect(() => {
     dispatch(getUserById(id));
@@ -58,6 +81,7 @@ const ChatBox = () => {
 
   function onSendClick() {
     if (newMessage.length) {
+      sendChat();
       let temp = newMessage?.trim();
       if (temp.length) {
         setChatData((prevState) => {
@@ -121,6 +145,7 @@ const ChatBox = () => {
           />
         </div>
         <InputMessage
+          sendChat={sendChat}
           messageReply={messageReply}
           setMessageReply={setMessageReply}
           setSenderHeight={setSenderHeight}

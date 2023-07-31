@@ -21,6 +21,8 @@ import { useDimentions } from "../../hooks/useDimentions";
 
 import { searchUsers } from "../../redux/slices/searchSlice";
 
+import { getChatList } from "../../redux/slices/chatSlice";
+
 import { closeSendMessageModal } from "../../redux/slices/appSettingSlice";
 
 import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
@@ -52,6 +54,11 @@ const AppHeader = () => {
     };
   }, [searchValue, dispatch]);
 
+  useEffect(() => {
+    if (user.userId) {
+      dispatch(getChatList(user.userId));
+    }
+  }, [dispatch, user]);
   function closeModal() {
     dispatch(closeSendMessageModal());
   }

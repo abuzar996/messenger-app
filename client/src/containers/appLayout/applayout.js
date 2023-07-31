@@ -3,10 +3,22 @@ import { Outlet } from "react-router-dom";
 import ServerError from "../ServerError";
 import NotificationContainer from "../../components/Notifications/notificationContainer";
 import useStatus from "../../hooks/useStatus";
+//
 
 const Applayout = () => {
+  //
+
   const isServerReachable = useStatus();
   const [isOnline, setOnline] = useState(true);
+
+  // socket.on("connection", console.log("hello world"));
+  // socket.on("send", () => console.log("hello from send"));
+
+  // socket.on("hello", (arg, callback) => {
+  //   console.log(arg); // "world"
+  //   alert("hello world");
+  //   callback("got it");
+  // });
 
   const handleOnlineState = () => {
     setOnline(true);

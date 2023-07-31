@@ -18,7 +18,7 @@ import AuthUser from "./containers/AuthUser";
 import SignIn from "./containers/SignIn";
 import SignUp from "./containers/SignUp";
 import Error from "./containers/Error";
-//require("dotenv").config();
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,11 +61,9 @@ const router = createBrowserRouter([
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router}></RouterProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

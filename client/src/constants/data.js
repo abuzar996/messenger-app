@@ -1,3 +1,4 @@
+//export const chatId;
 export const chats = [
   {
     user1: "hello",
@@ -226,4 +227,4 @@ export const updateData = (id) => {
   return (data[id].lastMessage.opened = true);
 };
 
-export const API = "http://localhost:3000";
+export const API = "http://localhost:3001";
