@@ -1,4 +1,72 @@
 //export const chatId;
+export const messageData = [
+  {
+    chatId: 1,
+    data: [
+      {
+        sender: "Alex",
+        message: "Hello How Are You?",
+      },
+      {
+        sender: "Alex",
+        message: "What Are You Doing?",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Alex",
+        message: "Great!",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+    ],
+  },
+];
+
+export const chatsData = [
+  {
+    userId: 1,
+    chats: [
+      {
+        userId: 2,
+        messages: -1,
+      },
+      {
+        userId: 3,
+        messages: -1,
+      },
+      {
+        userId: 4,
+        messages: 1,
+      },
+    ],
+  },
+  {
+    userId: 4,
+    chats: [
+      {
+        userId: 1,
+        messages: 1,
+      },
+      {
+        userId: 2,
+        messages: -1,
+      },
+      {
+        userId: 3,
+        messages: -1,
+      },
+    ],
+  },
+];
 export const chats = [
   {
     user1: "hello",

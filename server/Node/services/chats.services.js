@@ -1,5 +1,5 @@
 const { verifyUser } = require("./user.services");
-const { chats } = require("../modal/chats/chats.modal");
+const { chats, chatsData } = require("../modal/chats/chats.modal");
 const checkIfSameUser = (userId, token) => {
   const userData = verifyUser(token);
   if (userData && userData.userId) {
@@ -9,7 +9,7 @@ const checkIfSameUser = (userId, token) => {
 };
 
 const checkIfChatsExist = (userId) => {
-  return chats.find((chat) => chat.userId === userId);
+  return chatsData.find((chat) => chat.userId === userId);
 };
 
 module.exports = {

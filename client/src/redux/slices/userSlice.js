@@ -7,6 +7,8 @@ const initialState = {
   addLoading: false,
   listLoading: false,
   loading: false,
+  allUsersLoading: false,
+  allUsers: [],
   usersList: [],
   friends: [],
   user: {},
@@ -15,6 +17,17 @@ const initialState = {
   error: "",
   success: false,
 };
+
+export const getAllTheUsers = createAsyncThunk("getAllTheUsers", async () => {
+  const response = await axios
+    .get(`${API}/users/get-all-users`, {
+      headers: { token: localStorage.getItem("Token") },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  return response;
+});
 
 export const getAllFriends = createAsyncThunk("GetAllFriends", async () => {
   const response = await axios
@@ -231,6 +244,18 @@ const userSlice = createSlice({
       state.error = "";
     });
     builder.addCase(removeFriends.rejected, (state) => {
+      state.error = "Something went wrong";
+    });
+
+    builder.addCase(getAllTheUsers.pending, (state) => {
+      state.allUsersLoading = true;
+      state.error = "";
+    });
+    builder.addCase(getAllTheUsers.fulfilled, (state, action) => {
+      state.allUsersLoading = false;
+      state.allUsers = action.payload.data.users;
+    });
+    builder.addCase(getAllTheUsers.rejected, (state) => {
       state.error = "Something went wrong";
     });
   },

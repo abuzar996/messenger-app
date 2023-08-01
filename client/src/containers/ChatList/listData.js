@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDimentions } from "../../hooks/useDimentions";
+
 const ListData = ({
   onClick,
   setOptionModalOpen,
@@ -13,7 +14,8 @@ const ListData = ({
   searchFocus,
 }) => {
   const { chatlist, loading } = useSelector((state) => state.chats);
-
+  const [chatlist2] = useState([]);
+  const [loading2] = useState(false);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
@@ -54,12 +56,12 @@ const ListData = ({
       }
       ref={reference}
     >
-      {loading ? (
+      {loading2 ? (
         <div className="loader-styles-list">
           <CircularProgress color="success" />
         </div>
-      ) : chatlist.length > 0 ? (
-        chatlist.map((value, index) => (
+      ) : chatlist2.length > 0 ? (
+        chatlist2.map((value, index) => (
           <Card
             onMessageClick={onMessageClick}
             key={index}

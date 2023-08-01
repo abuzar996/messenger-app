@@ -1,3 +1,130 @@
+const messageData = [
+  {
+    message: 1,
+    data: [
+      {
+        sender: "Alex",
+        message: "Hello How Are You?",
+      },
+      {
+        sender: "Alex",
+        message: "What Are You Doing?",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Alex",
+        message: "Great!",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Allison",
+        message: "Great to Hear!",
+      },
+    ],
+  },
+  {
+    message: 2,
+    data: [
+      {
+        sender: "Jhon",
+        message: "Hello How Are You?",
+      },
+      {
+        sender: "Jhon",
+        message: "What Are You Doing?",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Jhon",
+        message: "Great!",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Allison",
+        message: "Great to Hear!",
+      },
+    ],
+  },
+  {
+    message: 3,
+    data: [
+      {
+        sender: "Thomas",
+        message: "Hello How Are You?",
+      },
+      {
+        sender: "Thomas",
+        message: "What Are You Doing?",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Thomas",
+        message: "Great!",
+      },
+      {
+        sender: "Allison",
+        message: "I'm good",
+      },
+      {
+        sender: "Allison",
+        message: "Great to Hear!",
+      },
+    ],
+  },
+];
+
+const chatsData = [
+  {
+    userId: 1,
+    chats: [
+      {
+        userId: 2,
+        messages: 1,
+      },
+      {
+        userId: 3,
+        messages: 2,
+      },
+      {
+        userId: 4,
+        messages: 1,
+      },
+    ],
+  },
+  {
+    userId: 4,
+    chats: [
+      {
+        userId: 1,
+        messages: 1,
+      },
+      {
+        userId: 2,
+        messages: 2,
+      },
+      {
+        userId: 3,
+        messages: 3,
+      },
+    ],
+  },
+];
+
 const chats = [
   {
     userId: 1,
@@ -150,18 +277,7 @@ const chats = [
           opened: false,
         },
       },
-      // {
-      //   userId: 10,
-      //   firstname: "Steven",
-      //   lastname: "Smith",
-      //   lastMessage: {
-      //     user2: "I'm good",
-      //     messageId: 15,
-      //     reply: 10,
-      //     opened: false,
-      //   },
-      // },
     ],
   },
 ];
-module.exports = { chats };
+module.exports = { chats, chatsData, messageData };

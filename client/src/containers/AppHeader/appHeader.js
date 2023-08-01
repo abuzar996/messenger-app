@@ -19,6 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { useDimentions } from "../../hooks/useDimentions";
 
+import { getAllTheUsers } from "../../redux/slices/userSlice";
 import { searchUsers } from "../../redux/slices/searchSlice";
 
 import { getChatList } from "../../redux/slices/chatSlice";
@@ -31,6 +32,7 @@ const AppHeader = () => {
   const refferencesHeader = useRef(null);
   const dispatch = useDispatch();
   const { sendMessageModal } = useSelector((state) => state.appReducer);
+  const { chatlist } = useSelector((state) => state.chats);
   const { user } = useSelector((state) => state.user);
   const { addFriendsModal, userProfileModal } = useSelector(
     (state) => state.appReducer
@@ -39,6 +41,15 @@ const AppHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllTheUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log(chatlist);
+  }, [chatlist]);
+
   useEffect(() => {
     let timer;
     if (searchValue) {
