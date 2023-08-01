@@ -2,6 +2,17 @@ const {
   checkIfSameUser,
   checkIfChatsExist,
 } = require("../services/chats.services");
+const { fetchMessagesSchema } = require("../validators/chats.validators");
+
+const validatefetchMessages = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    await fetchMessagesSchema.validateAsync({ userId });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 const userCheck = (req, res, next) => {
   const { userId } = req.params;
   const { token } = req.headers;
@@ -23,4 +34,4 @@ const chatCheck = (req, res, next) => {
     res.send({ message: err.message });
   }
 };
-module.exports = { userCheck, chatCheck };
+module.exports = { userCheck, chatCheck, validatefetchMessages };

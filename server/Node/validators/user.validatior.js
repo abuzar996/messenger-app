@@ -37,6 +37,7 @@ const addUserToFriendListSchema = Joi.object({
 const removeUserFromFriendListSchema = Joi.object({
   friendId: Joi.number().required(),
 });
+
 module.exports = {
   createUser: schema,
   loginBody: loginBody,

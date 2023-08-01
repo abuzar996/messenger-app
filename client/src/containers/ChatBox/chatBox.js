@@ -11,11 +11,12 @@ import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
+import { fetchAllMessages } from "../../redux/slices/chatSlice";
 let socket; // =
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  // const { messages, messageLoading } = useSelector((state) => state.chats);
   const { chatsHidden } = useSelector((state) => state.appReducer);
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
@@ -31,11 +32,12 @@ const ChatBox = () => {
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
-
   ///////////////////////////////////////////
   /////////////////////////////////////////////
   //////////////////////////////////////////
-
+  useEffect(() => {
+    dispatch(fetchAllMessages(id));
+  }, [dispatch, id]);
   useEffect(() => {
     socket = io(API);
     socket.emit("setup", user);
@@ -47,9 +49,6 @@ const ChatBox = () => {
   function sendChat() {
     socket.emit("chat", "hello world");
   }
-  //////////////////////////////////
-  ///////////////////////////////
-  //////////////////////////////
 
   useEffect(() => {
     dispatch(getUserById(id));

@@ -1,4 +1,23 @@
-const { returnChatData } = require("../../services/chats.services");
+const {
+  returnChatData,
+  fetchMessages,
+} = require("../../services/chats.services");
+
+const fetchMessagesData = (req, res) => {
+  const { userId } = req.params;
+  const { user } = req.body;
+  try {
+    let messageData = fetchMessages(user.userId, userId);
+    if (messageData && messageData.length > 0) {
+      res.status(200).send({ messageData });
+    } else {
+      res.status(404).send({ messageData: [] });
+    }
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
+
 const getChatData = (req, res) => {
   const { userId } = req.params;
   try {
@@ -9,4 +28,4 @@ const getChatData = (req, res) => {
   }
 };
 
-module.exports = { getChatData: getChatData };
+module.exports = { getChatData: getChatData, fetchMessagesData };

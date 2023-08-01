@@ -25,8 +25,30 @@ const returnChatData = (userId) => {
   });
   return data;
 };
+const fetchMessages = (searcher, userId) => {
+  if (searcher && userId) {
+    let history = chatsData.find((chat) => chat.userId === searcher);
+    let chat = history.chats.find((chat) => chat.userId === +userId);
+    if (chat) {
+      let data = messageData.find(
+        (message) => message.message === chat.messages
+      );
+      if (data) {
+        return data.data;
+      }
+
+      return [];
+    }
+    return [];
+
+    //let messages=messageData.find(({message}) =>message===userId);
+  } else {
+    return [];
+  }
+};
 module.exports = {
   checkIfSameUser: checkIfSameUser,
   checkIfChatsExist: checkIfChatsExist,
   returnChatData: returnChatData,
+  fetchMessages,
 };
