@@ -22,7 +22,7 @@ import { useDimentions } from "../../hooks/useDimentions";
 import { getAllTheUsers } from "../../redux/slices/userSlice";
 import { searchUsers } from "../../redux/slices/searchSlice";
 
-import { getChatList } from "../../redux/slices/chatSlice";
+import { getChatList, tuneChatData } from "../../redux/slices/chatSlice";
 
 import { closeSendMessageModal } from "../../redux/slices/appSettingSlice";
 
@@ -33,7 +33,7 @@ const AppHeader = () => {
   const dispatch = useDispatch();
   const { sendMessageModal } = useSelector((state) => state.appReducer);
   const { chatlist } = useSelector((state) => state.chats);
-  const { user } = useSelector((state) => state.user);
+  const { user, allUsers } = useSelector((state) => state.user);
   const { addFriendsModal, userProfileModal } = useSelector(
     (state) => state.appReducer
   );
@@ -44,11 +44,23 @@ const AppHeader = () => {
 
   useEffect(() => {
     dispatch(getAllTheUsers());
-  }, [dispatch]);
+    if (user.userId) {
+      dispatch(getChatList(user.userId));
+    }
+  }, [dispatch, user]);
 
   useEffect(() => {
-    console.log(chatlist);
-  }, [chatlist]);
+    if (chatlist.length > 0 && allUsers.length > 0) {
+      let data = chatlist.map((list) => {
+        let user = allUsers.find((user) => user.userId === list.userId);
+        list = { ...list, firstname: user.firstname, lastname: user.lastname };
+        return list;
+      });
+      dispatch(tuneChatData(data));
+    } else {
+      dispatch(tuneChatData([]));
+    }
+  }, [allUsers, chatlist, dispatch]);
 
   useEffect(() => {
     let timer;
@@ -65,11 +77,6 @@ const AppHeader = () => {
     };
   }, [searchValue, dispatch]);
 
-  useEffect(() => {
-    if (user.userId) {
-      dispatch(getChatList(user.userId));
-    }
-  }, [dispatch, user]);
   function closeModal() {
     dispatch(closeSendMessageModal());
   }

@@ -53,7 +53,11 @@ const searchAUserByIdcheck = (userId) => {
 };
 
 const getAllUsersExcept = (id) => {
-  const data = user.filter((u) => u.userId !== id);
+  const data = user
+    .filter((u) => u.userId !== id)
+    .map(({ userId, firstname, lastname, email }) => {
+      return { userId, firstname, lastname, email };
+    });
   return data;
 };
 

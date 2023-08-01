@@ -52,7 +52,7 @@ const messageData = [
         message: "I'm good",
       },
       {
-        sender: "Allison",
+        sender: "Jhon",
         message: "Great to Hear!",
       },
     ],
@@ -81,7 +81,7 @@ const messageData = [
         message: "I'm good",
       },
       {
-        sender: "Allison",
+        sender: "Thomas",
         message: "Great to Hear!",
       },
     ],
@@ -94,15 +94,16 @@ const chatsData = [
     chats: [
       {
         userId: 2,
-        messages: 1,
-      },
-      {
-        userId: 3,
         messages: 2,
       },
+    ],
+  },
+  {
+    userId: 2,
+    chats: [
       {
-        userId: 4,
-        messages: 1,
+        userId: 1,
+        messages: 2,
       },
     ],
   },

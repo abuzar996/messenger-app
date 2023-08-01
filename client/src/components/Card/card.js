@@ -2,10 +2,10 @@ import React, { useRef, useEffect, useState } from "react";
 import "./card.styles.css";
 import "../../App.css";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import user from "../../images/user.png";
+import users from "../../images/user.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
-
+import { useSelector } from "react-redux";
 const Card = ({
   modalOpen,
   firstname,
@@ -14,6 +14,7 @@ const Card = ({
   onMessageClick,
   data,
 }) => {
+  const { user } = useSelector((state) => state.user);
   const [seen, setSeen] = useState(false);
   const windowSize = useDimentions();
   const references = useRef(null);
@@ -52,7 +53,7 @@ const Card = ({
       }}
     >
       <div className="img-container">
-        <img className="image" src={user} alt="user" />
+        <img className="image" src={users} alt="user" />
       </div>
       <div className="data-body">
         <div className="data-container align-center padding-left padding-top">
@@ -72,7 +73,7 @@ const Card = ({
         <div className="data-container padding-left">
           <label>
             <span className={!seen ? "un-opened-bold" : null}>
-              {lastMessage.user1
+              {lastMessage.sender === user.firstname
                 ? "You sent a message"
                 : firstname + " sent you a message"}
             </span>

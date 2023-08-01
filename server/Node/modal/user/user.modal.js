@@ -11,7 +11,8 @@ const userModal = [
     userId: 2,
     firstname: "John",
     lastname: "Doe",
-    email: "John.doe@gmail.com",
+    email: "john@gmail.com",
+    password: "$2b$10$zm8iX2YAMlumQ17ZdznFneENhg10e7mBswfL3LCBCuLZcB.2BnSFO",
     friends: [4],
   },
   {

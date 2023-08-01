@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./chatList.styles.css";
@@ -13,9 +13,7 @@ const ListData = ({
   mobileSize,
   searchFocus,
 }) => {
-  const { chatlist, loading } = useSelector((state) => state.chats);
-  const [chatlist2] = useState([]);
-  const [loading2] = useState(false);
+  const { tunnedChatList, loading } = useSelector((state) => state.chats);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);
@@ -56,12 +54,12 @@ const ListData = ({
       }
       ref={reference}
     >
-      {loading2 ? (
+      {loading ? (
         <div className="loader-styles-list">
           <CircularProgress color="success" />
         </div>
-      ) : chatlist2.length > 0 ? (
-        chatlist2.map((value, index) => (
+      ) : tunnedChatList.length > 0 ? (
+        tunnedChatList.map((value, index) => (
           <Card
             onMessageClick={onMessageClick}
             key={index}

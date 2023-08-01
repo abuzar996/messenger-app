@@ -3,6 +3,7 @@ import axios from "axios";
 import { API } from "../../constants/data";
 const initialState = {
   chatlist: [],
+  tunnedChatList: [],
   loading: false,
   error: "",
 };
@@ -19,6 +20,11 @@ export const getChatList = createAsyncThunk("getChatList", async (userId) => {
 const chatSlice = createSlice({
   name: "chat",
   initialState,
+  reducers: {
+    tuneChatData: (state, action) => {
+      state.tunnedChatList = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getChatList.pending, (state) => {
       state.loading = true;
@@ -39,4 +45,5 @@ const chatSlice = createSlice({
     });
   },
 });
+export const { tuneChatData } = chatSlice.actions;
 export default chatSlice.reducer;
