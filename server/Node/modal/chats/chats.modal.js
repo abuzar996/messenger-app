@@ -62,6 +62,7 @@ const messageData = [
         sender: "Allison",
         message: "Great to Hear!",
         messageId: 12,
+        reply: 4,
       },
     ],
   },
@@ -135,6 +136,41 @@ const messageData = [
       },
     ],
   },
+  {
+    message: 6,
+    data: [
+      {
+        sender: "John",
+        message: "Hello How Are You?",
+        messageId: 1,
+      },
+      {
+        sender: "John",
+        message: "What Are You Doing?",
+        messageId: 2,
+      },
+      {
+        sender: "Alex",
+        message: "I'm good",
+        messageId: 3,
+      },
+      {
+        sender: "John",
+        message: "Great!",
+        messageId: 4,
+      },
+      {
+        sender: "Alex",
+        message: "I'm good",
+        messageId: 5,
+      },
+      {
+        sender: "John",
+        message: "Great to Hear!",
+        messageId: 6,
+      },
+    ],
+  },
 ];
 
 const chatsData = [
@@ -143,7 +179,7 @@ const chatsData = [
     chats: [
       {
         userId: 2,
-        messages: 2,
+        messages: 6,
       },
     ],
   },

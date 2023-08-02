@@ -45,7 +45,13 @@ const MessageSent = ({ messages, messageRef, onHandleClick, messageList }) => {
     <>
       {reply && messageToBeReplied ? (
         <div
-          style={{ padding: "10px", flexDirection: "column", float: "right" }}
+          style={{
+            padding: "10px",
+            flexDirection: "column",
+            float: "right",
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
         >
           <div
             style={{
@@ -105,7 +111,12 @@ const MessageRecieved = ({ messages, onHandleClick, messageList }) => {
     <>
       {reply && messageToBeReplied ? (
         <div
-          style={{ padding: "10px", flexDirection: "column", float: "left" }}
+          style={{
+            padding: "10px",
+            flexDirection: "column",
+            float: "left",
+            display: "flex",
+          }}
         >
           <div
             style={{
@@ -194,7 +205,6 @@ const Message = ({ onClick, setOptionModalOpen, messages }) => {
                 onHandleClick={() => onHandleClick(message)}
               />
             )}
-            ;
           </div>
         ))}
     </>
