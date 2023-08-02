@@ -10,7 +10,7 @@ const ReplyContainer = ({ width, message, marginBottom }) => {
       <div className="chat-box-message-reply-inner-container">
         <div>
           <label className="chat-box-message-label">
-            {message.user1 ? message.user1 : message.user2}
+            {localStorage.getItem("confirm-message")}
           </label>
         </div>
         <div>

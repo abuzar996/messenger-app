@@ -26,6 +26,11 @@
   display: flex;
   justify-content: flex-end;
 }
+.chat-space-loading-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .label1 {
   background-color: var(--secondary);
   color: var(--primary);

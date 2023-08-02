@@ -10,14 +10,14 @@
   --danger: rgb(148, 3, 32);
 }
 .theme-light {
-  --primary: #c5c6c7;
-  --secondary: #64485c;
+  --primary: #f2f5ff;
+  --secondary: #000310;
   --hover-modal: #000;
   background-color: var(--primary);
 }
 .theme-dark {
-  --primary: #202123;
-  --secondary: #c6bdbd;
+  --primary: #000310;
+  --secondary: #f2f5ff;
   --hover-modal: #fff;
   background-color: var(--primary);
 }

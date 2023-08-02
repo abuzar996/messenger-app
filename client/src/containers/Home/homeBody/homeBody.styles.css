@@ -35,6 +35,6 @@
 
 .logo-img-theme-light {
   color: var(--secondary);
-  filter: invert(27%) sepia(25%) saturate(516%) hue-rotate(265deg)
-    brightness(98%) contrast(86%);
+  filter: invert(5%) sepia(14%) saturate(2542%) hue-rotate(180deg)
+    brightness(95%) contrast(107%);
 }

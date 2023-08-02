@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
 import { io } from "socket.io-client";
 import { API } from "../../constants/data";
-import { chats } from "../../constants/data";
 import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
@@ -16,25 +15,18 @@ let socket; // =
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const { messages, messageLoading } = useSelector((state) => state.chats);
   const { chatsHidden } = useSelector((state) => state.appReducer);
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [messageData, setMessageData] = useState(null);
   const [messageReply, setMessageReply] = useState(false);
-  const [replyData, setReplyData] = useState(null);
   const [senderHeight, setSenderHeight] = useState(null);
   const [marginBottom, setMarginBottom] = useState(senderHeight);
-  const [chatData, setChatData] = useState([...chats]);
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
-  const [scrollValue, setScrollValue] = useState(0);
-  ///////////////////////////////////////////
-  /////////////////////////////////////////////
-  //////////////////////////////////////////
+
   useEffect(() => {
     dispatch(fetchAllMessages(id));
   }, [dispatch, id]);
@@ -55,18 +47,6 @@ const ChatBox = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (searchValue) {
-      let newData = chats.filter((data) => {
-        return data.user1
-          ? data.user1.includes(searchValue)
-          : data.user2.includes(searchValue);
-      });
-      setChatData([...newData]);
-    } else {
-      setChatData([...chats]);
-    }
-  }, [searchValue]);
-  useEffect(() => {
     if (windowSize.width <= 500) {
       setMobileSize(true);
     } else {
@@ -79,25 +59,25 @@ const ChatBox = () => {
   }, [senderHeight]);
 
   function onSendClick() {
-    if (newMessage.length) {
-      sendChat();
-      let temp = newMessage?.trim();
-      if (temp.length) {
-        setChatData((prevState) => {
-          return [
-            ...prevState,
-            {
-              user1: newMessage,
-              messageId: prevState.length + 1,
-              reply: replyData ? replyData.messageId : null,
-            },
-          ];
-        });
-        setMessageData(null);
-        setMessageReply(false);
-      }
-      setNewMessage("");
-    }
+    // if (newMessage.length) {
+    //   sendChat();
+    //   let temp = newMessage?.trim();
+    //   if (temp.length) {
+    //     setChatData((prevState) => {
+    //       return [
+    //         ...prevState,
+    //         {
+    //           user1: newMessage,
+    //           messageId: prevState.length + 1,
+    //           reply: replyData ? replyData.messageId : null,
+    //         },
+    //       ];
+    //     });
+    //     setMessageData(null);
+    //     setMessageReply(false);
+    //   }
+    //   setNewMessage("");
+    // }
   }
   function onInputChange(e) {
     setNewMessage(e.target.value);
@@ -130,16 +110,9 @@ const ChatBox = () => {
         />
         <div>
           <ChatSpace
-            replyData={replyData}
-            setReplyData={setReplyData}
-            messageData={messageData}
-            setMessageData={setMessageData}
             messageReply={messageReply}
             setMessageReply={setMessageReply}
             marginBottom={marginBottom}
-            chatData={chatData}
-            scrollValue={scrollValue}
-            setScrollValue={setScrollValue}
             searchFocus={searchFocus}
           />
         </div>

@@ -59,10 +59,11 @@ const chatSlice = createSlice({
 
     builder.addCase(fetchAllMessages.pending, (state) => {
       state.messagesLoading = true;
+      state.messages = [];
     });
     builder.addCase(fetchAllMessages.fulfilled, (state, action) => {
       if (action.payload.status === 200) {
-        state.messages = action.payload.data;
+        state.messages = action.payload.data.messageData;
       } else {
         state.messages = [];
       }
@@ -71,7 +72,7 @@ const chatSlice = createSlice({
     });
     builder.addCase(fetchAllMessages.rejected, (state, action) => {
       state.error = action.payload.message;
-      state.loading = false;
+      state.messagesLoading = false;
       state.messages = [];
     });
   },
