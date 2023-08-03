@@ -16,6 +16,8 @@ const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { chatsHidden } = useSelector((state) => state.appReducer);
+  const { messages, messagesLoading } = useSelector((state) => state.chats);
+
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
@@ -26,7 +28,12 @@ const ChatBox = () => {
   const [marginBottom, setMarginBottom] = useState(senderHeight);
   const [newMessage, setNewMessage] = useState([]);
   const [optionsModal, setOptionModalOpen] = useState(false);
-
+  const [dataToBePassed, setDataToBePassed] = useState({});
+  const [messageData, setMessageData] = useState({});
+  const [privateMessages, setPrivateMessages] = useState([]);
+  useEffect(() => {
+    setPrivateMessages(messages);
+  }, [messages]);
   useEffect(() => {
     dispatch(fetchAllMessages(id));
   }, [dispatch, id]);
@@ -59,25 +66,23 @@ const ChatBox = () => {
   }, [senderHeight]);
 
   function onSendClick() {
-    // if (newMessage.length) {
-    //   sendChat();
-    //   let temp = newMessage?.trim();
-    //   if (temp.length) {
-    //     setChatData((prevState) => {
-    //       return [
-    //         ...prevState,
-    //         {
-    //           user1: newMessage,
-    //           messageId: prevState.length + 1,
-    //           reply: replyData ? replyData.messageId : null,
-    //         },
-    //       ];
-    //     });
-    //     setMessageData(null);
-    //     setMessageReply(false);
-    //   }
-    //   setNewMessage("");
-    // }
+    let replyExists = messageReply && dataToBePassed;
+    let newMessageObject = {
+      messageId: privateMessages.length + 1,
+      message: newMessage,
+      sender: user.firstname,
+      reply: replyExists ? dataToBePassed.messageId : null,
+    };
+    if (newMessageObject) {
+      if (privateMessages.length > 0) {
+        setPrivateMessages((prevState) => [...prevState, newMessageObject]);
+      } else {
+        setPrivateMessages([newMessageObject]);
+      }
+    }
+
+    setNewMessage("");
+    setMessageReply(false);
   }
   function onInputChange(e) {
     setNewMessage(e.target.value);
@@ -110,10 +115,16 @@ const ChatBox = () => {
         />
         <div>
           <ChatSpace
+            messages={privateMessages}
+            messagesLoading={messagesLoading}
             messageReply={messageReply}
             setMessageReply={setMessageReply}
             marginBottom={marginBottom}
             searchFocus={searchFocus}
+            dataToBePassed={dataToBePassed}
+            setDataToBePassed={setDataToBePassed}
+            messageData={messageData}
+            setMessageData={setMessageData}
           />
         </div>
         <InputMessage

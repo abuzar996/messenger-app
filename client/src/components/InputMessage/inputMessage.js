@@ -16,7 +16,6 @@ const InputMessage = ({
   onChange,
   setSenderHeight,
   messageReply,
-  setMessageReply,
 }) => {
   const Ref = useRef(null);
   const inputRef = useRef(null);
@@ -36,7 +35,6 @@ const InputMessage = ({
 
   function onEnterPress() {
     inputRef.current.blur();
-    setMessageReply(false);
     onClick();
   }
 

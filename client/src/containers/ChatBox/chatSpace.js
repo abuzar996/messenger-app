@@ -9,17 +9,21 @@ import { EmptyMessage } from "./emptyMessage";
 import MessageOptionsModal from "../../modals/MessageOptionsModal";
 import CircularProgress from "@mui/material/CircularProgress";
 import Message from "./message";
-import { useSelector } from "react-redux";
+
 const ChatSpace = ({
   marginBottom,
   messageReply,
   setMessageReply,
   searchFocus,
+  dataToBePassed,
+  setDataToBePassed,
+  messageData,
+  setMessageData,
+  messagesLoading,
+  messages,
 }) => {
   const dimentions = useDimentions();
   const [documentWidth, setDocumentWidth] = useState(null);
-  const { messages, messagesLoading } = useSelector((state) => state.chats);
-
   const [messagesData, setMessagesData] = useState([]);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -46,7 +50,8 @@ const ChatSpace = ({
     const cWidth = +localStorage.getItem("width_message");
     setHorizontalDisplay(xValue, parentWidth, cWidth);
     setVerticalDisplay(yValue, parentHeight, cHeight);
-    localStorage.setItem("message", data.message);
+    localStorage.setItem("message", JSON.stringify(data));
+    setMessageData(data);
   }
   useEffect(() => {
     setMessagesData(messages);
@@ -60,9 +65,7 @@ const ChatSpace = ({
 
   function onReplyClick() {
     setMessageReply(true);
-
-    let message = localStorage.getItem("message");
-    localStorage.setItem("confirm-message", message);
+    setDataToBePassed(messageData);
   }
 
   return (
@@ -101,7 +104,11 @@ const ChatSpace = ({
         />
       )}
       {messageReply && (
-        <ReplyContainer width={documentWidth} marginBottom={marginBottom} />
+        <ReplyContainer
+          width={documentWidth}
+          marginBottom={marginBottom}
+          data={dataToBePassed}
+        />
       )}
     </div>
   );
