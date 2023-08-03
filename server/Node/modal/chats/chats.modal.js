@@ -1,4 +1,4 @@
-const messageData = [
+var messageData = [
   {
     message: 1,
     data: [
@@ -137,7 +137,7 @@ const messageData = [
     ],
   },
   {
-    message: 6,
+    message: 4,
     data: [
       {
         sender: "John",
@@ -179,7 +179,11 @@ const chatsData = [
     chats: [
       {
         userId: 2,
-        messages: 6,
+        messages: 4,
+      },
+      {
+        userId: 4,
+        messages: 1,
       },
     ],
   },

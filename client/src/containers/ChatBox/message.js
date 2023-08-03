@@ -60,6 +60,7 @@ const MessageSent = ({ messages, messageRef, onHandleClick, messageList }) => {
               display: "flex",
               flexDirection: "column",
               borderRadius: "10px",
+              justifyContent: "center",
             }}
           >
             <label
@@ -67,6 +68,7 @@ const MessageSent = ({ messages, messageRef, onHandleClick, messageList }) => {
               style={{
                 paddingTop: "10px",
                 paddingLeft: "10px",
+                paddingRight: "10px",
                 textAlign: "center",
               }}
             >
@@ -125,6 +127,7 @@ const MessageRecieved = ({ messages, onHandleClick, messageList }) => {
               display: "flex",
               flexDirection: "column",
               borderRadius: "10px",
+              justifyContent: "center",
             }}
           >
             <label
@@ -132,6 +135,7 @@ const MessageRecieved = ({ messages, onHandleClick, messageList }) => {
               style={{
                 paddingTop: "10px",
                 paddingLeft: "10px",
+                paddingRight: "10px",
                 textAlign: "center",
               }}
             >

@@ -10,13 +10,24 @@ import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
-import { fetchAllMessages } from "../../redux/slices/chatSlice";
+import {
+  fetchAllMessages,
+  addNewMessage,
+  addNewMessageRecord,
+  addNewChatList,
+  //getChatList,
+} from "../../redux/slices/chatSlice";
 let socket; // =
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { chatsHidden } = useSelector((state) => state.appReducer);
-  const { messages, messagesLoading } = useSelector((state) => state.chats);
+  const {
+    messages,
+    messagesLoading,
+    messageRecordId,
+    addNewMessageRecordValue,
+  } = useSelector((state) => state.chats);
 
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
@@ -31,6 +42,18 @@ const ChatBox = () => {
   const [dataToBePassed, setDataToBePassed] = useState({});
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
+
+  useEffect(() => {
+    if (addNewMessageRecordValue !== -1) {
+      dispatch(
+        addNewChatList({
+          message: addNewMessageRecordValue,
+          userId: user.userId,
+          clientId: +id,
+        })
+      );
+    }
+  }, [addNewMessageRecordValue, id, user, dispatch]);
   useEffect(() => {
     setPrivateMessages(messages);
   }, [messages]);
@@ -66,23 +89,33 @@ const ChatBox = () => {
   }, [senderHeight]);
 
   function onSendClick() {
-    let replyExists = messageReply && dataToBePassed;
-    let newMessageObject = {
-      messageId: privateMessages.length + 1,
-      message: newMessage,
-      sender: user.firstname,
-      reply: replyExists ? dataToBePassed.messageId : null,
-    };
-    if (newMessageObject) {
-      if (privateMessages.length > 0) {
-        setPrivateMessages((prevState) => [...prevState, newMessageObject]);
-      } else {
-        setPrivateMessages([newMessageObject]);
-      }
-    }
+    if (newMessage.length > 0) {
+      let replyExists = messageReply && dataToBePassed;
+      let newMessageObject = {
+        messageId: privateMessages.length + 1,
+        message: newMessage,
+        sender: user.firstname,
+        reply: replyExists ? dataToBePassed.messageId : -1,
+      };
+      if (newMessageObject) {
+        if (privateMessages.length > 0) {
+          setPrivateMessages((prevState) => [...prevState, newMessageObject]);
 
-    setNewMessage("");
-    setMessageReply(false);
+          dispatch(
+            addNewMessage({
+              message: messageRecordId,
+              data: newMessageObject,
+            })
+          );
+        } else {
+          dispatch(addNewMessageRecord(newMessageObject));
+          setPrivateMessages([newMessageObject]);
+        }
+      }
+
+      setNewMessage("");
+      setMessageReply(false);
+    }
   }
   function onInputChange(e) {
     setNewMessage(e.target.value);

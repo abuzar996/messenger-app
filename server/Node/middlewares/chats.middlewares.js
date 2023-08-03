@@ -2,8 +2,41 @@ const {
   checkIfSameUser,
   checkIfChatsExist,
 } = require("../services/chats.services");
-const { fetchMessagesSchema } = require("../validators/chats.validators");
+const {
+  fetchMessagesSchema,
+  addMessageSchema,
+  addMessageRecordSchema,
+  createNewChatSchema,
+} = require("../validators/chats.validators");
 
+const validateAddMessage = async (req, res, next) => {
+  const { data, message } = req.body;
+  try {
+    await addMessageSchema.validateAsync({ message, data: data });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
+const validateAddChat = async (req, res, next) => {
+  const { userId, clientId, message } = req.body;
+  try {
+    await createNewChatSchema.validateAsync({ userId, clientId, message });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
+
+const validateAddMessageRecord = async (req, res, next) => {
+  const { data } = req.body;
+  try {
+    await addMessageRecordSchema.validateAsync({ data });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 const validatefetchMessages = async (req, res, next) => {
   const { userId } = req.params;
   try {
@@ -34,4 +67,11 @@ const chatCheck = (req, res, next) => {
     res.send({ message: err.message });
   }
 };
-module.exports = { userCheck, chatCheck, validatefetchMessages };
+module.exports = {
+  userCheck,
+  chatCheck,
+  validatefetchMessages,
+  validateAddMessage,
+  validateAddMessageRecord,
+  validateAddChat,
+};
