@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./chatList.styles.css";
-import { data } from "../../constants/data";
 import TopNav from "../TopNav";
 import ListHeader from "../ListHeader";
 import DeleteModal from "../../modals/DeleteModal/deleteModal";
@@ -19,19 +18,18 @@ const ChatList = () => {
   const [modalYPosition, setModalYPosition] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
-  const [userData, setUserData] = useState([...data]);
 
-  useEffect(() => {
-    if (searchValue) {
-      let tempUserData = data.filter((user) =>
-        user.firstname.includes(searchValue)
-      );
+  // useEffect(() => {
+  //   if (searchValue) {
+  //     let tempUserData = data.filter((user) =>
+  //       user.firstname.includes(searchValue)
+  //     );
 
-      setUserData([...tempUserData]);
-    } else {
-      setUserData([...data]);
-    }
-  }, [searchValue]);
+  //     setUserData([...tempUserData]);
+  //   } else {
+  //     setUserData([...data]);
+  //   }
+  // }, [searchValue]);
 
   useEffect(() => {
     let cHeight = +localStorage.getItem("height");
@@ -81,7 +79,6 @@ const ChatList = () => {
       <ListData
         mobileSize={mobileSize}
         setScrollValue={setScrollValue}
-        data={userData}
         searchFocus={searchFocus}
         setOptionModalOpen={setOptionModalOpen}
       />
