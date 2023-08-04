@@ -10,12 +10,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HideSourceIcon from "@mui/icons-material/HideSource";
 import { removeAllUsers } from "../../redux/slices/userSlice";
-import { changeTheme } from "../../redux/slices/appSettingSlice";
+import { changeUserSettings } from "../../redux/slices/appSettingSlice";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { showChats, hideChats } from "../../redux/slices/appSettingSlice";
 const UserOptionModal = ({ modalOpen }) => {
   const { darkmode, chatsHidden } = useSelector((state) => state.appReducer);
-
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useKeys("Escape", closeFn);
@@ -73,7 +73,7 @@ const UserOptionModal = ({ modalOpen }) => {
             size="small"
             checked={darkmode}
             onChange={() => {
-              dispatch(changeTheme());
+              dispatch(changeUserSettings(user.userId));
             }}
           />
           <label>Dark Theme</label>

@@ -6,7 +6,7 @@ import "./signUp.styles.css";
 import "../../App.css";
 import { useDispatch } from "react-redux";
 import { addNotification } from "../../redux/slices/notificationSlice";
-
+import { addSettingsForNewUser } from "../../redux/slices/appSettingSlice";
 import { refreshState } from "../../redux/slices/userSlice";
 
 import { useDimentions } from "../../hooks/useDimentions";
@@ -41,6 +41,7 @@ const SignUp = () => {
           timeOut: 3000,
         })
       );
+      dispatch(addSettingsForNewUser());
       dispatch(refreshState());
       navigate("/signIn");
     }

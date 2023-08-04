@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { API } from "../../constants/data";
 const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
 const initialState = {
   loading: false,
@@ -13,6 +15,55 @@ const initialState = {
   chatsHidden: false,
 };
 
+export const addSettingsForNewUser = createAsyncThunk(
+  "AddSettingsForNewUser",
+  async () => {
+    try {
+      return await axios
+        .post(`${API}/settings/add-new-user-settings`)
+        .then((response) => response)
+        .catch((error) => error.response);
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
+export const getUserSettings = createAsyncThunk(
+  "GetDefaultSettings",
+  async (userId) => {
+    try {
+      return await axios
+        .get(`${API}/settings/get-settings-of-user/${userId}`, {
+          headers: { token: localStorage.getItem("Token") },
+        })
+        .then((response) => response)
+        .catch((error) => error.response);
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
+export const changeUserSettings = createAsyncThunk(
+  "ChangeUserSettings",
+  async (userId) => {
+    try {
+      return await axios
+        .post(
+          `${API}/settings/change-settings-of-user`,
+          { userId: userId },
+          {
+            headers: { token: localStorage.getItem("Token") },
+          }
+        )
+        .then((response) => response)
+        .catch((error) => error.response);
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
 const appSettingSlice = createSlice({
   name: "App Slice",
   initialState,
@@ -55,6 +106,56 @@ const appSettingSlice = createSlice({
     hideChats: (state) => {
       state.chatsHidden = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getUserSettings.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(getUserSettings.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.darkmode = action.payload.data.darkMode;
+        state.loading = false;
+        state.error = "";
+      } else {
+        state.error = "cannot fetch user settings";
+      }
+    });
+    builder.addCase(getUserSettings.rejected, (state) => {
+      state.loading = false;
+      state.error = "cannot fetch user settings";
+    });
+
+    builder.addCase(changeUserSettings.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(changeUserSettings.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.darkmode = !state.darkmode;
+        state.loading = false;
+        state.error = "";
+      } else {
+        state.error = "cannot fetch user settings";
+      }
+    });
+    builder.addCase(changeUserSettings.rejected, (state) => {
+      state.loading = false;
+      state.error = "cannot fetch user settings";
+    });
+
+    builder.addCase(addSettingsForNewUser.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(addSettingsForNewUser.fulfilled, (state) => {
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(addSettingsForNewUser.rejected, (state) => {
+      state.loading = false;
+      state.error = "cannot fetch user settings";
+    });
   },
 });
 export const {

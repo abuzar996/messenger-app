@@ -7,7 +7,7 @@ const {
   addmessageRecordToUser,
   addmessageRecordToClient,
 } = require("../../services/chats.services");
-const { messageData, chatsData } = require("../../modal/chats/chats.modal");
+const { messageData } = require("../../modal/chats/chats.modal");
 const fetchMessagesData = (req, res) => {
   const { userId } = req.params;
   const { user } = req.body;

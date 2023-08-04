@@ -24,7 +24,10 @@ import { searchUsers } from "../../redux/slices/searchSlice";
 
 import { getChatList, tuneChatData } from "../../redux/slices/chatSlice";
 
-import { closeSendMessageModal } from "../../redux/slices/appSettingSlice";
+import {
+  closeSendMessageModal,
+  getUserSettings,
+} from "../../redux/slices/appSettingSlice";
 
 import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
 
@@ -49,6 +52,12 @@ const AppHeader = () => {
       dispatch(getChatList(user.userId));
     }
   }, [dispatch, user, addNewChatLoading]);
+
+  useEffect(() => {
+    if (user.userId) {
+      dispatch(getUserSettings(user.userId));
+    }
+  }, [user, dispatch]);
 
   useEffect(() => {
     if (chatlist.length > 0 && allUsers.length > 0) {
