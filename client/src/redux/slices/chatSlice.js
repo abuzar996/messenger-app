@@ -76,10 +76,14 @@ const chatSlice = createSlice({
     tuneChatData: (state, action) => {
       state.tunnedChatList = action.payload;
     },
+    updateTriggers: (state) => {
+      state.addNewMessageRecordValue = -1;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getChatList.pending, (state) => {
       state.loading = true;
+      state.chatlist = [];
     });
     builder.addCase(getChatList.fulfilled, (state, action) => {
       if (action.payload.status === 200) {
@@ -103,8 +107,13 @@ const chatSlice = createSlice({
     });
     builder.addCase(fetchAllMessages.fulfilled, (state, action) => {
       if (action.payload.status === 200) {
-        state.messages = action.payload.data.messageData;
-        state.messageRecordId = action.payload.data.message;
+        if (action.payload.data.messageData) {
+          state.messages = action.payload.data.messageData;
+          state.messageRecordId = action.payload.data.message;
+        } else {
+          state.messageRecordId = -1;
+          state.messages = [];
+        }
       } else {
         state.messages = [];
       }
@@ -169,5 +178,5 @@ const chatSlice = createSlice({
     });
   },
 });
-export const { tuneChatData } = chatSlice.actions;
+export const { tuneChatData, updateTriggers } = chatSlice.actions;
 export default chatSlice.reducer;

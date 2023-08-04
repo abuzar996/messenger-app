@@ -140,7 +140,7 @@ var messageData = [
     message: 4,
     data: [
       {
-        sender: "John",
+        sender: "Alex",
         message: "Hello How Are You?",
         messageId: 1,
       },
@@ -175,43 +175,39 @@ var messageData = [
 
 const chatsData = [
   {
-    userId: 1,
-    chats: [
-      {
-        userId: 2,
-        messages: 4,
-      },
-      {
-        userId: 4,
-        messages: 1,
-      },
-    ],
+    // userId: 1,
+    // chats: [
+    // {
+    //   userId: 2,
+    //   messages: 4,
+    // },
+    // {
+    //   userId: 4,
+    //   messages: 1,
+    // },
+    //],
   },
   {
-    userId: 2,
-    chats: [
-      {
-        userId: 1,
-        messages: 2,
-      },
-    ],
+    // userId: 2,
+    // chats: [
+    // {
+    //   userId: 1,
+    //   messages: 4,
+    // },
+    //],
   },
   {
-    userId: 4,
-    chats: [
-      {
-        userId: 1,
-        messages: 1,
-      },
-      {
-        userId: 2,
-        messages: 2,
-      },
-      {
-        userId: 3,
-        messages: 3,
-      },
-    ],
+    // userId: 4,
+    // chats: [
+    // {
+    //   userId: 1,
+    //   messages: 1,
+    // },
+    // {
+    //   userId: 3,
+    //   messages: 3,
+    // },
+    //],
   },
 ];
 

@@ -67,7 +67,7 @@ const InputMessage = ({
           </div>
         </div>
         <div className="message-button-container">
-          <Button onClick={onClick.bind(this)}>Send</Button>
+          <Button onClick={onClick}>Send</Button>
         </div>
       </div>
     </div>

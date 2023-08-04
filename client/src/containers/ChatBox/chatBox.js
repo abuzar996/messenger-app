@@ -16,6 +16,7 @@ import {
   addNewMessageRecord,
   addNewChatList,
   //getChatList,
+  updateTriggers,
 } from "../../redux/slices/chatSlice";
 let socket; // =
 const ChatBox = () => {
@@ -42,7 +43,7 @@ const ChatBox = () => {
   const [dataToBePassed, setDataToBePassed] = useState({});
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
-
+  //const { addNewChatLoading } = useSelector((state) => state.chats);
   useEffect(() => {
     if (addNewMessageRecordValue !== -1) {
       dispatch(
@@ -52,6 +53,7 @@ const ChatBox = () => {
           clientId: +id,
         })
       );
+      dispatch(updateTriggers());
     }
   }, [addNewMessageRecordValue, id, user, dispatch]);
   useEffect(() => {
@@ -85,7 +87,7 @@ const ChatBox = () => {
   }, [windowSize, mobileSize]);
 
   useEffect(() => {
-    setMarginBottom(senderHeight);
+    setMarginBottom(senderHeight + 8);
   }, [senderHeight]);
 
   function onSendClick() {
@@ -107,12 +109,11 @@ const ChatBox = () => {
               data: newMessageObject,
             })
           );
-        } else {
+        } else if (privateMessages.length === 0) {
           dispatch(addNewMessageRecord(newMessageObject));
           setPrivateMessages([newMessageObject]);
         }
       }
-
       setNewMessage("");
       setMessageReply(false);
     }
