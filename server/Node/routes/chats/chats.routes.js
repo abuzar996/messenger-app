@@ -8,6 +8,7 @@ const {
   addNewMessage,
   addNewMessageRecord,
   addNewChatToList,
+  deleteSelectedChat,
 } = require("../../controllers/chats/chats.controller");
 const {
   userCheck,
@@ -16,6 +17,7 @@ const {
   validateAddMessage,
   validateAddMessageRecord,
   validateAddChat,
+  validatedeleteChat,
 } = require("../../middlewares/chats.middlewares");
 chatsRouter.get(
   "/get-chat-list-by-id/:userId",
@@ -51,5 +53,11 @@ chatsRouter.post(
   isAuthenticated,
   validateAddChat,
   addNewChatToList
+);
+chatsRouter.post(
+  "/delete-selected-chat",
+  isAuthenticated,
+  validatedeleteChat,
+  deleteSelectedChat
 );
 module.exports = chatsRouter;

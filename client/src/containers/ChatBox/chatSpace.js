@@ -9,6 +9,8 @@ import { EmptyMessage } from "./emptyMessage";
 import MessageOptionsModal from "../../modals/MessageOptionsModal";
 import CircularProgress from "@mui/material/CircularProgress";
 import Message from "./message";
+import { changeSelectedId } from "../../redux/slices/chatSlice";
+import { useDispatch } from "react-redux";
 
 const ChatSpace = ({
   marginBottom,
@@ -22,6 +24,7 @@ const ChatSpace = ({
   messagesLoading,
   messages,
 }) => {
+  const dispatch = useDispatch();
   const dimentions = useDimentions();
   const [documentWidth, setDocumentWidth] = useState(null);
   const [messagesData, setMessagesData] = useState([]);
@@ -52,6 +55,7 @@ const ChatSpace = ({
     setVerticalDisplay(yValue, parentHeight, cHeight);
     localStorage.setItem("message", JSON.stringify(data));
     setMessageData(data);
+    dispatch(changeSelectedId(data.messageId));
   }
   useEffect(() => {
     setMessagesData(messages);

@@ -2,11 +2,11 @@ import React from "react";
 import "./deleteModal.styles.css";
 
 import Overlay from "../../components/Overlay";
-const DeleteMadal = ({
-  headerMessage,
-  modalOpen,
-  /*deleteModal,*/ onClose,
-}) => {
+import { useDispatch, useSelector } from "react-redux";
+import { deleteSelectedMessage } from "../../redux/slices/chatSlice";
+const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const { messageRecordId, clickedId } = useSelector((state) => state.chats);
   return (
     <Overlay modalOpen={modalOpen}>
       <div
@@ -24,7 +24,16 @@ const DeleteMadal = ({
         </div>
         <div className="delete-buttons-container">
           <button className="delete-modal-cancel-button">Cancel</button>
-          <button className="delete-modal-delete-button">Delete</button>
+          <button
+            className="delete-modal-delete-button"
+            onClick={() => {
+              if (headerMessage === "Delete Message") {
+                dispatch(deleteSelectedMessage({ messageRecordId, clickedId }));
+              }
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </Overlay>

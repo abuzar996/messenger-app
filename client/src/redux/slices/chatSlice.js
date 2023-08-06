@@ -3,6 +3,7 @@ import axios from "axios";
 import { API } from "../../constants/data";
 const initialState = {
   chatlist: [],
+  clickedId: -1,
   tunnedChatList: [],
   messages: [],
   messageRecordId: -1,
@@ -12,6 +13,7 @@ const initialState = {
   addNewMessageRecordValue: -1,
   addNewChatLoading: false,
   loading: false,
+  deleteLoading: false,
   error: "",
 };
 
@@ -23,6 +25,23 @@ export const addNewChatList = createAsyncThunk("AddNewChat", async (data) => {
     .then((response) => response)
     .catch((error) => error.response);
 });
+
+export const deleteSelectedMessage = createAsyncThunk(
+  "DeleteSelectedMessage",
+  async (data) => {
+    console.log(data);
+    return await axios
+      .post(
+        `${API}/chats/delete-selected-chat`,
+        { recordId: data.messageRecordId, messageId: data.clickedId },
+        {
+          headers: { token: localStorage.getItem("Token") },
+        }
+      )
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+);
 
 export const addNewMessage = createAsyncThunk("addNewMessage", async (data) => {
   return await axios
@@ -78,6 +97,9 @@ const chatSlice = createSlice({
     },
     updateTriggers: (state) => {
       state.addNewMessageRecordValue = -1;
+    },
+    changeSelectedId: (state, action) => {
+      state.clickedId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -176,7 +198,24 @@ const chatSlice = createSlice({
       state.error = "Something went wrong";
       state.addNewChatLoading = false;
     });
+
+    builder.addCase(deleteSelectedMessage.pending, (state) => {
+      state.deleteLoading = true;
+    });
+    builder.addCase(deleteSelectedMessage.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.deleteLoading = false;
+      } else {
+        state.deleteLoading = false;
+        state.error = "Something went wrong";
+      }
+    });
+    builder.addCase(deleteSelectedMessage.rejected, (state, action) => {
+      state.error = "Something went wrong";
+      state.deleteLoading = false;
+    });
   },
 });
-export const { tuneChatData, updateTriggers } = chatSlice.actions;
+export const { tuneChatData, updateTriggers, changeSelectedId } =
+  chatSlice.actions;
 export default chatSlice.reducer;

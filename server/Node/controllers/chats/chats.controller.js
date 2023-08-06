@@ -6,8 +6,9 @@ const {
   createNewRecord,
   addmessageRecordToUser,
   addmessageRecordToClient,
+  findAndDeleteMessage,
 } = require("../../services/chats.services");
-const { messageData } = require("../../modal/chats/chats.modal");
+let { messageData } = require("../../modal/chats/chats.modal");
 const fetchMessagesData = (req, res) => {
   const { userId } = req.params;
   const { user } = req.body;
@@ -83,10 +84,25 @@ const addNewChatToList = (req, res) => {
   }
 };
 
+const deleteSelectedChat = (req, res) => {
+  const { recordId, messageId } = req.body;
+  try {
+    const findAndDelete = findAndDeleteMessage(recordId, messageId);
+    if (findAndDelete) {
+      res.status(200).send({ message: "Message deleted successfully" });
+    } else {
+      res.status(404).send({ message: "Couldn't find" });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 module.exports = {
   getChatData: getChatData,
   fetchMessagesData,
   addNewMessage,
   addNewMessageRecord,
   addNewChatToList,
+  deleteSelectedChat,
 };

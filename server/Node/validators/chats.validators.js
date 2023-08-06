@@ -25,9 +25,14 @@ const createNewChatSchema = Joi.object({
   clientId: Joi.number().required(),
   message: Joi.number().required(),
 });
+const deleteSelectedChatSchema = Joi.object({
+  recordId: Joi.number().required(),
+  messageId: Joi.number().required(),
+});
 module.exports = {
   fetchMessagesSchema,
   addMessageSchema,
   addMessageRecordSchema,
   createNewChatSchema,
+  deleteSelectedChatSchema,
 };

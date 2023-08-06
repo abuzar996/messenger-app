@@ -37,7 +37,6 @@ const Card = ({
       onMessageClick(data);
     }
   }
-  console.log("hello world ");
   useEffect(() => {
     localStorage.setItem(
       "chat_options_offsetx",

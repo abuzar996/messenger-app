@@ -1,5 +1,5 @@
 const { verifyUser } = require("./user.services");
-var { chatsData, messageData } = require("../modal/chats/chats.modal");
+let { chatsData, messageData } = require("../modal/chats/chats.modal");
 const checkIfSameUser = (userId, token) => {
   const userData = verifyUser(token);
   if (userData && userData.userId) {
@@ -114,6 +114,32 @@ const addmessageRecordToClient = (userId, clientId, message) => {
     return false;
   }
 };
+const findAndDeleteMessage = (recordID, messageId) => {
+  try {
+    const record = messageData.find((message) => message.message === recordID);
+    if (record) {
+      let data = record.data.filter(
+        (message) => message.messageId !== messageId
+      );
+      if (data.length !== record.data.length) {
+        let newData = messageData.map((message) =>
+          message.message === recordID
+            ? { message: message.message, data: data }
+            : { message: message.message, data: message.data }
+        );
+        //console.log()
+        messageData = newData;
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return false;
+  } catch {
+    return false;
+  }
+};
 module.exports = {
   findMessageRecord,
   checkIfSameUser: checkIfSameUser,
@@ -124,4 +150,5 @@ module.exports = {
   createNewRecord,
   addmessageRecordToUser,
   addmessageRecordToClient,
+  findAndDeleteMessage,
 };
