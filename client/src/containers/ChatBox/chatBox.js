@@ -28,6 +28,7 @@ const ChatBox = () => {
     messagesLoading,
     messageRecordId,
     addNewMessageRecordValue,
+    //  addMessageLoading,
     //deleteLoading,
   } = useSelector((state) => state.chats);
   const { user } = useSelector((state) => state.user);
@@ -43,6 +44,8 @@ const ChatBox = () => {
   const [dataToBePassed, setDataToBePassed] = useState({});
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
+  const [searchData, setSearchData] = useState([]);
+  //const [onSearch, setOnSearch] = useState(false);
   //const { addNewChatLoading } = useSelector((state) => state.chats);
   useEffect(() => {
     if (addNewMessageRecordValue !== -1) {
@@ -60,7 +63,9 @@ const ChatBox = () => {
     setPrivateMessages(messages);
   }, [messages]);
   useEffect(() => {
+    // if (!addMessageLoading) {
     dispatch(fetchAllMessages(id));
+    // }
   }, [dispatch, id]);
   useEffect(() => {
     socket = io(API);
@@ -91,23 +96,15 @@ const ChatBox = () => {
   }, [senderHeight]);
 
   useEffect(() => {
-    if (searchFocus) {
-      let searchMessage = [];
-      messages.forEach((message) =>
+    if (searchValue) {
+      let tempUserData = privateMessages.filter((message) =>
         message.message.includes(searchValue)
-          ? searchMessage.push(message)
-          : null
       );
-      if (privateMessages.length !== searchMessage.length) {
-        setPrivateMessages(searchMessage);
-      }
-    } else {
-      if (privateMessages !== messages) {
-        setPrivateMessages(messages);
+      if (searchData.length !== tempUserData.length) {
+        setSearchData([...tempUserData]);
       }
     }
-  }, [searchValue, searchFocus, privateMessages, messages]);
-
+  }, [searchValue, searchFocus, searchData, privateMessages]);
   function onSendClick() {
     if (newMessage.length > 0) {
       let randInt = createUUID();
@@ -169,7 +166,9 @@ const ChatBox = () => {
         />
         <div>
           <ChatSpace
-            messages={privateMessages}
+            messages={
+              searchFocus && searchValue !== "" ? searchData : privateMessages
+            }
             messagesLoading={messagesLoading}
             messageReply={messageReply}
             setMessageReply={setMessageReply}
