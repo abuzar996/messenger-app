@@ -65,9 +65,6 @@ const Search = ({
           value={searchValue}
           ref={inputRef}
           onFocus={() => {
-            if (onFocus) {
-              onFocus(true);
-            }
             if (setSearchFocus) {
               setSearchFocus(true);
             }

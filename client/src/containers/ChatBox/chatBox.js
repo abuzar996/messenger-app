@@ -92,13 +92,23 @@ const ChatBox = () => {
     setMarginBottom(senderHeight + 8);
   }, [senderHeight]);
 
-  // useEffect(() => {
-  //   // console.log(privateMessages);
-  //   // let messages = privateMessages.filter((message) =>
-  //   //   message.message.includes(searchValue)
-  //   // );
-  //   console.log(messages);
-  // }, [searchValue, privateMessages]);
+  useEffect(() => {
+    if (searchFocus) {
+      let searchMessage = [];
+      messages.forEach((message) =>
+        message.message.includes(searchValue)
+          ? searchMessage.push(message)
+          : null
+      );
+      if (privateMessages.length !== searchMessage.length) {
+        setPrivateMessages(searchMessage);
+      }
+    } else {
+      if (privateMessages !== messages) {
+        setPrivateMessages(messages);
+      }
+    }
+  }, [searchValue, searchFocus, privateMessages, messages]);
 
   function onSendClick() {
     if (newMessage.length > 0) {
