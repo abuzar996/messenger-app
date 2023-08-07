@@ -10,6 +10,7 @@ import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
+import { createUUID } from "../../constants/data";
 import {
   fetchAllMessages,
   addNewMessage,
@@ -91,8 +92,18 @@ const ChatBox = () => {
     setMarginBottom(senderHeight + 8);
   }, [senderHeight]);
 
+  // useEffect(() => {
+  //   // console.log(privateMessages);
+  //   // let messages = privateMessages.filter((message) =>
+  //   //   message.message.includes(searchValue)
+  //   // );
+  //   console.log(messages);
+  // }, [searchValue, privateMessages]);
+
   function onSendClick() {
     if (newMessage.length > 0) {
+      let randInt = createUUID();
+      console.log(randInt);
       let replyExists = messageReply && dataToBePassed;
       let newMessageObject = {
         messageId: privateMessages.length + 1,

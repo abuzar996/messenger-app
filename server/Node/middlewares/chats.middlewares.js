@@ -71,7 +71,6 @@ const chatCheck = (req, res, next) => {
   const { userId } = req.params;
   try {
     const chats = checkIfChatsExist(+userId);
-
     chats ? next() : res.status(404).send({ message: "Not Found" });
   } catch (err) {
     res.send({ message: err.message });
