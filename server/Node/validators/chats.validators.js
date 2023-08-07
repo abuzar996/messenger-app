@@ -6,7 +6,7 @@ const fetchMessagesSchema = Joi.object({
 const addMessageSchema = Joi.object({
   message: Joi.number().required(),
   data: Joi.object({
-    messageId: Joi.number().required(),
+    messageId: Joi.string().required(),
     message: Joi.string().required(),
     sender: Joi.string().required(),
     reply: Joi.number().optional(),
@@ -14,7 +14,7 @@ const addMessageSchema = Joi.object({
 });
 const addMessageRecordSchema = Joi.object({
   data: Joi.object({
-    messageId: Joi.number().required(),
+    messageId: Joi.string().required(),
     message: Joi.string().required(),
     sender: Joi.string().required(),
     reply: Joi.number().optional(),
@@ -27,7 +27,7 @@ const createNewChatSchema = Joi.object({
 });
 const deleteSelectedChatSchema = Joi.object({
   recordId: Joi.number().required(),
-  messageId: Joi.number().required(),
+  messageId: Joi.string().required(),
 });
 module.exports = {
   fetchMessagesSchema,

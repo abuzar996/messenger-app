@@ -29,7 +29,7 @@ const ChatBox = () => {
     messageRecordId,
     addNewMessageRecordValue,
     //  addMessageLoading,
-    //deleteLoading,
+    deleteLoading,
   } = useSelector((state) => state.chats);
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
@@ -61,8 +61,10 @@ const ChatBox = () => {
     setPrivateMessages(messages);
   }, [messages]);
   useEffect(() => {
-    dispatch(fetchAllMessages(id));
-  }, [dispatch, id]);
+    if (!deleteLoading) {
+      dispatch(fetchAllMessages(id));
+    }
+  }, [dispatch, id, deleteLoading]);
   useEffect(() => {
     socket = io(API);
     socket.emit("setup", user);

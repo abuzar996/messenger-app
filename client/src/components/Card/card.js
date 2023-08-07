@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import "./card.styles.css";
 import "../../App.css";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+//import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import users from "../../images/user.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
@@ -15,17 +15,17 @@ const Card = ({
   data,
 }) => {
   const { user } = useSelector((state) => state.user);
-  const [seen, setSeen] = useState(false);
+  //const [seen, setSeen] = useState(false);
   const windowSize = useDimentions();
   const references = useRef(null);
 
-  useEffect(() => {
-    if (lastMessage.user2 && !lastMessage.opened) {
-      setSeen(false);
-    } else {
-      setSeen(true);
-    }
-  }, [lastMessage]);
+  // useEffect(() => {
+  //   if (lastMessage.user2 && !lastMessage.opened) {
+  //     setSeen(false);
+  //   } else {
+  //     setSeen(true);
+  //   }
+  // }, [lastMessage]);
   function onHandleClick(event, data) {
     if (event.target.id === "inner-option") {
       modalOpen(true);
@@ -71,13 +71,15 @@ const Card = ({
         </div>
         <div className="data-container padding-left">
           <label>
-            <span className={!seen ? "un-opened-bold" : null}>
-              {lastMessage.sender === user.firstname
+            {/* <span className={!seen ? "un-opened-bold" : null}> */}
+            {lastMessage
+              ? lastMessage.sender === user.firstname
                 ? "You sent a message"
-                : firstname + " sent you a message"}
-            </span>
+                : firstname + " sent you a message"
+              : "Start a conversation"}
+            {/* </span> */}
           </label>
-          {!seen && <FiberManualRecordIcon className="padding-right" />}
+          {/* {!seen && <FiberManualRecordIcon className="padding-right" />} */}
         </div>
       </div>
     </div>
