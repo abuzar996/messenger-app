@@ -45,8 +45,6 @@ const ChatBox = () => {
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  //const [onSearch, setOnSearch] = useState(false);
-  //const { addNewChatLoading } = useSelector((state) => state.chats);
   useEffect(() => {
     if (addNewMessageRecordValue !== -1) {
       dispatch(
@@ -63,9 +61,7 @@ const ChatBox = () => {
     setPrivateMessages(messages);
   }, [messages]);
   useEffect(() => {
-    // if (!addMessageLoading) {
     dispatch(fetchAllMessages(id));
-    // }
   }, [dispatch, id]);
   useEffect(() => {
     socket = io(API);
@@ -108,10 +104,9 @@ const ChatBox = () => {
   function onSendClick() {
     if (newMessage.length > 0) {
       let randInt = createUUID();
-      console.log(randInt);
       let replyExists = messageReply && dataToBePassed;
       let newMessageObject = {
-        messageId: privateMessages.length + 1,
+        messageId: randInt,
         message: newMessage,
         sender: user.firstname,
         reply: replyExists ? dataToBePassed.messageId : -1,
