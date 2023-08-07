@@ -1,51 +1,51 @@
 const settings = [
   {
     userId: 1,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 2,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 3,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 4,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 5,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 6,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 7,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 8,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 9,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 10,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 11,
-    darkMode: false,
+    darkMode: true,
   },
   {
     userId: 12,
-    darkMode: false,
+    darkMode: true,
   },
 ];
 module.exports = {

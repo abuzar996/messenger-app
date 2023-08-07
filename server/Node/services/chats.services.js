@@ -140,6 +140,43 @@ const findAndDeleteMessage = (recordID, messageId) => {
     return false;
   }
 };
+
+const deleteRecordFromUser = (userId, clientId) => {
+  try {
+    const record = chatsData.find((chat) => chat.userId === userId);
+    if (record) {
+      const chats = record.chats.find((chat) => chat.userId === clientId);
+      if (chats) {
+        let newData = record.chats.filter((data) => data.userId !== clientId);
+        record.chats = newData;
+        return true;
+      }
+      return false;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
+
+const findAndDeleteRecord = (userId, clientId) => {
+  try {
+    let userDelete = deleteRecordFromUser(userId, clientId);
+    if (userDelete) {
+      let clientDelete = deleteRecordFromUser(clientId, userId);
+      if (clientDelete) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+
+  //  console.log("hello world");
+};
+
 module.exports = {
   findMessageRecord,
   checkIfSameUser: checkIfSameUser,
@@ -151,4 +188,5 @@ module.exports = {
   addmessageRecordToUser,
   addmessageRecordToClient,
   findAndDeleteMessage,
+  findAndDeleteRecord,
 };

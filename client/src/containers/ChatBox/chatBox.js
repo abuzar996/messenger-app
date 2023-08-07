@@ -11,12 +11,14 @@ import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
 import { createUUID } from "../../constants/data";
+//import { deleteChatRecord } from "../../redux/slices/chatSlice";
 import {
   fetchAllMessages,
   addNewMessage,
   addNewMessageRecord,
   addNewChatList,
   updateTriggers,
+  changeLength,
 } from "../../redux/slices/chatSlice";
 let socket; // =
 const ChatBox = () => {
@@ -29,6 +31,7 @@ const ChatBox = () => {
     messageRecordId,
     addNewMessageRecordValue,
     //  addMessageLoading,
+    //deleteRecordLoading,
     deleteLoading,
   } = useSelector((state) => state.chats);
   const { user } = useSelector((state) => state.user);
@@ -60,6 +63,11 @@ const ChatBox = () => {
   useEffect(() => {
     setPrivateMessages(messages);
   }, [messages]);
+  // useEffect(() => {
+  //   if (!deleteLoading && messages.length === 0) {
+  //     dispatch(deleteChatRecord({ userId: user.userId, clientId: +id }));
+  //   }
+  // }, [deleteLoading, messages, dispatch, id, user]);
   useEffect(() => {
     if (!deleteLoading) {
       dispatch(fetchAllMessages(id));
@@ -103,6 +111,11 @@ const ChatBox = () => {
       }
     }
   }, [searchValue, searchFocus, searchData, privateMessages]);
+
+  useEffect(() => {
+    dispatch(changeLength(privateMessages.length));
+  }, [privateMessages, dispatch]);
+
   function onSendClick() {
     if (newMessage.length > 0) {
       let randInt = createUUID();

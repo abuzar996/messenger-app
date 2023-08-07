@@ -14,8 +14,22 @@ const initialState = {
   addNewChatLoading: false,
   loading: false,
   deleteLoading: false,
+  deleteRecordLoading: false,
+  privateMessages: -1,
   error: "",
 };
+
+export const deleteChatRecord = createAsyncThunk(
+  "DeleteChatRecord",
+  async (data) => {
+    return await axios
+      .post(`${API}/chats/delete-chat-record`, data, {
+        headers: { token: localStorage.getItem("Token") },
+      })
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+);
 
 export const addNewChatList = createAsyncThunk("AddNewChat", async (data) => {
   return await axios
@@ -91,6 +105,9 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
+    changeLength: (state, action) => {
+      state.privateMessages = action.payload;
+    },
     tuneChatData: (state, action) => {
       state.tunnedChatList = action.payload;
     },
@@ -213,8 +230,24 @@ const chatSlice = createSlice({
       state.error = "Something went wrong";
       state.deleteLoading = false;
     });
+
+    builder.addCase(deleteChatRecord.pending, (state) => {
+      state.deleteRecordLoading = true;
+    });
+    builder.addCase(deleteChatRecord.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.deleteRecordLoading = false;
+      } else {
+        state.deleteRecordLoading = false;
+        state.error = "Something went wrong";
+      }
+    });
+    builder.addCase(deleteChatRecord.rejected, (state, action) => {
+      state.error = "Something went wrong";
+      state.deleteRecordLoading = false;
+    });
   },
 });
-export const { tuneChatData, updateTriggers, changeSelectedId } =
+export const { tuneChatData, updateTriggers, changeSelectedId, changeLength } =
   chatSlice.actions;
 export default chatSlice.reducer;

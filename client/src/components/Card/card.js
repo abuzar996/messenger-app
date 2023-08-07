@@ -1,11 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import "./card.styles.css";
 import "../../App.css";
-//import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+//import { useParams } from "react-router-dom";
+//import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import users from "../../images/user.png";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
-import { useSelector } from "react-redux";
+//import { deleteChatRecord } from "../../redux/slices/chatSlice";
 const Card = ({
   modalOpen,
   firstname,
@@ -14,18 +16,25 @@ const Card = ({
   onMessageClick,
   data,
 }) => {
+  //const dispatch = useDispatch();
+  //const { id } = useParams();
+  //console.log(+id);
   const { user } = useSelector((state) => state.user);
   //const [seen, setSeen] = useState(false);
   const windowSize = useDimentions();
   const references = useRef(null);
 
   // useEffect(() => {
-  //   if (lastMessage.user2 && !lastMessage.opened) {
-  //     setSeen(false);
-  //   } else {
-  //     setSeen(true);
+  //   if (!lastMessage) {
+  //     console.log("hello");
+  //     // dispatch(
+  //     //   deleteChatRecord({
+  //     //     userId: user.userId,
+  //     //     clientId: +id,
+  //     //   })
+  //     // );
   //   }
-  // }, [lastMessage]);
+  // }, [lastMessage, dispatch, id, user]);
   function onHandleClick(event, data) {
     if (event.target.id === "inner-option") {
       modalOpen(true);

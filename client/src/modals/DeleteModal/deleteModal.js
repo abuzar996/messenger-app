@@ -1,12 +1,20 @@
 import React from "react";
 import "./deleteModal.styles.css";
-
+import { useParams, useNavigate } from "react-router-dom";
 import Overlay from "../../components/Overlay";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSelectedMessage } from "../../redux/slices/chatSlice";
+import {
+  deleteChatRecord,
+  deleteSelectedMessage,
+} from "../../redux/slices/chatSlice";
+
 const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const { user } = useSelector((state) => state.user);
   const { messageRecordId, clickedId } = useSelector((state) => state.chats);
+  const { privateMessages } = useSelector((state) => state.chats);
   return (
     <Overlay modalOpen={modalOpen}>
       <div
@@ -28,7 +36,16 @@ const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
             className="delete-modal-delete-button"
             onClick={() => {
               if (headerMessage === "Delete Message") {
-                dispatch(deleteSelectedMessage({ messageRecordId, clickedId }));
+                if (privateMessages === 1) {
+                  dispatch(
+                    deleteChatRecord({ userId: user.userId, clientId: +id })
+                  );
+                  navigate("/app/home");
+                } else {
+                  dispatch(
+                    deleteSelectedMessage({ messageRecordId, clickedId })
+                  );
+                }
               }
             }}
           >
