@@ -29,7 +29,6 @@ export const addNewChatList = createAsyncThunk("AddNewChat", async (data) => {
 export const deleteSelectedMessage = createAsyncThunk(
   "DeleteSelectedMessage",
   async (data) => {
-    console.log(data);
     return await axios
       .post(
         `${API}/chats/delete-selected-chat`,
