@@ -6,7 +6,6 @@ import { Checkbox } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/authSlice";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HideSourceIcon from "@mui/icons-material/HideSource";
 import { removeAllUsers } from "../../redux/slices/userSlice";
@@ -19,7 +18,7 @@ const UserOptionModal = ({ modalOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useKeys("Escape", closeFn);
-  function onSettingsClicked() {}
+  // function onSettingsClicked() {}
   function onLogoutClicked() {
     dispatch(logoutUser());
     dispatch(removeAllUsers());
@@ -58,23 +57,21 @@ const UserOptionModal = ({ modalOpen }) => {
           </div>
         )}
 
-        <div className="user-option-modal-body" onClick={onSettingsClicked}>
-          <SettingsIcon className="user-option-modal-icons" />
-          <label>Settings</label>
-        </div>
         <div className="user-option-modal-body" onClick={onLogoutClicked}>
           <LogoutIcon className="user-option-modal-icons" />
           <label>Logout</label>
         </div>
-        <div className="user-option-modal-body">
+        <div
+          className="user-option-modal-body"
+          onClick={() => {
+            dispatch(changeUserSettings(user.userId));
+          }}
+        >
           <Checkbox
             style={{ width: "20px" }}
             color="default"
             size="small"
             checked={darkmode}
-            onChange={() => {
-              dispatch(changeUserSettings(user.userId));
-            }}
           />
           <label>Dark Theme</label>
         </div>
