@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,8 +11,10 @@ const ListData = ({
   setScrollValue,
   mobileSize,
   searchFocus,
+  tunnedChatList,
+  loading,
 }) => {
-  const { tunnedChatList, loading } = useSelector((state) => state.chats);
+  //const { tunnedChatList, loading } = useSelector((state) => state.chats);
   const navigate = useNavigate();
   useDimentions();
   const reference = useRef(null);

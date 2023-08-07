@@ -6,9 +6,11 @@ import DeleteModal from "../../modals/DeleteModal/deleteModal";
 import ChatOptionModal from "../../modals/ChatOptionsModal";
 import ListData from "./listData";
 import { useDimentions } from "../../hooks/useDimentions";
+import { useSelector } from "react-redux";
 
 const ChatList = () => {
   const windowSize = useDimentions();
+  const { tunnedChatList, loading } = useSelector((state) => state.chats);
   const refference = useRef(null);
   const [mobileSize, setMobileSize] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
@@ -18,18 +20,21 @@ const ChatList = () => {
   const [modalYPosition, setModalYPosition] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
+  const [userData, setUserData] = useState([]);
 
-  // useEffect(() => {
-  //   if (searchValue) {
-  //     let tempUserData = data.filter((user) =>
-  //       user.firstname.includes(searchValue)
-  //     );
-
-  //     setUserData([...tempUserData]);
-  //   } else {
-  //     setUserData([...data]);
-  //   }
-  // }, [searchValue]);
+  useEffect(() => {
+    setUserData([...tunnedChatList]);
+  }, [tunnedChatList]);
+  useEffect(() => {
+    if (searchValue) {
+      let tempUserData = tunnedChatList.filter((user) =>
+        user.firstname.includes(searchValue)
+      );
+      setUserData([...tempUserData]);
+    } else {
+      setUserData([...tunnedChatList]);
+    }
+  }, [searchValue, tunnedChatList]);
 
   useEffect(() => {
     let cHeight = +localStorage.getItem("height");
@@ -77,6 +82,8 @@ const ChatList = () => {
         setSearchFocus={setSearchFocus}
       />
       <ListData
+        tunnedChatList={userData}
+        loading={loading}
         mobileSize={mobileSize}
         setScrollValue={setScrollValue}
         searchFocus={searchFocus}
