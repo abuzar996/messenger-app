@@ -2,8 +2,8 @@ import React from "react";
 import "./chatHeader.styles.css";
 import { useNavigate } from "react-router-dom";
 import Search from "../../components/Search";
-
-import StarPurple500Icon from "@mui/icons-material/StarPurple500";
+import img2 from "../../images/img2.jpg";
+//import StarPurple500Icon from "@mui/icons-material/StarPurple500";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector } from "react-redux";
 const ChatHeader = ({
@@ -46,9 +46,11 @@ const ChatHeader = ({
         />
       </div>
       <div className="chat-icons-container">
-        <div>
-          <StarPurple500Icon />
-        </div>
+        <img
+          src={img2}
+          alt="img"
+          style={{ width: "20px", height: "30px", borderRadius: "50%" }}
+        ></img>
       </div>
     </div>
   );

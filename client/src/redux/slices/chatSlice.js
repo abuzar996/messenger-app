@@ -17,9 +17,21 @@ const initialState = {
   deleteLoading: false,
   deleteRecordLoading: false,
   privateMessages: -1,
+  favLoading: false,
   error: "",
 };
 
+export const changeChatFavForUser = createAsyncThunk(
+  "ChangeFavStatus",
+  async (data) => {
+    return await axios
+      .post(`${API}/chats/change-favourites`, data, {
+        headers: { token: localStorage.getItem("Token") },
+      })
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+);
 export const deleteChatRecord = createAsyncThunk(
   "DeleteChatRecord",
   async (data) => {
@@ -249,6 +261,22 @@ const chatSlice = createSlice({
     builder.addCase(deleteChatRecord.rejected, (state, action) => {
       state.error = "Something went wrong";
       state.deleteRecordLoading = false;
+    });
+
+    builder.addCase(changeChatFavForUser.pending, (state) => {
+      state.favLoading = true;
+    });
+    builder.addCase(changeChatFavForUser.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.favLoading = false;
+      } else {
+        state.favLoading = false;
+        state.error = "Something went wrong";
+      }
+    });
+    builder.addCase(changeChatFavForUser.rejected, (state, action) => {
+      state.error = "Something went wrong";
+      state.favLoading = false;
     });
   },
 });

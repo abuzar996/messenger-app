@@ -176,7 +176,42 @@ const findAndDeleteRecord = (userId, clientId) => {
 
   //  console.log("hello world");
 };
+const findAndChangeFav = (userId, chatId) => {
+  try {
+    if (userId && chatId) {
+      let record = chatsData.find((chat) => chat.userId === userId);
+      if (record) {
+        let innerData = record.chats.find((chat) => chat.userId === chatId);
+        if (innerData) {
+          let fav;
+          "favourite" in innerData
+            ? (fav = innerData.favourite)
+            : (fav = false);
 
+          //let fav = innerData.favourite ? innerData.favourite : false;
+          // console.log(fav);
+          innerData = {
+            userId: innerData.userId,
+            messages: innerData.messages,
+            favourite: !fav,
+          };
+          record.chats = record.chats.map((chat) =>
+            chat.userId === innerData.userId ? innerData : chat
+          );
+          chatsData = chatsData.map((chat) =>
+            chat.userId === record.userId ? record : chat
+          );
+          return true;
+        }
+        return false;
+      }
+      return false;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
 module.exports = {
   findMessageRecord,
   checkIfSameUser: checkIfSameUser,
@@ -186,6 +221,7 @@ module.exports = {
   addMessageToRecord,
   createNewRecord,
   addmessageRecordToUser,
+  findAndChangeFav,
   addmessageRecordToClient,
   findAndDeleteMessage,
   findAndDeleteRecord,

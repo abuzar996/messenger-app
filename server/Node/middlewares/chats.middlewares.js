@@ -9,8 +9,18 @@ const {
   createNewChatSchema,
   deleteSelectedChatSchema,
   deleteChatRecordSchema,
+  changeChatFavouriteSchema,
 } = require("../validators/chats.validators");
 
+const validateChangeChatFavourites = async (req, res, next) => {
+  const { userId, chatId } = req.body;
+  try {
+    await changeChatFavouriteSchema.validateAsync({ userId, chatId });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 const validatedeleteChatRecord = async (req, res, next) => {
   const { userId, clientId } = req.body;
   try {
@@ -95,4 +105,5 @@ module.exports = {
   validateAddChat,
   validatedeleteChat,
   validatedeleteChatRecord,
+  validateChangeChatFavourites,
 };

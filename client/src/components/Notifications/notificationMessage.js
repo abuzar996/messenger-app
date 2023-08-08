@@ -7,7 +7,7 @@ const NotificationMessage = ({ message, type, onHide }) => {
     <div className="notification-message-container">
       <div className="notification-message-header">
         <CancelIcon
-          style={{ paddingLeft: "10px" }}
+          style={{ paddingLeft: "10px", color: "orange" }}
           onClick={onHide.bind(this)}
         />
         <label className="notification-message-header-label">{type}</label>

@@ -10,6 +10,7 @@ const {
   addNewChatToList,
   deleteSelectedChat,
   deleteChatRecord,
+  changeFavouriteChatsForUser,
 } = require("../../controllers/chats/chats.controller");
 const {
   userCheck,
@@ -20,6 +21,7 @@ const {
   validateAddChat,
   validatedeleteChat,
   validatedeleteChatRecord,
+  validateChangeChatFavourites,
 } = require("../../middlewares/chats.middlewares");
 chatsRouter.get(
   "/get-chat-list-by-id/:userId",
@@ -68,6 +70,13 @@ chatsRouter.post(
   isAuthenticated,
   validatedeleteChatRecord,
   deleteChatRecord
+);
+
+chatsRouter.post(
+  "/change-favourites",
+  isAuthenticated,
+  validateChangeChatFavourites,
+  changeFavouriteChatsForUser
 );
 
 module.exports = chatsRouter;
