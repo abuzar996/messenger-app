@@ -34,9 +34,8 @@ import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
 const AppHeader = () => {
   const refferencesHeader = useRef(null);
   const dispatch = useDispatch();
-  const { addNewChatLoading, deleteRecordLoading } = useSelector(
-    (state) => state.chats
-  );
+  const { addNewChatLoading, deleteRecordLoading, addMessageLoading } =
+    useSelector((state) => state.chats);
   const { sendMessageModal } = useSelector((state) => state.appReducer);
   const { chatlist } = useSelector((state) => state.chats);
   const { user, allUsers } = useSelector((state) => state.user);
@@ -50,10 +49,16 @@ const AppHeader = () => {
 
   useEffect(() => {
     dispatch(getAllTheUsers());
-    if (user.userId) {
+    if (user.userId && !addMessageLoading) {
       dispatch(getChatList(user.userId));
     }
-  }, [dispatch, user, addNewChatLoading, deleteRecordLoading]);
+  }, [
+    dispatch,
+    user,
+    addNewChatLoading,
+    deleteRecordLoading,
+    addMessageLoading,
+  ]);
 
   useEffect(() => {
     if (user.userId) {

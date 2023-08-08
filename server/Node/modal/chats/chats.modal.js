@@ -193,10 +193,12 @@ const chatsData = [
       {
         userId: 1,
         messages: 1,
+        favourite: true,
       },
       {
         userId: 3,
         messages: 3,
+        favourite: true,
       },
     ],
   },

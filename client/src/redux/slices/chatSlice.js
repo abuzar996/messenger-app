@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API } from "../../constants/data";
 const initialState = {
+  messageInfo: {},
   chatlist: [],
   clickedId: -1,
   tunnedChatList: [],
@@ -116,6 +117,9 @@ const chatSlice = createSlice({
     },
     changeSelectedId: (state, action) => {
       state.clickedId = action.payload;
+    },
+    changeMessageInfo: (state, action) => {
+      state.messageInfo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -248,6 +252,11 @@ const chatSlice = createSlice({
     });
   },
 });
-export const { tuneChatData, updateTriggers, changeSelectedId, changeLength } =
-  chatSlice.actions;
+export const {
+  tuneChatData,
+  changeMessageInfo,
+  updateTriggers,
+  changeSelectedId,
+  changeLength,
+} = chatSlice.actions;
 export default chatSlice.reducer;

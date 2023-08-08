@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteChatRecord,
   deleteSelectedMessage,
+  changeMessageInfo,
 } from "../../redux/slices/chatSlice";
 
 const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
@@ -13,8 +14,29 @@ const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
-  const { messageRecordId, clickedId } = useSelector((state) => state.chats);
+  const { messageRecordId, clickedId, messageInfo } = useSelector(
+    (state) => state.chats
+  );
   const { privateMessages } = useSelector((state) => state.chats);
+
+  function onDeleteClicked() {
+    if (headerMessage === "Delete Message") {
+      if (privateMessages === 1) {
+        dispatch(deleteSelectedMessage({ messageRecordId, clickedId }));
+        dispatch(deleteChatRecord({ userId: user.userId, clientId: +id }));
+        navigate("/app/home");
+      } else {
+        dispatch(deleteSelectedMessage({ messageRecordId, clickedId }));
+      }
+    } else {
+      dispatch(
+        deleteChatRecord({ userId: user.userId, clientId: messageInfo.userId })
+      );
+      dispatch(changeMessageInfo({}));
+      //console.log(messageInfo);
+    }
+  }
+
   return (
     <Overlay modalOpen={modalOpen}>
       <div
@@ -34,20 +56,7 @@ const DeleteMadal = ({ headerMessage, modalOpen, onClose }) => {
           <button className="delete-modal-cancel-button">Cancel</button>
           <button
             className="delete-modal-delete-button"
-            onClick={() => {
-              if (headerMessage === "Delete Message") {
-                if (privateMessages === 1) {
-                  dispatch(
-                    deleteChatRecord({ userId: user.userId, clientId: +id })
-                  );
-                  navigate("/app/home");
-                } else {
-                  dispatch(
-                    deleteSelectedMessage({ messageRecordId, clickedId })
-                  );
-                }
-              }
-            }}
+            onClick={onDeleteClicked}
           >
             Delete
           </button>

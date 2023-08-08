@@ -57,10 +57,6 @@ const UserOptionModal = ({ modalOpen }) => {
           </div>
         )}
 
-        <div className="user-option-modal-body" onClick={onLogoutClicked}>
-          <LogoutIcon className="user-option-modal-icons" />
-          <label>Logout</label>
-        </div>
         <div
           className="user-option-modal-body"
           onClick={() => {
@@ -74,6 +70,10 @@ const UserOptionModal = ({ modalOpen }) => {
             checked={darkmode}
           />
           <label>Dark Theme</label>
+        </div>
+        <div className="user-option-modal-body" onClick={onLogoutClicked}>
+          <LogoutIcon className="user-option-modal-icons" />
+          <label>Logout</label>
         </div>
         <div className="user-option-close-button">
           <button className="option-close-button" onClick={closeFn}>
