@@ -102,7 +102,7 @@ var messageData = [
     ],
   },
   {
-    message: 3,
+    message: 7,
     data: [
       {
         sender: "Thomas",
@@ -192,7 +192,7 @@ const chatsData = [
     chats: [
       {
         userId: 4,
-        messages: 3,
+        messages: 7,
       },
     ],
   },
@@ -206,7 +206,7 @@ const chatsData = [
       },
       {
         userId: 3,
-        messages: 3,
+        messages: 7,
         favourite: true,
       },
     ],

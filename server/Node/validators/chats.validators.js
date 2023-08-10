@@ -10,8 +10,15 @@ const addMessageSchema = Joi.object({
     message: Joi.string().required(),
     sender: Joi.string().required(),
     reply: Joi.optional(),
+    opened: Joi.boolean().optional(),
   }).required(),
 });
+
+const setMessageSeenSchema = Joi.object({
+  messageId: Joi.required(),
+  owner: Joi.required(),
+});
+
 const addMessageRecordSchema = Joi.object({
   data: Joi.object({
     messageId: Joi.string().required(),
@@ -47,4 +54,5 @@ module.exports = {
   deleteSelectedChatSchema,
   deleteChatRecordSchema,
   changeChatFavouriteSchema,
+  setMessageSeenSchema,
 };

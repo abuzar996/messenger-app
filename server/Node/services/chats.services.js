@@ -1,5 +1,28 @@
 const { verifyUser } = require("./user.services");
 let { chatsData, messageData } = require("../modal/chats/chats.modal");
+const updateLastMessageStatus = (owner, messageId) => {
+  try {
+    let data = messageData.find((message) => message.message === messageId);
+
+    if (data) {
+      let lastMessage = data.data[data.data.length - 1];
+      if ("opened" in lastMessage);
+      {
+        if (owner !== lastMessage.sender) {
+          if (lastMessage.opened === false) {
+            lastMessage.opened = true;
+            return true;
+          }
+          return true;
+        }
+        return false;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
 const checkIfSameUser = (userId, token) => {
   const userData = verifyUser(token);
   if (userData && userData.userId) {
@@ -225,4 +248,5 @@ module.exports = {
   addmessageRecordToClient,
   findAndDeleteMessage,
   findAndDeleteRecord,
+  updateLastMessageStatus,
 };

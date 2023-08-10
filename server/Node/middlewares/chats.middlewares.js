@@ -10,8 +10,18 @@ const {
   deleteSelectedChatSchema,
   deleteChatRecordSchema,
   changeChatFavouriteSchema,
+  setMessageSeenSchema,
 } = require("../validators/chats.validators");
 
+const validateSetMessageSeen = async (req, res, next) => {
+  const { messageId, owner } = req.body;
+  try {
+    await setMessageSeenSchema.validateAsync({ messageId, owner });
+    next();
+  } catch (err) {
+    res.status(409).send({ message: err.message });
+  }
+};
 const validateChangeChatFavourites = async (req, res, next) => {
   const { userId, chatId } = req.body;
   try {
@@ -106,4 +116,5 @@ module.exports = {
   validatedeleteChat,
   validatedeleteChatRecord,
   validateChangeChatFavourites,
+  validateSetMessageSeen,
 };

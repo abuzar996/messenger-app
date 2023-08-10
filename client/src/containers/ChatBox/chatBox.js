@@ -20,6 +20,7 @@ import {
   addNewChatList,
   updateTriggers,
   changeLength,
+  changeMessageStatus,
 } from "../../redux/slices/chatSlice";
 //let socket; // =
 const ChatBox = () => {
@@ -31,12 +32,10 @@ const ChatBox = () => {
     messagesLoading,
     messageRecordId,
     addNewMessageRecordValue,
-    //  addMessageLoading,
-    //deleteRecordLoading,
     socketMessage,
     deleteLoading,
   } = useSelector((state) => state.chats);
-  //  console.log(socket);
+
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
@@ -51,6 +50,17 @@ const ChatBox = () => {
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
   const [searchData, setSearchData] = useState([]);
+
+  useEffect(() => {
+    if (messageRecordId !== -1) {
+      dispatch(
+        changeMessageStatus({
+          messageId: messageRecordId,
+          owner: user.firstname,
+        })
+      );
+    }
+  }, [dispatch, user, id, messageRecordId]);
   useEffect(() => {
     if (addNewMessageRecordValue !== -1) {
       dispatch(
@@ -76,31 +86,6 @@ const ChatBox = () => {
       setPrivateMessages((prevState) => [...prevState, socketMessage]);
     }
   }, [socketMessage]);
-  // useEffect(() => {
-  //   socket = io(API);
-  //   socket.emit("setup", user);
-  // }, [user]);
-
-  // useEffect(() => {
-  //   socket.emit("join chat", +id);
-  // }, [id]);
-
-  // useEffect(() => {
-  //   socket.on("message recieved", (data) => {
-  //     if (data.sentTo === user.userId && data.userId === +id) {
-  //       let newData = {
-  //         messageId: data.messageId,
-  //         sender: data.sender,
-  //         message: data.message,
-  //         reply: data.reply,
-  //       };
-  //       setPrivateMessages((prevState) => [...prevState, newData]);
-  //     } else {
-  //       console.log("hello I've A new message for you!");
-  //     }
-  //   });
-  // }, [id, user]);
-
   useEffect(() => {
     dispatch(getUserById(id));
   }, [dispatch, id]);
@@ -136,11 +121,13 @@ const ChatBox = () => {
     if (newMessage.length > 0) {
       let randInt = createUUID();
       let replyExists = messageReply && dataToBePassed;
+
       let newMessageObject = {
         messageId: randInt,
         message: newMessage,
         sender: user.firstname,
         reply: replyExists ? dataToBePassed.messageId : -1,
+        opened: false,
       };
       if (newMessageObject) {
         let dataToSentOnSocket = {

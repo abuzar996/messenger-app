@@ -50,6 +50,7 @@ const AppHeader = () => {
     addMessageLoading,
     favLoading,
     newMessageNotifications,
+    statusChangeLoading,
   } = useSelector((state) => state.chats);
   const { sendMessageModal } = useSelector((state) => state.appReducer);
   const { chatlist, socketMessageLoading } = useSelector(
@@ -91,6 +92,7 @@ const AppHeader = () => {
         dispatch(getChatList(user.userId));
       } else {
         dispatch(setNewNotifications("A new Message was sent to You!"));
+        dispatch(getChatList(user.userId));
       }
     });
   }, [userId, sentToId, dispatch, user]);
@@ -102,7 +104,8 @@ const AppHeader = () => {
       user.userId &&
       !addMessageLoading &&
       !favLoading &&
-      !socketMessageLoading
+      !socketMessageLoading &&
+      !statusChangeLoading
     ) {
       dispatch(getChatList(user.userId));
     }
@@ -115,6 +118,7 @@ const AppHeader = () => {
     favLoading,
     socketMessageLoading,
     newMessageNotifications,
+    statusChangeLoading,
   ]);
 
   useEffect(() => {

@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
     console.log("user joined chat", roomId);
   });
   socket.on("new message", (newMessageRecieved) => {
-    console.log(newMessageRecieved);
+    // console.log(newMessageRecieved);
     socket.in(newMessageRecieved.sentTo).emit("message recieved", {
       messageId: newMessageRecieved.messageId,
       sender: newMessageRecieved.sender,

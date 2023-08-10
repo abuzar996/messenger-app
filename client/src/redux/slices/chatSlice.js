@@ -9,6 +9,7 @@ const initialState = {
   socketMessageLoading: false,
   tunnedChatList: [],
   messages: [],
+  statusChangeLoading: false,
   messageRecordId: -1,
   messagesLoading: false,
   addMessageLoading: false,
@@ -23,6 +24,18 @@ const initialState = {
   error: "",
   newMessageNotifications: [],
 };
+
+export const changeMessageStatus = createAsyncThunk(
+  "ChangeMessageStatus",
+  async (data) => {
+    return await axios
+      .post(`${API}/chats/set-message-seen`, data, {
+        headers: { token: localStorage.getItem("Token") },
+      })
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+);
 
 export const changeChatFavForUser = createAsyncThunk(
   "ChangeFavStatus",
@@ -292,6 +305,22 @@ const chatSlice = createSlice({
     builder.addCase(changeChatFavForUser.rejected, (state, action) => {
       state.error = "Something went wrong";
       state.favLoading = false;
+    });
+
+    builder.addCase(changeMessageStatus.pending, (state) => {
+      state.statusChangeLoading = true;
+    });
+    builder.addCase(changeMessageStatus.fulfilled, (state, action) => {
+      if (action.payload.status === 200) {
+        state.statusChangeLoading = false;
+      } else {
+        state.statusChangeLoading = false;
+        state.error = "Something went wrong";
+      }
+    });
+    builder.addCase(changeMessageStatus.rejected, (state, action) => {
+      state.error = "Something went wrong";
+      state.statusChangeLoading = false;
     });
   },
 });

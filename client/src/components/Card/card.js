@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./card.styles.css";
 import "../../App.css";
-//import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import users from "../../images/user.png";
+
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
 import { changeMessageInfo } from "../../redux/slices/chatSlice";
@@ -17,24 +18,11 @@ const Card = ({
   data,
 }) => {
   const dispatch = useDispatch();
-  //const { id } = useParams();
-  //console.log(+id);
   const { user } = useSelector((state) => state.user);
-  //const [seen, setSeen] = useState(false);
+  const [seen /*, setSeen*/] = useState(true);
   const windowSize = useDimentions();
   const references = useRef(null);
-
-  // useEffect(() => {
-  //   if (!lastMessage) {
-  //     console.log("hello");
-  //     // dispatch(
-  //     //   deleteChatRecord({
-  //     //     userId: user.userId,
-  //     //     clientId: +id,
-  //     //   })
-  //     // );
-  //   }
-  // }, [lastMessage, dispatch, id, user]);
+  //useEffect(() => {});
   function onHandleClick(event, data) {
     if (event.target.id === "inner-option") {
       modalOpen(true);
@@ -81,15 +69,19 @@ const Card = ({
         </div>
         <div className="data-container padding-left">
           <label>
-            {/* <span className={!seen ? "un-opened-bold" : null}> */}
-            {lastMessage
-              ? lastMessage.sender === user.firstname
-                ? "You sent a message"
-                : firstname + " sent you a message"
-              : "Start a conversation"}
-            {/* </span> */}
+            <span className={!seen ? "un-opened-bold" : null}>
+              {lastMessage
+                ? lastMessage.sender === user.firstname
+                  ? "You sent a message"
+                  : firstname + " sent you a message"
+                : "Start a conversation"}
+            </span>
           </label>
-          {/* {!seen && <FiberManualRecordIcon className="padding-right" />} */}
+          {lastMessage &&
+            !lastMessage.opened &&
+            lastMessage.sender !== user.firstname && (
+              <FiberManualRecordIcon className="padding-right" />
+            )}
         </div>
       </div>
     </div>

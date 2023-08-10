@@ -9,6 +9,7 @@ const {
   findAndDeleteMessage,
   findAndDeleteRecord,
   findAndChangeFav,
+  updateLastMessageStatus,
 } = require("../../services/chats.services");
 let { messageData } = require("../../modal/chats/chats.modal");
 const { user } = require("../../modal/user/user.modal");
@@ -125,7 +126,20 @@ const changeFavouriteChatsForUser = (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
-
+const updateMessageStatus = (req, res) => {
+  const { messageId, owner } = req.body;
+  try {
+    const update = updateLastMessageStatus(owner, messageId);
+    if (update) {
+      return res.status(200).send({
+        message: "Message Updated successfully",
+      });
+    }
+    return res.status(404).send({ message: "Something went wrong!" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
 module.exports = {
   getChatData: getChatData,
   fetchMessagesData,
@@ -135,4 +149,5 @@ module.exports = {
   deleteSelectedChat,
   deleteChatRecord,
   changeFavouriteChatsForUser,
+  updateMessageStatus,
 };
