@@ -77,7 +77,8 @@ const Card = ({
                 : "Start a conversation"}
             </span>
           </label>
-          {lastMessage &&
+          {"opened" in lastMessage &&
+            lastMessage &&
             !lastMessage.opened &&
             lastMessage.sender !== user.firstname && (
               <FiberManualRecordIcon className="padding-right" />

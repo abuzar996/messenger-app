@@ -7,10 +7,12 @@ import {
   openAddfriendsModal,
   openSendMessageModal,
 } from "../../../redux/slices/appSettingSlice";
+//import { setUserNull } from "../../../redux/slices/userSlice";
 import { useSelector } from "react-redux";
 import { useDimentions } from "../../../hooks/useDimentions";
 
 const HomeBody = () => {
+  //console.log("I rendered");
   const { darkmode, chatsHidden } = useSelector((state) => state.appReducer);
   const windowSize = useDimentions();
   const [bodyHeight, setBodyHeight] = useState(null);

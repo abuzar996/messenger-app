@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   allUsersLoading: false,
   allUsers: [],
+  desiredUser: {},
   usersList: [],
   friends: [],
   user: {},
@@ -16,6 +17,7 @@ const initialState = {
   userById: {},
   error: "",
   success: false,
+  routeId: -1,
 };
 
 export const getAllTheUsers = createAsyncThunk("getAllTheUsers", async () => {
@@ -125,6 +127,18 @@ const userSlice = createSlice({
     },
     removeAllUsers: (state) => {
       state.usersList = [];
+    },
+    getDesiredUser: (state, action) => {
+      if (state.allUsers.length > 0) {
+        console.log(state.allUsers);
+        console.log(action.payload);
+      }
+    },
+    setUserNull: (state) => {
+      state.userById = {};
+    },
+    storeId: (state, action) => {
+      state.routeId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -260,5 +274,11 @@ const userSlice = createSlice({
     });
   },
 });
-export const { refreshState, removeAllUsers } = userSlice.actions;
+export const {
+  storeId,
+  refreshState,
+  removeAllUsers,
+  getDesiredUser,
+  setUserNull,
+} = userSlice.actions;
 export default userSlice.reducer;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { API } from "../../constants/data";
 import "./appHeader.styles.css";
@@ -30,6 +29,7 @@ import {
   tuneChatData,
   setSocketMessage,
   setNewNotifications,
+  //changeMessageStatus,
 } from "../../redux/slices/chatSlice";
 
 import {
@@ -40,9 +40,9 @@ import {
 import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
 export let socket;
 const AppHeader = () => {
-  const { id } = useParams();
-  //console.log(id);
+  //console.log("id", id);
   const refferencesHeader = useRef(null);
+
   const dispatch = useDispatch();
   const {
     addNewChatLoading,
@@ -53,7 +53,7 @@ const AppHeader = () => {
     statusChangeLoading,
   } = useSelector((state) => state.chats);
   const { sendMessageModal } = useSelector((state) => state.appReducer);
-  const { chatlist, socketMessageLoading } = useSelector(
+  const { chatlist, socketMessageLoading, messageRecordId } = useSelector(
     (state) => state.chats
   );
   const { user, allUsers } = useSelector((state) => state.user);
@@ -65,18 +65,12 @@ const AppHeader = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [userId, setUserId] = useState();
-  const [sentToId, setSentToId] = useState();
 
   useEffect(() => {
     setUserId(user.userId);
     socket = io(API);
     socket.emit("setup", user);
   }, [user]);
-
-  useEffect(() => {
-    setSentToId(+id);
-    socket.emit("join chat", +id);
-  }, [id]);
 
   useEffect(() => {
     //
@@ -86,8 +80,9 @@ const AppHeader = () => {
         sender: data.sender,
         message: data.message,
         reply: data.reply,
+        senderId: data.senderId,
       };
-      if (data.sentTo === userId && data.userId === sentToId) {
+      if (data.sentTo === userId) {
         dispatch(setSocketMessage(newData));
         dispatch(getChatList(user.userId));
       } else {
@@ -95,7 +90,7 @@ const AppHeader = () => {
         dispatch(getChatList(user.userId));
       }
     });
-  }, [userId, sentToId, dispatch, user]);
+  }, [userId, dispatch, user, messageRecordId]);
 
   useEffect(() => {
     dispatch(getAllTheUsers());

@@ -10,7 +10,7 @@ import ChatHeader from "../ChatHeader";
 import InputMessage from "../../components/InputMessage";
 import { useDimentions } from "../../hooks/useDimentions";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../redux/slices/userSlice";
+import { getUserById, storeId } from "../../redux/slices/userSlice";
 import { createUUID } from "../../constants/data";
 //import { deleteChatRecord } from "../../redux/slices/chatSlice";
 import {
@@ -36,7 +36,8 @@ const ChatBox = () => {
     deleteLoading,
   } = useSelector((state) => state.chats);
 
-  const { user } = useSelector((state) => state.user);
+  const { user, routeId } = useSelector((state) => state.user);
+  //console.log(userById);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
@@ -82,11 +83,34 @@ const ChatBox = () => {
     }
   }, [dispatch, id, deleteLoading]);
   useEffect(() => {
-    if (socketMessage !== {}) {
-      setPrivateMessages((prevState) => [...prevState, socketMessage]);
+    if (socketMessage !== {} && socketMessage.senderId === routeId) {
+      console.log("hello");
+      let check = privateMessages.find(
+        (message) => message.messageId === socketMessage.messageId
+      );
+      if (!check) {
+        setPrivateMessages((prevState) => [...prevState, socketMessage]);
+      }
+
+      dispatch(
+        changeMessageStatus({
+          messageId: messageRecordId,
+          owner: user.firstname,
+        })
+      );
     }
-  }, [socketMessage]);
+  }, [
+    socketMessage,
+    routeId,
+    id,
+    dispatch,
+    user,
+    messageRecordId,
+    privateMessages,
+  ]);
+
   useEffect(() => {
+    dispatch(storeId(+id));
     dispatch(getUserById(id));
   }, [dispatch, id]);
 
@@ -126,6 +150,7 @@ const ChatBox = () => {
         messageId: randInt,
         message: newMessage,
         sender: user.firstname,
+        senderId: user.userId,
         reply: replyExists ? dataToBePassed.messageId : -1,
         opened: false,
       };

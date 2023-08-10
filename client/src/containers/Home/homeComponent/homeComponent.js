@@ -4,8 +4,11 @@ import HomeHeader from "../homeHeader";
 import HomeBody from "../homeBody";
 import { useDimentions } from "../../../hooks/useDimentions";
 import ChatList from "../../ChatList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { storeId } from "../../../redux/slices/userSlice";
+//import { setUserNull } from "../../../redux/slices/userSlice";
 const HomeComponent = () => {
+  const dispatch = useDispatch();
   const { chatsHidden } = useSelector((state) => state.appReducer);
   const [mobileSize, setMobileSize] = useState(false);
 
@@ -17,6 +20,9 @@ const HomeComponent = () => {
       setMobileSize(false);
     }
   }, [windowSize, mobileSize]);
+  useEffect(() => {
+    dispatch(storeId(-1));
+  }, [dispatch]);
   return (
     <div className="home-component-layout-container">
       {!mobileSize ? (

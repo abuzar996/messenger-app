@@ -11,6 +11,7 @@ const addMessageSchema = Joi.object({
     sender: Joi.string().required(),
     reply: Joi.optional(),
     opened: Joi.boolean().optional(),
+    senderId: Joi.optional(),
   }).required(),
 });
 

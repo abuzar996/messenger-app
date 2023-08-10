@@ -19,7 +19,7 @@ const updateLastMessageStatus = (owner, messageId) => {
       }
     }
     return false;
-  } catch {
+  } catch (error) {
     return false;
   }
 };
