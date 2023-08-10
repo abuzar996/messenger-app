@@ -188,6 +188,15 @@ const chatsData = [
     ],
   },
   {
+    userId: 3,
+    chats: [
+      {
+        userId: 4,
+        messages: 3,
+      },
+    ],
+  },
+  {
     userId: 4,
     chats: [
       {

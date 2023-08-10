@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./chatBox.styles.css";
-import { io } from "socket.io-client";
-import { API } from "../../constants/data";
+import { socket } from "../AppHeader/appHeader";
+//import { io } from "socket.io-client";
+//import { API } from "../../constants/data";
 import ChatSpace from "./chatSpace";
 import MessageOptionModal from "../../modals/MessageOptionsModal";
 import ChatHeader from "../ChatHeader";
@@ -20,7 +21,7 @@ import {
   updateTriggers,
   changeLength,
 } from "../../redux/slices/chatSlice";
-let socket; // =
+//let socket; // =
 const ChatBox = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -32,8 +33,10 @@ const ChatBox = () => {
     addNewMessageRecordValue,
     //  addMessageLoading,
     //deleteRecordLoading,
+    socketMessage,
     deleteLoading,
   } = useSelector((state) => state.chats);
+  //  console.log(socket);
   const { user } = useSelector((state) => state.user);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
@@ -63,27 +66,40 @@ const ChatBox = () => {
   useEffect(() => {
     setPrivateMessages(messages);
   }, [messages]);
-  // useEffect(() => {
-  //   if (!deleteLoading && messages.length === 0) {
-  //     dispatch(deleteChatRecord({ userId: user.userId, clientId: +id }));
-  //   }
-  // }, [deleteLoading, messages, dispatch, id, user]);
   useEffect(() => {
     if (!deleteLoading) {
       dispatch(fetchAllMessages(id));
     }
   }, [dispatch, id, deleteLoading]);
   useEffect(() => {
-    socket = io(API);
-    socket.emit("setup", user);
-  }, [user]);
+    if (socketMessage !== {}) {
+      setPrivateMessages((prevState) => [...prevState, socketMessage]);
+    }
+  }, [socketMessage]);
+  // useEffect(() => {
+  //   socket = io(API);
+  //   socket.emit("setup", user);
+  // }, [user]);
 
-  useEffect(() => {
-    socket.emit("join chat", id + "chatroom");
-  }, [id]);
-  function sendChat() {
-    socket.emit("chat", "hello world");
-  }
+  // useEffect(() => {
+  //   socket.emit("join chat", +id);
+  // }, [id]);
+
+  // useEffect(() => {
+  //   socket.on("message recieved", (data) => {
+  //     if (data.sentTo === user.userId && data.userId === +id) {
+  //       let newData = {
+  //         messageId: data.messageId,
+  //         sender: data.sender,
+  //         message: data.message,
+  //         reply: data.reply,
+  //       };
+  //       setPrivateMessages((prevState) => [...prevState, newData]);
+  //     } else {
+  //       console.log("hello I've A new message for you!");
+  //     }
+  //   });
+  // }, [id, user]);
 
   useEffect(() => {
     dispatch(getUserById(id));
@@ -127,6 +143,12 @@ const ChatBox = () => {
         reply: replyExists ? dataToBePassed.messageId : -1,
       };
       if (newMessageObject) {
+        let dataToSentOnSocket = {
+          ...newMessageObject,
+          userId: user.userId,
+          sentTo: +id,
+        };
+        socket.emit("new message", dataToSentOnSocket);
         if (privateMessages.length > 0) {
           setPrivateMessages((prevState) => [...prevState, newMessageObject]);
 
@@ -191,7 +213,6 @@ const ChatBox = () => {
           />
         </div>
         <InputMessage
-          sendChat={sendChat}
           messageReply={messageReply}
           setMessageReply={setMessageReply}
           setSenderHeight={setSenderHeight}

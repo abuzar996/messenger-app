@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { io } from "socket.io-client";
+import { API } from "../../constants/data";
 import "./appHeader.styles.css";
 import {
   openProfileModal,
@@ -22,7 +25,12 @@ import { useDimentions } from "../../hooks/useDimentions";
 import { getAllTheUsers } from "../../redux/slices/userSlice";
 import { searchUsers } from "../../redux/slices/searchSlice";
 
-import { getChatList, tuneChatData } from "../../redux/slices/chatSlice";
+import {
+  getChatList,
+  tuneChatData,
+  setSocketMessage,
+  setNewNotifications,
+} from "../../redux/slices/chatSlice";
 
 import {
   closeSendMessageModal,
@@ -30,8 +38,10 @@ import {
 } from "../../redux/slices/appSettingSlice";
 
 import SelectUserMessageModal from "../../modals/SelectUserMessageModal";
-
+export let socket;
 const AppHeader = () => {
+  const { id } = useParams();
+  //console.log(id);
   const refferencesHeader = useRef(null);
   const dispatch = useDispatch();
   const {
@@ -39,9 +49,12 @@ const AppHeader = () => {
     deleteRecordLoading,
     addMessageLoading,
     favLoading,
+    newMessageNotifications,
   } = useSelector((state) => state.chats);
   const { sendMessageModal } = useSelector((state) => state.appReducer);
-  const { chatlist } = useSelector((state) => state.chats);
+  const { chatlist, socketMessageLoading } = useSelector(
+    (state) => state.chats
+  );
   const { user, allUsers } = useSelector((state) => state.user);
   const { addFriendsModal, userProfileModal } = useSelector(
     (state) => state.appReducer
@@ -50,10 +63,47 @@ const AppHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
+  const [userId, setUserId] = useState();
+  const [sentToId, setSentToId] = useState();
+
+  useEffect(() => {
+    setUserId(user.userId);
+    socket = io(API);
+    socket.emit("setup", user);
+  }, [user]);
+
+  useEffect(() => {
+    setSentToId(+id);
+    socket.emit("join chat", +id);
+  }, [id]);
+
+  useEffect(() => {
+    //
+    socket.on("message recieved", (data) => {
+      let newData = {
+        messageId: data.messageId,
+        sender: data.sender,
+        message: data.message,
+        reply: data.reply,
+      };
+      if (data.sentTo === userId && data.userId === sentToId) {
+        dispatch(setSocketMessage(newData));
+        dispatch(getChatList(user.userId));
+      } else {
+        dispatch(setNewNotifications("A new Message was sent to You!"));
+      }
+    });
+  }, [userId, sentToId, dispatch, user]);
 
   useEffect(() => {
     dispatch(getAllTheUsers());
-    if (user.userId && !addMessageLoading && !favLoading) {
+
+    if (
+      user.userId &&
+      !addMessageLoading &&
+      !favLoading &&
+      !socketMessageLoading
+    ) {
       dispatch(getChatList(user.userId));
     }
   }, [
@@ -63,6 +113,8 @@ const AppHeader = () => {
     deleteRecordLoading,
     addMessageLoading,
     favLoading,
+    socketMessageLoading,
+    newMessageNotifications,
   ]);
 
   useEffect(() => {

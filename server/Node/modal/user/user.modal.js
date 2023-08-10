@@ -19,7 +19,7 @@ const userModal = [
     userId: 3,
     firstname: "Thomas",
     lastname: "Snow",
-    email: "thomas.snow@gmail.com",
+    email: "thomas@gmail.com",
     password: "$2b$10$zm8iX2YAMlumQ17ZdznFneENhg10e7mBswfL3LCBCuLZcB.2BnSFO",
   },
   {

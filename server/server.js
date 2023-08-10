@@ -2,13 +2,16 @@ const app = require("./app");
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const {
+  addNewMessageRecord,
+} = require("./Node/controllers/chats/chats.controller");
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: { origin: "*" },
 });
 io.on("connection", (socket) => {
   console.log("server connection successfull");
-  socket.on("chat", (chat) => console.log(chat));
+  //socket.on("chat", (chat) => console.log(chat));
   socket.on("setup", (user) => {
     socket.join(user.userId);
     socket.emit("connected");
@@ -17,6 +20,17 @@ io.on("connection", (socket) => {
   socket.on("join chat", (roomId) => {
     socket.join(roomId);
     console.log("user joined chat", roomId);
+  });
+  socket.on("new message", (newMessageRecieved) => {
+    console.log(newMessageRecieved);
+    socket.in(newMessageRecieved.sentTo).emit("message recieved", {
+      messageId: newMessageRecieved.messageId,
+      sender: newMessageRecieved.sender,
+      message: newMessageRecieved.message,
+      sentTo: newMessageRecieved.sentTo,
+      userId: newMessageRecieved.userId,
+      reply: newMessageRecieved.reply,
+    });
   });
   socket.on("disconnect", () => {
     console.log("we are disconnected");

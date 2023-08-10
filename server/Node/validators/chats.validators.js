@@ -9,7 +9,7 @@ const addMessageSchema = Joi.object({
     messageId: Joi.string().required(),
     message: Joi.string().required(),
     sender: Joi.string().required(),
-    reply: Joi.number().optional(),
+    reply: Joi.optional(),
   }).required(),
 });
 const addMessageRecordSchema = Joi.object({
@@ -17,7 +17,7 @@ const addMessageRecordSchema = Joi.object({
     messageId: Joi.string().required(),
     message: Joi.string().required(),
     sender: Joi.string().required(),
-    reply: Joi.number().optional(),
+    reply: Joi.optional(),
   }).required(),
 });
 const createNewChatSchema = Joi.object({

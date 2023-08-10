@@ -5,6 +5,8 @@ const initialState = {
   messageInfo: {},
   chatlist: [],
   clickedId: -1,
+  socketMessage: {},
+  socketMessageLoading: false,
   tunnedChatList: [],
   messages: [],
   messageRecordId: -1,
@@ -19,6 +21,7 @@ const initialState = {
   privateMessages: -1,
   favLoading: false,
   error: "",
+  newMessageNotifications: [],
 };
 
 export const changeChatFavForUser = createAsyncThunk(
@@ -132,6 +135,18 @@ const chatSlice = createSlice({
     },
     changeMessageInfo: (state, action) => {
       state.messageInfo = action.payload;
+    },
+    setSocketMessage: (state, action) => {
+      state.socketMessage = action.payload;
+    },
+    setNewNotifications: (state, action) => {
+      state.newMessageNotifications.push(action.payload);
+    },
+    setLodingTrue: (state, action) => {
+      state.socketMessageLoading = true;
+    },
+    setLodingFalse: (state, action) => {
+      state.socketMessageLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -286,5 +301,9 @@ export const {
   updateTriggers,
   changeSelectedId,
   changeLength,
+  setSocketMessage,
+  setNewNotifications,
+  setLodingFalse,
+  setLodingTrue,
 } = chatSlice.actions;
 export default chatSlice.reducer;
