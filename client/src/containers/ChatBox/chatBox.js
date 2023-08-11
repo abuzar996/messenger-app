@@ -50,7 +50,9 @@ const ChatBox = () => {
   const [messageData, setMessageData] = useState({});
   const [privateMessages, setPrivateMessages] = useState([]);
   const [searchData, setSearchData] = useState([]);
-
+  useEffect(() => {
+    setMessageReply(false);
+  }, [id]);
   useEffect(() => {
     if (messageRecordId !== -1 && !messagesLoading) {
       dispatch(
