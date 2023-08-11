@@ -11,12 +11,16 @@
   opacity: 0.6;
 }
 .image {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid var(--secondary);
+  border-radius: 50%;
 }
 .img-container {
   display: flex;
   padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   flex-direction: row;
 }
 .data-container {

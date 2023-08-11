@@ -26,6 +26,8 @@ const addMessageRecordSchema = Joi.object({
     message: Joi.string().required(),
     sender: Joi.string().required(),
     reply: Joi.optional(),
+    senderId: Joi.optional(),
+    opened: Joi.optional(),
   }).required(),
 });
 const createNewChatSchema = Joi.object({

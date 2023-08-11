@@ -8,10 +8,8 @@
 }
 .chat-space {
   display: flex;
-  height: calc(100vh - 240px);
   background-color: var(--primary);
   flex-direction: column;
-  overflow-y: scroll;
   vertical-align: bottom;
 }
 .inner-container {

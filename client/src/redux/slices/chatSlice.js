@@ -152,6 +152,9 @@ const chatSlice = createSlice({
     setSocketMessage: (state, action) => {
       state.socketMessage = action.payload;
     },
+    updateRecord: (state) => {
+      state.messageRecordId = -1;
+    },
     setNewNotifications: (state, action) => {
       state.newMessageNotifications.push(action.payload);
     },
@@ -334,5 +337,6 @@ export const {
   setNewNotifications,
   setLodingFalse,
   setLodingTrue,
+  updateRecord,
 } = chatSlice.actions;
 export default chatSlice.reducer;

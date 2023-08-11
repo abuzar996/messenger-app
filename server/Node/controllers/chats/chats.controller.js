@@ -129,7 +129,6 @@ const changeFavouriteChatsForUser = (req, res) => {
 const updateMessageStatus = (req, res) => {
   const { messageId, owner } = req.body;
   try {
-    console.log("messageId", messageId);
     const update = updateLastMessageStatus(owner, messageId);
     if (update) {
       return res.status(200).send({

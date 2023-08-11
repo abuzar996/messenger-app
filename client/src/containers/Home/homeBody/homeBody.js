@@ -12,25 +12,25 @@ import { useSelector } from "react-redux";
 import { useDimentions } from "../../../hooks/useDimentions";
 
 const HomeBody = () => {
-  //console.log("I rendered");
   const { darkmode, chatsHidden } = useSelector((state) => state.appReducer);
   const windowSize = useDimentions();
   const [bodyHeight, setBodyHeight] = useState(null);
 
   useEffect(() => {
-    let height1 = localStorage.getItem("homeHeaderHeight");
-    let height2 = localStorage.getItem("MainHeader-height");
-    setBodyHeight(+height1 + +height2);
+    let height1 = +localStorage.getItem("homeHeaderHeight");
+    let height2 = +localStorage.getItem("MainHeader-height");
+    let windowHeight = window.innerHeight;
+    let val = height1 + height2 + 6.5;
+    setBodyHeight(((windowHeight - val) / windowHeight) * 100);
   }, [windowSize]);
   const dispatch = useDispatch();
   return (
     <div
       className="home-body-container"
-      //style={chatsHidden ? { marginLeft: "0px" } : null}
       style={
         chatsHidden
-          ? { height: `calc(100vh - ${bodyHeight})`, marginLeft: "0px" }
-          : { height: `calc(100vh - ${bodyHeight})` }
+          ? { height: `${bodyHeight}vh`, marginLeft: "0px" }
+          : { height: `${bodyHeight}vh` }
       }
     >
       <img

@@ -1,22 +1,32 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./chatList.styles.css";
 import Card from "../../components/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDimentions } from "../../hooks/useDimentions";
-
+import { updateRecord } from "../../redux/slices/chatSlice";
 const ListData = ({
   onClick,
   setOptionModalOpen,
   setScrollValue,
-  mobileSize,
   searchFocus,
   tunnedChatList,
   loading,
 }) => {
-  //const { tunnedChatList, loading } = useSelector((state) => state.chats);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  useDimentions();
+  const windowSize = useDimentions();
+  const [containerHeight, setContainerHeight] = useState(null);
+
+  useEffect(() => {
+    let appHeader = +localStorage.getItem("MainHeader-height");
+    let ListHeader = +localStorage.getItem("list-header-height");
+    let listNav = +localStorage.getItem("top-nav-height");
+    let val = appHeader + ListHeader + listNav + 6;
+
+    setContainerHeight(((window.innerHeight - val) / window.innerHeight) * 100);
+  }, [windowSize]);
   const reference = useRef(null);
   useEffect(() => {
     const element = reference.current;
@@ -28,31 +38,14 @@ const ListData = ({
   });
 
   function onMessageClick(data) {
-    // setList(
-    //   list.map((item) =>
-    //     item.userId === data.userId
-    //       ? {
-    //           ...item,
-    //           lastMessage: {
-    //             ...data.lastMessage,
-    //             opened: true,
-    //           },
-    //         }
-    //       : item
-    //   )
-    // );
+    dispatch(updateRecord());
     navigate(`/app/messages/${data.userId}`);
   }
   return (
     <div
+      id="list-data-cont-id"
       className="chat-list-inner-container"
-      style={
-        mobileSize
-          ? {
-              borderBottomLeftRadius: "0",
-            }
-          : null
-      }
+      style={{ height: `${containerHeight}vh`, overflow: "scroll" }}
       ref={reference}
     >
       {loading ? (

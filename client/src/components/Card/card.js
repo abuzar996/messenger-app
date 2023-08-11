@@ -3,7 +3,7 @@ import "./card.styles.css";
 import "../../App.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import users from "../../images/user.png";
+import users from "../../images/img2.jpg";
 
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";

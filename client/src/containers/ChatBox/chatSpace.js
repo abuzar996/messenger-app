@@ -30,7 +30,7 @@ const ChatSpace = ({
   const [messagesData, setMessagesData] = useState([]);
   const [optionModalOpen, setOptionModalOpen] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
-
+  const [containerHeight, setContainerHeight] = useState(null);
   const refferences = useRef(null);
 
   useKeys("Escape", toggleModal, refferences);
@@ -44,6 +44,14 @@ const ChatSpace = ({
   }
   useEffect(() => {
     setDocumentWidth(refferences.current.clientWidth);
+  }, [dimentions]);
+
+  useEffect(() => {
+    let chatHeaderHeight = +localStorage.getItem("chat-header-height");
+    let inputMessageHeight = +localStorage.getItem("input-message-height");
+    let MainHeaderHeight = +localStorage.getItem("MainHeader-height");
+    let val = chatHeaderHeight + inputMessageHeight + MainHeaderHeight + 6.8;
+    setContainerHeight(((window.innerHeight - val) / window.innerHeight) * 100);
   }, [dimentions]);
 
   function onMessageClick(xValue, yValue, data) {
@@ -74,6 +82,7 @@ const ChatSpace = ({
 
   return (
     <div
+      style={{ height: `${containerHeight}vh`, overflow: "scroll" }}
       className={
         messagesData.length ? "chat-space" : "chat-space justify-element"
       }

@@ -52,7 +52,7 @@ const ChatBox = () => {
   const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
-    if (messageRecordId !== -1) {
+    if (messageRecordId !== -1 && !messagesLoading) {
       dispatch(
         changeMessageStatus({
           messageId: messageRecordId,
@@ -60,7 +60,7 @@ const ChatBox = () => {
         })
       );
     }
-  }, [dispatch, user, id, messageRecordId]);
+  }, [dispatch, user, id, messageRecordId, messagesLoading]);
   useEffect(() => {
     if (addNewMessageRecordValue !== -1) {
       dispatch(
@@ -186,7 +186,7 @@ const ChatBox = () => {
       <div
         className="chat-box-container"
         style={
-          mobileSize
+          {} && mobileSize
             ? { marginLeft: "0px" }
             : chatsHidden
             ? { marginLeft: "0px" }

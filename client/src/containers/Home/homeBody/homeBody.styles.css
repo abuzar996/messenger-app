@@ -6,7 +6,6 @@
   justify-content: center;
   background-color: var(--primary);
   border: 1px solid var(--secondary);
-  height: calc(100vh - 102px);
   flex-direction: column;
 }
 .home-body-container > img {

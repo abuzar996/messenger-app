@@ -41,7 +41,11 @@ const InputMessage = ({
   useKeys("Escape", function () {
     inputRef.current.blur();
   });
-
+  useEffect(() => {
+    if (Ref) {
+      localStorage.setItem("input-message-height", Ref.current.clientHeight);
+    }
+  }, [dimentions]);
   return (
     <div ref={Ref} className="input-message-container">
       <div>
