@@ -10,11 +10,11 @@ const io = new Server(server, {
   cors: { origin: "*" },
 });
 io.on("connection", (socket) => {
-  console.log("server connection successfull");
+  //console.log("server connection successfull");
   //socket.on("chat", (chat) => console.log(chat));
   socket.on("setup", (user) => {
     socket.join(user.userId);
-    socket.emit("connected");
+    //socket.emit("connected");
   });
 
   socket.on("join chat", (roomId) => {
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     });
   });
   socket.on("disconnect", () => {
-    console.log("we are disconnected");
+    //console.log("we are disconnected");
   });
 });
 

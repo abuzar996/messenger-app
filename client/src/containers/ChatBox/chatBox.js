@@ -37,7 +37,6 @@ const ChatBox = () => {
   } = useSelector((state) => state.chats);
 
   const { user, routeId } = useSelector((state) => state.user);
-  //console.log(userById);
   const windowSize = useDimentions();
   const [mobileSize, setMobileSize] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
@@ -84,7 +83,6 @@ const ChatBox = () => {
   }, [dispatch, id, deleteLoading]);
   useEffect(() => {
     if (socketMessage !== {} && socketMessage.senderId === routeId) {
-      console.log("hello");
       let check = privateMessages.find(
         (message) => message.messageId === socketMessage.messageId
       );
