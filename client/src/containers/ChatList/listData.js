@@ -45,7 +45,7 @@ const ListData = ({
     <div
       id="list-data-cont-id"
       className="chat-list-inner-container"
-      style={{ height: `${containerHeight}vh`, overflow: "scroll" }}
+      style={{ height: `${containerHeight}vh`, overflowY: "scroll" }}
       ref={reference}
     >
       {loading ? (
