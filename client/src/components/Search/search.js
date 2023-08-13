@@ -17,21 +17,26 @@ const Search = ({
   searchFocus,
   setSearchFocus,
 }) => {
-  //console.log("search rendered");
   const windowSize = useDimentions();
   const searchReference = useRef(null);
   const inputRef = useRef(null);
-  //const [searchFocus, setSearchFocus] = useState(false);
 
-  useKeys("Escape", escapePressed, null);
+  useKeys("Escape", escapePressed, document.getElementsByName("search-box"));
 
   function handleClick() {
     refresh();
     inputRef.current.blur();
     onFocus(false);
   }
-  function escapePressed() {
+  function escapePressed(event) {
     if (setSearchFocus) {
+      const element = document.documentElement;
+      // element.preventDefault();
+      if (document.webkitFullscreenEnabled) {
+        //  console.log("hello");
+        //const element = document.documentElement;
+        //element.webkitRequestFullscreen();
+      }
       setSearchFocus(false);
     }
 
@@ -52,7 +57,11 @@ const Search = ({
     }
   }, [useRefValue, windowSize]);
   return (
-    <div ref={searchReference} className="search-inner-container">
+    <div
+      name="search-box"
+      ref={searchReference}
+      className="search-inner-container"
+    >
       <div className={searchFocus ? "search-none" : "search-img"}>
         <SearchIcon style={{ display: "flex", paddingLeft: "5px" }} />
       </div>

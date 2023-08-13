@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const AuthUser = ({ children }) => {
+  useEffect(() => {
+    if (document.fullscreenEnabled) {
+      console.log("hello");
+    }
+  }, []);
   const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.authReducer);
   useEffect(() => {
