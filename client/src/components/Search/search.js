@@ -28,15 +28,8 @@ const Search = ({
     inputRef.current.blur();
     onFocus(false);
   }
-  function escapePressed(event) {
+  function escapePressed() {
     if (setSearchFocus) {
-      const element = document.documentElement;
-      // element.preventDefault();
-      if (document.webkitFullscreenEnabled) {
-        //  console.log("hello");
-        //const element = document.documentElement;
-        //element.webkitRequestFullscreen();
-      }
       setSearchFocus(false);
     }
 
