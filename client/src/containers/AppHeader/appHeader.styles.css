@@ -123,12 +123,13 @@
   }
 }
 @media screen and (max-width: 650px) {
-  .logo-item > label {
-    display: none;
-  }
   .logo-item {
     display: none;
   }
+  .logo-item > label {
+    display: none;
+  }
+
   .theme-label {
     display: none;
   }
