@@ -59,7 +59,7 @@ const ChatHeader = ({
         <img
           src={img2}
           alt="img"
-          style={{ width: "20px", height: "30px", borderRadius: "50%" }}
+          style={{ width: "30px", height: "30px", borderRadius: "50%" }}
         ></img>
       </div>
     </div>
