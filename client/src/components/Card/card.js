@@ -4,12 +4,16 @@ import "../../App.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import users from "../../images/img2.jpg";
+import user1 from "../../images/photo1.jpg";
+import user2 from "../../images/photo2.jpg";
+import user3 from "../../images/photo3.jpg";
 
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDimentions } from "../../hooks/useDimentions";
 import { changeMessageInfo } from "../../redux/slices/chatSlice";
 const Card = ({
+  index,
   modalOpen,
   firstname,
   lastname,
@@ -50,7 +54,19 @@ const Card = ({
       }}
     >
       <div className="img-container">
-        <img className="image" src={users} alt="user" />
+        <img
+          className="image"
+          src={
+            index === 0
+              ? users
+              : index === 1
+              ? user1
+              : index === 2
+              ? user2
+              : user3
+          }
+          alt="user"
+        />
       </div>
       <div className="data-body">
         <div className="data-container align-center padding-left padding-top">
