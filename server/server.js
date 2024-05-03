@@ -3,8 +3,6 @@ const http = require("http");
 const mongoose = require("mongoose");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const MongoUrl =
-  "mongodb+srv://messenger-api:DT3x4w5uGIlesS3h@messenger.vpgis2y.mongodb.net/messenger?retryWrites=true&w=majority";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: { origin: "*" },
@@ -30,13 +28,7 @@ io.on("connection", (socket) => {
     });
   });
 });
-mongoose.connection.once("open", () => {
-  console.log("MongoDb Connection successful");
-});
 
-mongoose.connection.on("error", (err) => {
-  console.log(`MongoDb caused ${err.message}`);
-});
 const startServer = async () => {
   // await mongoose.connect(MongoUrl, {
   //   useNewUrlParser: true,
